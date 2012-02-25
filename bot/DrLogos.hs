@@ -95,7 +95,13 @@ drLogos Message { msg_prefix  = Just (NickName nn _ _)
                 , msg_params  = [chan, msg]
                 }
     | Just (NewQuestion tagM body) <- parseRes = newQuestion chan nn tagM body
-    | otherwise = return []
+    | otherwise = do
+        mq <- Map.lookup chan <$> gets botTags
+        case mq of
+            Nothing -> return []
+            Just (Question {qParent = parent}) -> do
+                let parentMsg = "<" ++ nn ++ "> on " ++ chan ++ ": " ++ msg
+                return [ privmsg parent parentMsg ]
   where
     parseRes = parse' p_userCommand msg
 drLogos _msg = return []
