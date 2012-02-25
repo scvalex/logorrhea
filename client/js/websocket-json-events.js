@@ -18,7 +18,12 @@ The server has to send websocket data of form
 */
 
 var FancyWebSocket = function(url){
-  var conn = new WebSocket(url);
+  if (typeof WebSocket !== 'undefined')
+    var conn = new WebSocket(url);
+  else if (typeof MozWebSocket !== 'undefined')
+    var conn = new MozWebSocket(url);
+  else
+    throw 'WebSocket seems to not be supported by this browser!';
 
   var callbacks = {};
 
