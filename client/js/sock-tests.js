@@ -5,7 +5,7 @@ describe('async example test suite', function () {
     runs(function () {
       this.connectionOpen = false;
       this.lastMessage = null;
-      this.sock = new SockJS('http://localhost:9999/echo');
+      this.sock = new WebSocket('ws://localhost:9999/echo');
 
       var self = this;
       this.sock.onopen = function() {
@@ -44,6 +44,7 @@ describe('async example test suite', function () {
     });
 
     runs(function () {
+      meh = this.lastMessage;
       expect(this.lastMessage).toEqual('Hello, WebSocket!');
     });
 
