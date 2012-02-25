@@ -41,7 +41,13 @@ require(['jquery', 'knockout', 'websocket-json-events', 'jsschema', 'schemas'],
       this.bindMethod(
         eventName,
         function(data) {
-          return jsschema.check(schemas[data.event], okCallback(data));
+          console.log("schema-check ", eventName, data);
+          if (schemas[data.event] !== undefined)
+            return jsschema.check(schemas[data.event], okCallback(data));
+          else {
+            console.log("Warning: received object without schema for event type '" + eventName + "'", data);
+            return okCallback(data);
+          }
         },
         // Dont schema-check errors (yet)
         errorCallback
