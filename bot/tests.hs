@@ -24,15 +24,24 @@ withConnection :: UserName -> IO IRCInfo -> IRCT IO () -> IO ()
 withConnection un conn act = do
     i <- conn
     runIRCT un i $ do
-        sendMessage $ nick un
-        sendMessage $ user un "*" "*" un
+        nick un
+        user un "*" "*" un
         act
+        quit Nothing
+        return ()
 
 test_connectJoin :: IRCT IO ()
 test_connectJoin = do
-    sendMessage $ joinChan chan
+    joinChan chan
     forever $ popMessage >>= liftIO . putStrLn . encode
 
+test_connectJoinMsg :: IRCT IO ()
+test_connectJoinMsg = do
+    joinChan chan
+    privmsg chan "hello!"
+    part chan
+    forever $ popMessage >>= liftIO . putStrLn . encode
+    
 main :: IO ()
 main = do
     args <- getArgs
@@ -40,4 +49,5 @@ main = do
             [s] -> s
             _   -> userName
         conn = connectToServer server port
-    withConnection un conn test_connectJoin
+    -- withConnection un conn test_connectJoin
+    withConnection un conn test_connectJoinMsg
