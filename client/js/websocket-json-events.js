@@ -13,6 +13,8 @@ socket.bind('some_event', function(data){
 // broadcast events to all connected users
 socket.send( 'some_event', {name: 'ismael', message : 'Hello world'} );
 
+WebSocket onopen/onclose events are mapped to the 'open'/'close' event channels.
+
 The server has to send websocket data of form
   JSON.stringify({ event: EVENT_NAME, data: DATA })
 */
