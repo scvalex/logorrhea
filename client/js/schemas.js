@@ -28,6 +28,7 @@ var schemas = {
   })),
 
 
+  // Note that this currently is for both server and client isssued disconnect
   'disconnect': eventSchema(schema(function() {
   })),
 
