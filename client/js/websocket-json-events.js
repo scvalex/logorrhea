@@ -1,3 +1,5 @@
+/* Adapted from https://gist.github.com/299789 */
+
 /* Ismael Celis 2010
 Simplified WebSocket events dispatcher (no channels, no users)
 
@@ -10,6 +12,9 @@ socket.bind('some_event', function(data){
 
 // broadcast events to all connected users
 socket.send( 'some_event', {name: 'ismael', message : 'Hello world'} );
+
+The server has to send websocket data of form
+  JSON.stringify({ event: EVENT_NAME, data: DATA })
 */
 
 var FancyWebSocket = function(url){
