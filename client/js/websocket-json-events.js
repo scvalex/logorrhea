@@ -36,6 +36,15 @@ var FancyWebSocket = function(url) {
     return this; // chainable
   };
 
+  this.bindMethod = function(method_name, okCallback, errorCallback) {
+    if (typeof okCallback != 'undefined') {
+      this.bind(method_name + ".ok", okCallback);
+    }
+    if (typeof errorCallback != 'undefined') {
+      this.bind(method_name + ".error", errorCallback);
+    }
+  };
+
   this.send = function(event_name, event_data) {
     var payload = JSON.stringify({event:event_name, data: event_data});
     conn.send(payload); // <= send JSON data to socket server
