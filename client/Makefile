@@ -22,5 +22,5 @@ clean: statics_clean
 init: statics_fetch_force
 
 
-dev:
+dev: statics_fetch
 	./dev.sh
