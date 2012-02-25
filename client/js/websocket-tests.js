@@ -5,7 +5,16 @@ describe('async example test suite', function () {
     runs(function () {
       this.connectionOpen = false;
       this.lastMessage = null;
-      this.sock = new WebSocket('ws://localhost:9999/echo');
+
+      var url = 'ws://localhost:9999/echo';
+      if (typeof WebSocket != 'undefined') {
+        this.sock = new WebSocket(url);
+      } else if (typeof MozWebSocket != 'undefined') {
+        this.sock = new MozWebSocket(url);
+      } else {
+        console.log("Unsupported browser: I don't know how to open WebSockets.");
+        throw "unspported browser";
+      }
 
       var self = this;
       this.sock.onopen = function() {
