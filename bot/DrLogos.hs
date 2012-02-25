@@ -19,6 +19,9 @@ import Text.Parsec.String
 import Bot
 import IRC
 
+-- DEBUG
+import Debug.Trace
+
 type Tag      = Channel
 type NickName = String
 
@@ -27,8 +30,10 @@ data Question = Question
     , qAsker    :: NickName
     , qMessages :: [Message]
     , qParent   :: Channel
+    , qTag :: Tag
     }
-    
+    deriving (Show)
+
 data BotState = BotState
     { botQuestions    :: Map Channel [Tag]
     , botTags         :: Map Tag Question
@@ -46,20 +51,29 @@ newBotState chans admins =
 
 data UserCommand
     = NewQuestion (Maybe Tag) String
+    | ListQuestions
 
 tok :: Parser a -> Parser a
-tok p = p <* spaces
+tok p = p <* space <* spaces
+
+p_startCommand :: Parser ()
+p_startCommand = string "??" >> return ()
 
 p_tag :: Parser String
 p_tag = (:) <$> char '#' <*> ((:) <$> letter <*> many alphaNum)
 
 p_userCommand :: Parser UserCommand
-p_userCommand = p_newQuestion
+p_userCommand = choice . map try $
+                [ p_newQuestion
+                , p_listQuestions ]
   where
     p_newQuestion =
         NewQuestion
-            <$> (tok (string "??") >> optionMaybe p_tag)
+            <$> (tok p_startCommand >> optionMaybe p_tag)
             <*> (manyTill anyChar eof)
+    p_listQuestions =
+        p_startCommand >> string "list" >> spaces >> eof >> return ListQuestions
+
 
 parse' :: Parser a -> String -> Maybe a
 parse' p s = either (const Nothing) Just $ parse p "" s
@@ -78,8 +92,9 @@ newQuestion chan nn tagM body = do
                             , qAsker    = nn
                             , qMessages = []
                             , qParent   = chan
+                            , qTag      = tag
                             }
-        tags'    = Map.insert tag q tags                   
+        tags'    = Map.insert tag q tags              
         -- FIXME: Better error handling
         chanTags = qs Map.! chan
         qs'      = Map.insert chan (tag : chanTags) qs
@@ -91,12 +106,21 @@ newQuestion chan nn tagM body = do
            , privmsg chan parentAd
            ]
 
+listQuestions :: NickName -> Channel -> Bot BotState [Message]
+listQuestions nn chan = do
+    tags <- gets botTags
+    questions <- map (tags Map.!) . (Map.! chan) <$> gets botQuestions
+    let questionDesc q =
+            qTag q ++ " <" ++ qAsker q ++ "> " ++ qFull q
+    trace (show questions) $ return . map (privmsg nn . questionDesc) $ questions
+
 drLogos :: BotProcess BotState
 drLogos wholeMsg@Message { msg_prefix  = Just (NickName nn _ _)
                          , msg_command = "PRIVMSG"
                          , msg_params  = [chan, msg]
                          }
     | Just (NewQuestion tagM body) <- parseRes = newQuestion chan nn tagM body
+    | Just ListQuestions <- parseRes = listQuestions nn chan
     | otherwise = do
         mq <- Map.lookup chan <$> gets botTags
         case mq of
