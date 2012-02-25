@@ -6,11 +6,11 @@ module ParseMessage (
 
 import Network.IRC.Base
 
-import Data.ByteString.Lazy (ByteString)
+import Data.ByteString (ByteString)
 import Control.Monad
 import Data.Maybe
 import Text.Parsec hiding (spaces)
-import Text.Parsec.ByteString.Lazy
+import Text.Parsec.ByteString
 
 -- | Parse a String into a Message.
 decode :: ByteString    -- ^ Message string
