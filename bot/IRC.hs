@@ -6,16 +6,7 @@ module IRC
     , runIRCT
 
     , module Network.IRC.Base
-
-    , Channel
-    , Password
-    , nick
-    , user
-    , joinChan
-    , part
-    , quit
-    , privmsg
-    , message
+    , module Network.IRC.Commands
     ) where
 
 import Control.Applicative
@@ -26,8 +17,7 @@ import qualified Data.ByteString as B
 import qualified Data.ByteString.Char8 as B8
 import Network
 import Network.IRC.Base
-import Network.IRC.Commands (Channel, Password)
-import qualified Network.IRC.Commands as Comm
+import Network.IRC.Commands
 import System.IO
 
 import qualified ParseMessage as Parse
@@ -68,28 +58,3 @@ instance (Applicative m, MonadIO m) => MonadIRC (IRCT m) where
         liftIO (B.hPut h bs >> hFlush h)
         
     getUserName = IRCT . lift $ get
-
-
-sendMessage' :: MonadIRC m => Message -> m Message
-sendMessage' msg = sendMessage msg >> return msg
-
-nick :: MonadIRC m => UserName -> m Message
-nick  = sendMessage' . Comm.nick
-
-user :: MonadIRC m => UserName -> ServerName -> ServerName -> RealName -> m Message
-user un sn1 sn2 = sendMessage' . Comm.user un sn1 sn2
-
-joinChan :: MonadIRC m => Channel -> m Message
-joinChan = sendMessage' . Comm.joinChan
-
-part :: MonadIRC m => Channel -> m Message
-part = sendMessage' . Comm.part
-
-quit :: MonadIRC m => Maybe String -> m Message
-quit = sendMessage' . Comm.quit
-
-privmsg :: MonadIRC m => String -> String -> m Message
-privmsg s = sendMessage' . Comm.privmsg s
-
-message :: MonadIRC m => String -> m Message
-message s = decode (B8.pack s) >>= sendMessage'

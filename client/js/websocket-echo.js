@@ -15,6 +15,8 @@ echo.on('request', function(request) {
   conn.on('message', function(message) {
     if (message.type === 'utf8') {
       conn.sendUTF(message.utf8Data);
+    } else {
+      console.error("ERROR: received non-utf8 data, ignoring");
     }
   });
 
