@@ -19,8 +19,8 @@ require(["jquery", "knockout", "websocket-json-events"], function($) {
       disconnectInternal();
     };
 
-    self.channelClicked = function() {
-      console.log("Channel clicked");
+    self.channelClicked = function(channelName) {
+      browseChannelInternal(channelName);
     }
   }
 
@@ -67,7 +67,6 @@ require(["jquery", "knockout", "websocket-json-events"], function($) {
     socket.bindMethod(
       'list_channels',
       function(data) {
-        console.log("Got channels: ", data['channels']);
         conversationsModel.channels(data['channels']);
       },
       function(err) {
@@ -88,6 +87,10 @@ require(["jquery", "knockout", "websocket-json-events"], function($) {
       undefined);
 
     socket.send('disconnect', {});
+  }
+
+  function browseChannelInternal(channel) {
+    console.log("Channel clicked: " + channel);
   }
 
   $(function() {
