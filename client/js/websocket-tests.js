@@ -53,7 +53,6 @@ describe('async example test suite', function () {
     });
 
     runs(function () {
-      meh = this.lastMessage;
       expect(this.lastMessage).toEqual('Hello, WebSocket!');
     });
 
