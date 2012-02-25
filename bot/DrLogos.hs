@@ -33,6 +33,7 @@ data BotState = BotState
     { botQuestions    :: Map Channel [Tag]
     , botTags         :: Map Tag Question
     , botAdmins       :: [UserName]
+    , botClosed       :: Map Tag Question
     }
 
 newBotState :: [Channel] -> [UserName] -> BotState
@@ -40,6 +41,7 @@ newBotState chans admins =
     BotState { botQuestions = Map.fromList $ map (, []) chans
              , botTags      = Map.empty
              , botAdmins    = admins
+             , botClosed    = Map.empty
              }
 
 data UserCommand
@@ -90,17 +92,21 @@ newQuestion chan nn tagM body = do
            ]
 
 drLogos :: BotProcess BotState
-drLogos Message { msg_prefix  = Just (NickName nn _ _)
-                , msg_command = "PRIVMSG"
-                , msg_params  = [chan, msg]
-                }
+drLogos wholeMsg@Message { msg_prefix  = Just (NickName nn _ _)
+                         , msg_command = "PRIVMSG"
+                         , msg_params  = [chan, msg]
+                         }
     | Just (NewQuestion tagM body) <- parseRes = newQuestion chan nn tagM body
     | otherwise = do
         mq <- Map.lookup chan <$> gets botTags
         case mq of
             Nothing -> return []
-            Just (Question {qParent = parent}) -> do
+            Just q@(Question { qParent   = parent
+                             , qMessages = messages}) -> do
                 let parentMsg = "<" ++ nn ++ "> on " ++ chan ++ ": " ++ msg
+                bs@BotState {botTags = tags} <- get
+                put bs {botTags = Map.insert chan
+                                  q {qMessages = wholeMsg : messages} tags}
                 return [ privmsg parent parentMsg ]
   where
     parseRes = parse' p_userCommand msg
