@@ -13,7 +13,7 @@ botState = newBotState ["#testlogo"] []
 
 server   = "irc.freenode.org"
 port     = fromIntegral 6667
-userName = "maaantrh5rhguyr"
+userName = "maaantrh5rhguasd"
 
 connectToServer :: String -> PortNumber -> IO IRCInfo
 connectToServer server port = do
