@@ -4,6 +4,7 @@
 ROOT_DIR = '.'
 
 STATICS = {
+	'js/require.js': 'http://requirejs.org/docs/release/1.0.7/minified/require.js',
 	'js/coffee-script.js': 'http://github.com/jashkenas/coffee-script/raw/master/extras/coffee-script.js',
 	'js/jquery.js': 'http://code.jquery.com/jquery.min.js',
 	'js/mootools.js': 'http://mootools.net/download/get/mootools-core-1.4.4-full-nocompat.js',
@@ -11,7 +12,7 @@ STATICS = {
 	'js/sockjs.js': 'http://cdn.sockjs.org/sockjs-0.2.min.js',
         'js/jasmine.js': 'https://raw.github.com/pivotal/jasmine/master/lib/jasmine-core/jasmine.js',
         'js/jasmine-html.js': 'https://raw.github.com/pivotal/jasmine/master/lib/jasmine-core/jasmine-html.js',
-        'css/jasmine.css': 'https://raw.github.com/pivotal/jasmine/blob/master/lib/jasmine-core/jasmine.css',
+        'css/jasmine.css': 'https://raw.github.com/pivotal/jasmine/master/lib/jasmine-core/jasmine.css',
 }
 
 
