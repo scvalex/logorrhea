@@ -37,7 +37,7 @@ require(['jquery', 'knockout', 'websocket-json-events', 'jsschema', 'schemas'],
         return jsschema.check(schemas[data.event], callback(data));
       });
     };
-    socket.bindSchemaMethod = function (eventName, okCallback, errorCallback) {
+    socket.bindSchemaMethod = function(eventName, okCallback, errorCallback) {
       this.bindMethod(
         eventName,
         function(data) {
@@ -80,7 +80,7 @@ require(['jquery', 'knockout', 'websocket-json-events', 'jsschema', 'schemas'],
         console.log("failed to connect: ", err);
       });
 
-    socket.bindMethod(
+    socket.bindSchemaMethod(
       'list_channels',
       function(data) {
         conversationsModel.channels(data['channels']);
