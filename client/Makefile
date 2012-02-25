@@ -18,7 +18,7 @@ clean: statics_clean
 	rm -f staticfetcher.py
 
 init:
-	[ -f .statics_fetched ] && make statics_fetch_force || true
+	[ -f .statics_fetched ] || make statics_fetch_force
 	touch .statics_fetched
 
 dev: statics_fetch
