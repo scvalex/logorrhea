@@ -1,0 +1,501 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		15B32CBA14F92EE90006FEF9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B32CB914F92EE90006FEF9 /* UIKit.framework */; };
+		15B32CBC14F92EE90006FEF9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B32CBB14F92EE90006FEF9 /* Foundation.framework */; };
+		15B32CBE14F92EE90006FEF9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B32CBD14F92EE90006FEF9 /* CoreGraphics.framework */; };
+		15B32CC414F92EE90006FEF9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 15B32CC214F92EE90006FEF9 /* InfoPlist.strings */; };
+		15B32CC614F92EE90006FEF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B32CC514F92EE90006FEF9 /* main.m */; };
+		15B32CCA14F92EE90006FEF9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B32CC914F92EE90006FEF9 /* AppDelegate.m */; };
+		15B32CCD14F92EE90006FEF9 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15B32CCB14F92EE90006FEF9 /* MainStoryboard_iPhone.storyboard */; };
+		15B32CD014F92EE90006FEF9 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15B32CCE14F92EE90006FEF9 /* MainStoryboard_iPad.storyboard */; };
+		15B32CD314F92EE90006FEF9 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B32CD214F92EE90006FEF9 /* HomeViewController.m */; };
+		15B32CD514F92EE90006FEF9 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B32CD414F92EE90006FEF9 /* first.png */; };
+		15B32CD714F92EE90006FEF9 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B32CD614F92EE90006FEF9 /* first@2x.png */; };
+		15B32CDA14F92EE90006FEF9 /* PrefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B32CD914F92EE90006FEF9 /* PrefViewController.m */; };
+		15B32CDC14F92EE90006FEF9 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B32CDB14F92EE90006FEF9 /* second.png */; };
+		15B32CDE14F92EE90006FEF9 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B32CDD14F92EE90006FEF9 /* second@2x.png */; };
+		15B32CE614F92EE90006FEF9 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B32CE514F92EE90006FEF9 /* SenTestingKit.framework */; };
+		15B32CE714F92EE90006FEF9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B32CB914F92EE90006FEF9 /* UIKit.framework */; };
+		15B32CE814F92EE90006FEF9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B32CBB14F92EE90006FEF9 /* Foundation.framework */; };
+		15B32CF014F92EE90006FEF9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 15B32CEE14F92EE90006FEF9 /* InfoPlist.strings */; };
+		15B32CF314F92EE90006FEF9 /* logorrheaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B32CF214F92EE90006FEF9 /* logorrheaTests.m */; };
+		15B32D0914F9356B0006FEF9 /* 09-chat-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B32D0814F9356B0006FEF9 /* 09-chat-2.png */; };
+		15B32D0C14F935760006FEF9 /* 53-house.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B32D0B14F935760006FEF9 /* 53-house.png */; };
+		15B32D1614F93A7B0006FEF9 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B32D1414F93A7B0006FEF9 /* LoginView.m */; };
+		15B32D1914F942470006FEF9 /* 28-star.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B32D1814F942470006FEF9 /* 28-star.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		15B32CE914F92EE90006FEF9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15B32CAC14F92EE80006FEF9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 15B32CB414F92EE80006FEF9;
+			remoteInfo = logorrhea;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		15B32CB514F92EE90006FEF9 /* logorrhea.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = logorrhea.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		15B32CB914F92EE90006FEF9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		15B32CBB14F92EE90006FEF9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		15B32CBD14F92EE90006FEF9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		15B32CC114F92EE90006FEF9 /* logorrhea-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "logorrhea-Info.plist"; sourceTree = "<group>"; };
+		15B32CC314F92EE90006FEF9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		15B32CC514F92EE90006FEF9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		15B32CC714F92EE90006FEF9 /* logorrhea-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "logorrhea-Prefix.pch"; sourceTree = "<group>"; };
+		15B32CC814F92EE90006FEF9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		15B32CC914F92EE90006FEF9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		15B32CCC14F92EE90006FEF9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		15B32CCF14F92EE90006FEF9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		15B32CD114F92EE90006FEF9 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		15B32CD214F92EE90006FEF9 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		15B32CD414F92EE90006FEF9 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
+		15B32CD614F92EE90006FEF9 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
+		15B32CD814F92EE90006FEF9 /* PrefViewController.h */ = {isa = PBXFileReference; path = PrefViewController.h; sourceTree = "<group>"; };
+		15B32CD914F92EE90006FEF9 /* PrefViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrefViewController.m; sourceTree = "<group>"; };
+		15B32CDB14F92EE90006FEF9 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
+		15B32CDD14F92EE90006FEF9 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		15B32CE414F92EE90006FEF9 /* logorrheaTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = logorrheaTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		15B32CE514F92EE90006FEF9 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		15B32CED14F92EE90006FEF9 /* logorrheaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "logorrheaTests-Info.plist"; sourceTree = "<group>"; };
+		15B32CEF14F92EE90006FEF9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		15B32CF114F92EE90006FEF9 /* logorrheaTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = logorrheaTests.h; sourceTree = "<group>"; };
+		15B32CF214F92EE90006FEF9 /* logorrheaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = logorrheaTests.m; sourceTree = "<group>"; };
+		15B32D0814F9356B0006FEF9 /* 09-chat-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "09-chat-2.png"; sourceTree = "<group>"; };
+		15B32D0B14F935760006FEF9 /* 53-house.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "53-house.png"; sourceTree = "<group>"; };
+		15B32D1314F93A7B0006FEF9 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
+		15B32D1414F93A7B0006FEF9 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
+		15B32D1814F942470006FEF9 /* 28-star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "28-star.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		15B32CB214F92EE80006FEF9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15B32CBA14F92EE90006FEF9 /* UIKit.framework in Frameworks */,
+				15B32CBC14F92EE90006FEF9 /* Foundation.framework in Frameworks */,
+				15B32CBE14F92EE90006FEF9 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		15B32CE014F92EE90006FEF9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15B32CE614F92EE90006FEF9 /* SenTestingKit.framework in Frameworks */,
+				15B32CE714F92EE90006FEF9 /* UIKit.framework in Frameworks */,
+				15B32CE814F92EE90006FEF9 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		15B32CAA14F92EE80006FEF9 = {
+			isa = PBXGroup;
+			children = (
+				15B32CBF14F92EE90006FEF9 /* logorrhea */,
+				15B32CEB14F92EE90006FEF9 /* logorrheaTests */,
+				15B32CB814F92EE90006FEF9 /* Frameworks */,
+				15B32CB614F92EE90006FEF9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		15B32CB614F92EE90006FEF9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				15B32CB514F92EE90006FEF9 /* logorrhea.app */,
+				15B32CE414F92EE90006FEF9 /* logorrheaTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		15B32CB814F92EE90006FEF9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				15B32CB914F92EE90006FEF9 /* UIKit.framework */,
+				15B32CBB14F92EE90006FEF9 /* Foundation.framework */,
+				15B32CBD14F92EE90006FEF9 /* CoreGraphics.framework */,
+				15B32CE514F92EE90006FEF9 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		15B32CBF14F92EE90006FEF9 /* logorrhea */ = {
+			isa = PBXGroup;
+			children = (
+				15B32D1814F942470006FEF9 /* 28-star.png */,
+				15B32D0B14F935760006FEF9 /* 53-house.png */,
+				15B32D0814F9356B0006FEF9 /* 09-chat-2.png */,
+				15B32CC814F92EE90006FEF9 /* AppDelegate.h */,
+				15B32CC914F92EE90006FEF9 /* AppDelegate.m */,
+				15B32CCB14F92EE90006FEF9 /* MainStoryboard_iPhone.storyboard */,
+				15B32CCE14F92EE90006FEF9 /* MainStoryboard_iPad.storyboard */,
+				15B32CD114F92EE90006FEF9 /* HomeViewController.h */,
+				15B32CD214F92EE90006FEF9 /* HomeViewController.m */,
+				15B32CD414F92EE90006FEF9 /* first.png */,
+				15B32CD614F92EE90006FEF9 /* first@2x.png */,
+				15B32CD814F92EE90006FEF9 /* PrefViewController.h */,
+				15B32CD914F92EE90006FEF9 /* PrefViewController.m */,
+				15B32CDB14F92EE90006FEF9 /* second.png */,
+				15B32CDD14F92EE90006FEF9 /* second@2x.png */,
+				15B32CC014F92EE90006FEF9 /* Supporting Files */,
+				15B32D1314F93A7B0006FEF9 /* LoginView.h */,
+				15B32D1414F93A7B0006FEF9 /* LoginView.m */,
+			);
+			path = logorrhea;
+			sourceTree = "<group>";
+		};
+		15B32CC014F92EE90006FEF9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				15B32CC114F92EE90006FEF9 /* logorrhea-Info.plist */,
+				15B32CC214F92EE90006FEF9 /* InfoPlist.strings */,
+				15B32CC514F92EE90006FEF9 /* main.m */,
+				15B32CC714F92EE90006FEF9 /* logorrhea-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		15B32CEB14F92EE90006FEF9 /* logorrheaTests */ = {
+			isa = PBXGroup;
+			children = (
+				15B32CF114F92EE90006FEF9 /* logorrheaTests.h */,
+				15B32CF214F92EE90006FEF9 /* logorrheaTests.m */,
+				15B32CEC14F92EE90006FEF9 /* Supporting Files */,
+			);
+			path = logorrheaTests;
+			sourceTree = "<group>";
+		};
+		15B32CEC14F92EE90006FEF9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				15B32CED14F92EE90006FEF9 /* logorrheaTests-Info.plist */,
+				15B32CEE14F92EE90006FEF9 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		15B32CB414F92EE80006FEF9 /* logorrhea */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 15B32CF614F92EE90006FEF9 /* Build configuration list for PBXNativeTarget "logorrhea" */;
+			buildPhases = (
+				15B32CB114F92EE80006FEF9 /* Sources */,
+				15B32CB214F92EE80006FEF9 /* Frameworks */,
+				15B32CB314F92EE80006FEF9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = logorrhea;
+			productName = logorrhea;
+			productReference = 15B32CB514F92EE90006FEF9 /* logorrhea.app */;
+			productType = "com.apple.product-type.application";
+		};
+		15B32CE314F92EE90006FEF9 /* logorrheaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 15B32CF914F92EE90006FEF9 /* Build configuration list for PBXNativeTarget "logorrheaTests" */;
+			buildPhases = (
+				15B32CDF14F92EE90006FEF9 /* Sources */,
+				15B32CE014F92EE90006FEF9 /* Frameworks */,
+				15B32CE114F92EE90006FEF9 /* Resources */,
+				15B32CE214F92EE90006FEF9 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				15B32CEA14F92EE90006FEF9 /* PBXTargetDependency */,
+			);
+			name = logorrheaTests;
+			productName = logorrheaTests;
+			productReference = 15B32CE414F92EE90006FEF9 /* logorrheaTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		15B32CAC14F92EE80006FEF9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = ICL;
+			};
+			buildConfigurationList = 15B32CAF14F92EE80006FEF9 /* Build configuration list for PBXProject "logorrhea" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 15B32CAA14F92EE80006FEF9;
+			productRefGroup = 15B32CB614F92EE90006FEF9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				15B32CB414F92EE80006FEF9 /* logorrhea */,
+				15B32CE314F92EE90006FEF9 /* logorrheaTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		15B32CB314F92EE80006FEF9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15B32CC414F92EE90006FEF9 /* InfoPlist.strings in Resources */,
+				15B32CCD14F92EE90006FEF9 /* MainStoryboard_iPhone.storyboard in Resources */,
+				15B32CD014F92EE90006FEF9 /* MainStoryboard_iPad.storyboard in Resources */,
+				15B32CD514F92EE90006FEF9 /* first.png in Resources */,
+				15B32CD714F92EE90006FEF9 /* first@2x.png in Resources */,
+				15B32CDC14F92EE90006FEF9 /* second.png in Resources */,
+				15B32CDE14F92EE90006FEF9 /* second@2x.png in Resources */,
+				15B32D0914F9356B0006FEF9 /* 09-chat-2.png in Resources */,
+				15B32D0C14F935760006FEF9 /* 53-house.png in Resources */,
+				15B32D1914F942470006FEF9 /* 28-star.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		15B32CE114F92EE90006FEF9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15B32CF014F92EE90006FEF9 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		15B32CE214F92EE90006FEF9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		15B32CB114F92EE80006FEF9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15B32CC614F92EE90006FEF9 /* main.m in Sources */,
+				15B32CCA14F92EE90006FEF9 /* AppDelegate.m in Sources */,
+				15B32CD314F92EE90006FEF9 /* HomeViewController.m in Sources */,
+				15B32CDA14F92EE90006FEF9 /* PrefViewController.m in Sources */,
+				15B32D1614F93A7B0006FEF9 /* LoginView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		15B32CDF14F92EE90006FEF9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15B32CF314F92EE90006FEF9 /* logorrheaTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		15B32CEA14F92EE90006FEF9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 15B32CB414F92EE80006FEF9 /* logorrhea */;
+			targetProxy = 15B32CE914F92EE90006FEF9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		15B32CC214F92EE90006FEF9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				15B32CC314F92EE90006FEF9 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		15B32CCB14F92EE90006FEF9 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				15B32CCC14F92EE90006FEF9 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		15B32CCE14F92EE90006FEF9 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				15B32CCF14F92EE90006FEF9 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		15B32CEE14F92EE90006FEF9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				15B32CEF14F92EE90006FEF9 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		15B32CF414F92EE90006FEF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		15B32CF514F92EE90006FEF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		15B32CF714F92EE90006FEF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "logorrhea/logorrhea-Prefix.pch";
+				INFOPLIST_FILE = "logorrhea/logorrhea-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		15B32CF814F92EE90006FEF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "logorrhea/logorrhea-Prefix.pch";
+				INFOPLIST_FILE = "logorrhea/logorrhea-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		15B32CFA14F92EE90006FEF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/logorrhea.app/logorrhea";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "logorrhea/logorrhea-Prefix.pch";
+				INFOPLIST_FILE = "logorrheaTests/logorrheaTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		15B32CFB14F92EE90006FEF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/logorrhea.app/logorrhea";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "logorrhea/logorrhea-Prefix.pch";
+				INFOPLIST_FILE = "logorrheaTests/logorrheaTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		15B32CAF14F92EE80006FEF9 /* Build configuration list for PBXProject "logorrhea" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15B32CF414F92EE90006FEF9 /* Debug */,
+				15B32CF514F92EE90006FEF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		15B32CF614F92EE90006FEF9 /* Build configuration list for PBXNativeTarget "logorrhea" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15B32CF714F92EE90006FEF9 /* Debug */,
+				15B32CF814F92EE90006FEF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		15B32CF914F92EE90006FEF9 /* Build configuration list for PBXNativeTarget "logorrheaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15B32CFA14F92EE90006FEF9 /* Debug */,
+				15B32CFB14F92EE90006FEF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 15B32CAC14F92EE80006FEF9 /* Project object */;
+}
