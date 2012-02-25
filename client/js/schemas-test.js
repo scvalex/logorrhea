@@ -2,10 +2,16 @@
 require(['jsschema', 'schemas'], function(_, schemas) {
 
   var expectSchemaPass = function (schema, object) {
+    // TODO move this into jsschema?
+    if (!schema)
+      throw new Error("schema evaluates to false!")
     return expect(jsschema.check(schema, object)).toEqual(object);
   }
 
   var expectSchemaFail = function (schema, object) {
+    // TODO move this into jsschema?
+    if (!schema)
+      throw new Error("schema evaluates to false!")
     expect(function() {
       jsschema.check(schema, object);
     }).toThrow();
