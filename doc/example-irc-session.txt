@@ -1,0 +1,17 @@
+nh2: ?? how can I reformat my system?
+
+??master: nh2 asked the question "How can I reformat my system?". You can reply to the user ??reformat_system.
+
+scvalex: ??reformat_system: use fdisk
+
+??reformat_system: (posted from conversation) rostayob: bullshit
+
+nh2: ??reformat_system: thanks, alex
+
+--
+
+nh2: ??reformat_system: /users
+
+??master: nh2: scvalex, rostayob and nh2 are participating in the conversation.
+
+??master: question "How can I reformat my system?" was (??reformat_system) cleaned up due to inactivity for 24 hours.
