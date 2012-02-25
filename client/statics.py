@@ -4,6 +4,7 @@
 ROOT_DIR = '.'
 
 STATICS = {
+	'js/require.js': 'http://requirejs.org/docs/release/1.0.7/minified/require.js',
 	'js/coffee-script.js': 'http://github.com/jashkenas/coffee-script/raw/master/extras/coffee-script.js',
 	'js/jquery.js': 'http://code.jquery.com/jquery.min.js',
 	'js/mootools.js': 'http://mootools.net/download/get/mootools-core-1.4.4-full-nocompat.js',
