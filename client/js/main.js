@@ -11,16 +11,21 @@ require(["jquery", "knockout", "websocket-json-events"], function($) {
     ]);
 
     self.connect = function() {
-      $('#loginBox').addClass('hidden');
-      $('#mainBox').removeClass('hidden');
       connectInternal();
+    };
+
+    self.disconnect = function () {
+      disconnectInternal();
     };
   }
 
   function connectInternal() {
+    $('#loginBox').addClass('hidden');
+    $('#mainBox').removeClass('hidden');
+
     console.log("Connecting as " + conversationsModel.username());
 
-    var socket = new FancyWebSocket('ws://localhost:9999/echo');
+    socket = new FancyWebSocket('ws://localhost:9999/echo');
 
     socket.bind(
       'open',
@@ -34,7 +39,7 @@ require(["jquery", "knockout", "websocket-json-events"], function($) {
       'close',
       function(_) {
         console.log('socket closed');
-        $("#connectingLabel").text("Disconnected");
+        $("#connectionStatusLabel").text("Disconnected");
       });
 
     socket.bindDefault(function(event, data) {
@@ -45,11 +50,27 @@ require(["jquery", "knockout", "websocket-json-events"], function($) {
       'connect',
       function(_) {
         console.log("connected ok");
-        $("#connectingLabel").text("Connected");
+        $("#disconnectButton").removeClass("hidden");
+        $("#connectionStatusLabel").text("Connected").addClass("hidden");
       },
       function(err) {
         console.log("failed to connect: " + reason);
       });
+  }
+
+  function disconnectInternal() {
+    $("#disconnectButton").addClass("hidden");
+
+    socket.bindMethod(
+      'disconnect',
+      function(_) {
+        console.log(socket);
+        socket.close();
+        $("#connectionStatusLabel").removeClass("hidden");
+      },
+      undefined);
+
+    socket.send('disconnect', {});
   }
 
   $(function() {
@@ -58,6 +79,8 @@ require(["jquery", "knockout", "websocket-json-events"], function($) {
     var conversationsModel = new ConversationsModel();
     window.conversationsModel = conversationsModel;
     ko.applyBindings(conversationsModel);
+
+    socket = null;
 
     $("#usernameInput")[0].focus();
   });

@@ -52,6 +52,10 @@ var FancyWebSocket = function(url) {
     return this;
   };
 
+  this.close = function() {
+    conn.close();
+  }
+
   // dispatch to the right handlers
   conn.onmessage = function(evt) {
     var json = JSON.parse(evt.data);
