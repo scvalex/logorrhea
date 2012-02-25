@@ -4,6 +4,7 @@ require(["jquery", "knockout", "websocket-json-events"], function($) {
     var self = this;
 
     self.username = ko.observable();
+    self.channels = ko.observableArray([]);
     self.users = ko.observableArray(['scvalex', 'ex_falso', 'rostayob', 'nh2']);
     self.conversations = ko.observableArray([
       { name: 'client_development', topic: 'Why is client development so easy?', users: ['scvalex', 'nh2'] },
@@ -21,7 +22,7 @@ require(["jquery", "knockout", "websocket-json-events"], function($) {
 
   function connectInternal() {
     $('#loginBox').addClass('hidden');
-    $('#mainBox').removeClass('hidden');
+    $('#loggedInBox').removeClass('hidden');
 
     console.log("Connecting as " + conversationsModel.username());
 
@@ -51,10 +52,22 @@ require(["jquery", "knockout", "websocket-json-events"], function($) {
       function(_) {
         console.log("connected ok");
         $("#disconnectButton").removeClass("hidden");
+        $('#channelsBox').removeClass('hidden');
         $("#connectionStatusLabel").text("Connected").addClass("hidden");
+        socket.send('list_channels', {});
       },
       function(err) {
-        console.log("failed to connect: " + reason);
+        console.log("failed to connect: ", err);
+      });
+
+    socket.bindMethod(
+      'list_channels',
+      function(data) {
+        console.log("Got channels: ", data['channels']);
+        conversationsModel.channels(data['channels']);
+      },
+      function(err) {
+        console.log("failed to get channels: ", err);
       });
   }
 

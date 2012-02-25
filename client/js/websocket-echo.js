@@ -25,6 +25,9 @@ echo.on('request', function(request) {
           msgObj = {event: "connect.ok", data: {}};
         } else if (msgObj['event'] === 'disconnect') {
           msgObj = {event: "disconnect.ok", data: {}};
+        } else if (msgObj['event'] === 'list_channels') {
+          msgObj = {event: 'list_channels.ok',
+                    data: { channels: ["stats", "comptech"] }};
         }
         var replyStr = JSON.stringify(msgObj);
       } catch (err) {
