@@ -21,6 +21,10 @@ echo.on('request', function(request) {
                                 });
         if (msgObj['event'] === 'ping') {
           msgObj['event'] = 'pong';
+        } else if (msgObj['event'] === 'connect') {
+          msgObj = {event: "connect.ok", data: {}};
+        } else if (msgObj['event'] === 'disconnect') {
+          msgObj = {event: "disconnect.ok", data: {}};
         }
         var replyStr = JSON.stringify(msgObj);
       } catch (err) {

@@ -14,14 +14,16 @@
       <form data-bind="submit: connect">
         <input id="usernameInput" data-bind="value: username"
                placeholder="username" />
-        <button type="submit">Connect</button>
+        <input type="submit" value="Connect" />
       </form>
     </div>
 
     <div id="mainBox" class="hidden">
       <div id="loggedInBox">
-        Logged in as <strong data-bind="text: username">&nbsp;</strong>
-        <span id="connectingLabel">Connecting</span>
+        You are <strong data-bind="text: username">&nbsp;</strong>
+        <span id="connectionStatusLabel">Connecting</span>
+        <button id="disconnectButton" class="hidden"
+                data-bind="click: disconnect">Disconnect</button>
       </div>
 
       <h3>Users</h3>
