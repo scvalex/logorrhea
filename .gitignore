@@ -1,2 +1,13 @@
 .DS_Store
 .statics_fetched
+client/js/coffee-script.js
+client/js/jasmine-html.js
+client/js/jasmine.js
+client/js/jquery.js
+client/js/knockout.js
+client/js/mootools.js
+client/js/require.js
+client/js/sockjs.js
+client/staticfetcher.py*
+client/*.css
+client/css/jasmine.css
