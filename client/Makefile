@@ -19,6 +19,7 @@ clean: statics_clean
 
 init:
 	[ -f .statics_fetched ] || make statics_fetch_force
+	[ -f .statics_fetched ] || npm install websocket
 	touch .statics_fetched
 
 dev: statics_fetch

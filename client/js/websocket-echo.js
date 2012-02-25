@@ -14,7 +14,22 @@ echo.on('request', function(request) {
 
   conn.on('message', function(message) {
     if (message.type === 'utf8') {
-      conn.sendUTF(message.utf8Data);
+      try {
+        var msgObj = JSON.parse(message.utf8Data,
+                                function(key, value) {
+                                  return value;
+                                });
+        if (msgObj['event'] === 'ping') {
+          msgObj['event'] = 'pong';
+        }
+        var replyStr = JSON.stringify(msgObj);
+      } catch (err) {
+        console.error("WARNING: received non-JSON message: " + message.utf8Data);
+        var replyStr = message.utf8Data;
+      }
+      conn.sendUTF(replyStr);
+    } else {
+      console.error("ERROR: received non-utf8 data, ignoring");
     }
   });
 
