@@ -1,5 +1,3 @@
-/* http://joshuakehn.com/blog/view/2/WebSocket-Tutorial-with-Node-js */
-
 var http = require('http');
 var WebSocketServer = require('websocket').server;
 
