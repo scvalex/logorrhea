@@ -1,4 +1,4 @@
-
+import Control.Monad
 import Control.Monad.Trans
 import Network
 import System.IO
@@ -8,7 +8,7 @@ import IRC
 server   = "irc.freenode.org"
 port     = fromIntegral 6667
 chan     = "#testlogo"
-nickName = "logotestingbot666"
+nickName = "maaantrh5rhguyr"
 
 connectToServer :: String -> PortNumber -> IO IRCInfo
 connectToServer server port = do
@@ -28,7 +28,7 @@ test_connectJoin = withSocketsDo $ do
             , user nickName "*" "*" nickName
             , joinChan chan
             ]
-        dumpContents
+        forever $ popMessage >>= liftIO . print
     hClose $ ircHandle info
         
 
