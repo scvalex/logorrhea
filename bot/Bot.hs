@@ -5,8 +5,9 @@ module Bot
     , BotState (..)
     , newBotState
     , Bot (..)      
+    , runBot      
     , BotProcess
-    , runBot
+    , botProcess
     ) where
 
 import Control.Applicative
@@ -41,7 +42,14 @@ newBotState chans admins = BotState { botQuestions = Map.empty
 newtype Bot a = Bot {unBot :: State BotState a}
     deriving (Functor, Applicative, Monad, MonadState BotState)
 
-type BotProcess = Message -> Bot [Message]
-
 runBot :: Bot a -> BotState -> (a, BotState)
 runBot (Bot s) bs = runState s bs
+
+type BotProcess = Message -> Bot [Message]
+
+botProcess :: MonadIRC m => BotProcess -> BotState -> m ()
+botProcess proc bs = forever $ do
+    msg <- popMessage
+    let (replies, bs') = runBot (proc msg) bs
+    mapM sendMessage replies
+    botProcess proc bs'
