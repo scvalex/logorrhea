@@ -1,4 +1,5 @@
-require(["jquery", "knockout", "websocket-json-events"], function($) {
+require(['jquery', 'knockout', 'websocket-json-events', 'jsschema', 'schemas'],
+        function($, _, _, _, schemas) {
 
   function ConversationsModel() {
     var self = this;
@@ -31,6 +32,21 @@ require(["jquery", "knockout", "websocket-json-events"], function($) {
     console.log("Connecting as " + conversationsModel.username());
 
     socket = new FancyWebSocket('ws://localhost:9999/echo');
+    socket.bindSchema = function(eventName, callback) {
+      this.bind(eventName, function(data) {
+        return jsschema.check(schemas[data.event], callback(data));
+      });
+    };
+    socket.bindSchemaMethod = function (eventName, okCallback, errorCallback) {
+      this.bindMethod(
+        eventName,
+        function(data) {
+          return jsschema.check(schemas[data.event], okCallback(data));
+        },
+        // Dont schema-check errors (yet)
+        errorCallback
+      );
+    }
 
     socket.bind(
       'open',
@@ -51,7 +67,7 @@ require(["jquery", "knockout", "websocket-json-events"], function($) {
       console.log("Unexpected message: " + event + "(" + data + ")");
     });
 
-    socket.bindMethod(
+    socket.bindSchemaMethod(
       'connect',
       function(_) {
         console.log("connected ok");
@@ -77,7 +93,7 @@ require(["jquery", "knockout", "websocket-json-events"], function($) {
   function disconnectInternal() {
     $("#disconnectButton").addClass("hidden");
 
-    socket.bindMethod(
+    socket.bindSchemaMethod(
       'disconnect',
       function(_) {
         console.log(socket);

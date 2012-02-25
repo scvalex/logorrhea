@@ -5,6 +5,7 @@
   <title>Jasmine Spec Runner</title>
 
   <link rel="stylesheet" type="text/css" href="css/jasmine.css">
+  <script type="text/javascript" src="js/require.js" data-main="js/test.js"></script>
   <script type="text/javascript" src="js/jasmine.js"></script>
   <script type="text/javascript" src="js/jasmine-html.js"></script>
 
@@ -13,38 +14,7 @@
   <script type="text/javascript" src="js/websocket-tests.js"></script>
   <script type="text/javascript" src="js/websocket-json-events.js"></script>
   <script type="text/javascript" src="js/json-events-tests.js"></script>
-  <script type="text/javascript" src="js/jsschema.js"></script>
-  <script type="text/javascript" src="js/schemas.js"></script>
   <script type="text/javascript" src="js/schemas-test.js"></script>
-
-  <script type="text/javascript">
-    (function() {
-      var jasmineEnv = jasmine.getEnv();
-      jasmineEnv.updateInterval = 1000;
-
-      var trivialReporter = new jasmine.TrivialReporter();
-
-      jasmineEnv.addReporter(trivialReporter);
-
-      jasmineEnv.specFilter = function(spec) {
-        return trivialReporter.specFilter(spec);
-      };
-
-      var currentWindowOnload = window.onload;
-
-      window.onload = function() {
-        if (currentWindowOnload) {
-          currentWindowOnload();
-        }
-        execJasmine();
-      };
-
-      function execJasmine() {
-        jasmineEnv.execute();
-      }
-
-    })();
-  </script>
 
 </head>
 
