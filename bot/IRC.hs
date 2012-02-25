@@ -7,13 +7,10 @@ module IRC
       
     , module Network.IRC.Base
     , module Network.IRC.Commands
-
-
     ) where
 
 import Control.Monad.Reader
 import Control.Monad.State
-import Data.ByteString (ByteString)
 import qualified Data.ByteString as B
 import qualified Data.ByteString.Char8 as B8
 import Network
@@ -32,15 +29,16 @@ data IRCInfo = IRCInfo
 class MonadIRC m where
     popMessage  :: m Message
     sendMessage :: Message -> m ()
+    getUserName :: m UserName
 
-newtype IRCT m a = IRCT {unIRC :: ReaderT IRCInfo m a}
+newtype IRCT m a = IRCT {unIRC :: ReaderT IRCInfo (StateT UserName m) a}
     deriving (Functor, Monad, MonadIO)
 
 instance MonadTrans IRCT where
-    lift = IRCT . lift 
+    lift = IRCT . lift . lift
 
-runIRCT :: MonadIO m => IRCInfo -> IRCT m () -> m ()
-runIRCT i@(IRCInfo { ircHandle = h }) (IRCT r) = runReaderT r i
+runIRCT :: MonadIO m => UserName -> IRCInfo -> IRCT m () -> m ()
+runIRCT un i (IRCT act) = evalStateT (runReaderT act i) un
 
 instance MonadIO m => MonadIRC (IRCT m) where
     popMessage = IRCT $ do
@@ -53,3 +51,5 @@ instance MonadIO m => MonadIRC (IRCT m) where
         let bs = B8.pack . (++"\r\n") . encode $ msg
         liftIO $ B.putStr bs
         liftIO (B.hPut h bs >> hFlush h)
+        
+    getUserName = IRCT . lift $ get

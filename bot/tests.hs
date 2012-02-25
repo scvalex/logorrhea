@@ -2,13 +2,14 @@ import Control.Monad
 import Control.Monad.Trans
 import Network
 import System.IO
+import System.Environment
 
 import IRC
 
 server   = "irc.freenode.org"
 port     = fromIntegral 6667
 chan     = "#testlogo"
-nickName = "maaantrh5rhguyr"
+userName = "maaantrh5rhguyr"
 
 connectToServer :: String -> PortNumber -> IO IRCInfo
 connectToServer server port = do
@@ -18,20 +19,25 @@ connectToServer server port = do
                    , ircName   = server
                    , ircPort   = port
                    }
+    
+withConnection :: UserName -> IO IRCInfo -> IRCT IO () -> IO ()
+withConnection un conn act = do
+    i <- conn
+    runIRCT un i $ do
+        sendMessage $ nick un
+        sendMessage $ user un "*" "*" un
+        act
 
-test_connectJoin :: IO ()
-test_connectJoin = withSocketsDo $ do
-    info <- connectToServer server port
-    runIRCT info $ do
-        mapM_ sendMessage
-            [ nick nickName
-            , user nickName "*" "*" nickName
-            , joinChan chan
-            ]
-        forever $ popMessage >>= liftIO . print
-    hClose $ ircHandle info
-        
+test_connectJoin :: IRCT IO ()
+test_connectJoin = do
+    sendMessage $ joinChan chan
+    forever $ popMessage >>= liftIO . putStrLn . encode
 
 main :: IO ()
 main = do
-    test_connectJoin
+    args <- getArgs
+    let un = case args of
+            [s] -> s
+            _   -> userName
+        conn = connectToServer server port
+    withConnection un conn test_connectJoin
