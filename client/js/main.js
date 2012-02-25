@@ -15,9 +15,13 @@ require(["jquery", "knockout", "websocket-json-events"], function($) {
       connectInternal();
     };
 
-    self.disconnect = function () {
+    self.disconnect = function() {
       disconnectInternal();
     };
+
+    self.channelClicked = function() {
+      console.log("Channel clicked");
+    }
   }
 
   function connectInternal() {

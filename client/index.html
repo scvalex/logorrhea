@@ -28,7 +28,7 @@
     <div id="channelsBox" class="hidden">
       <h3>Channels</h3>
       <ul class="channels" data-bind="foreach: channels">
-        <li data-bind="text: $data"></li>
+        <li><a data-bind="text: $data, click: $root.channelClicked">&nbsp;</a></li>
       </ul>
     </div>
 
