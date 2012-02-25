@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginView : UIViewController
+@interface LoginView : UIViewController {
+    IBOutlet NSString *username;
+    bool logged_in;
+}
+
+@property (weak, nonatomic) IBOutlet UITextField *myusername;
+@property(nonatomic, assign) bool logged_in;
+
+-(IBAction)textFieldDoneEditing:(id)sender;
+-(IBAction)backgroundClick:(id)sender;
+-(IBAction)login;
 
 @end
