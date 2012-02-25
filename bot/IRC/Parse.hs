@@ -1,10 +1,10 @@
 -- | Parsec parsers and a general parsing interface for IRC messages
-module ParseMessage (
+module IRC.Parse (
     -- * Parsing and Formatting Functions
     decode -- :: ByteString -> Maybe Message
   ) where
 
-import Network.IRC.Base
+import IRC.Base
 
 import Data.ByteString (ByteString)
 import Control.Monad

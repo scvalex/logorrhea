@@ -1,3 +1,4 @@
+
 import Control.Monad
 import Control.Monad.Trans
 import Network
@@ -5,10 +6,13 @@ import System.IO
 import System.Environment
 
 import IRC
+import Bot
+import DrLogos
+
+botState = newBotState ["#testlogo"] []
 
 server   = "irc.freenode.org"
 port     = fromIntegral 6667
-chan     = "#testlogo"
 userName = "maaantrh5rhguyr"
 
 connectToServer :: String -> PortNumber -> IO IRCInfo
@@ -30,18 +34,6 @@ withConnection un conn act = do
         sendMessage $ quit Nothing
         return ()
 
-test_connectJoin :: IRCT IO ()
-test_connectJoin = do
-    sendMessage $ joinChan chan
-    forever $ popMessage >>= liftIO . print
-
-test_connectJoinMsg :: IRCT IO ()
-test_connectJoinMsg = do
-    sendMessage $ joinChan chan
-    sendMessage $ privmsg chan "hello!"
-    sendMessage $ part chan
-    forever $ popMessage >>= liftIO . print
-    
 main :: IO ()
 main = do
     args <- getArgs
@@ -49,5 +41,4 @@ main = do
             [s] -> s
             _   -> userName
         conn = connectToServer server port
-    withConnection un conn test_connectJoin
-    -- withConnection un conn test_connectJoinMsg
+    withConnection un conn (initDrLogos botState >>= botProcess drLogos)

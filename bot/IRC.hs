@@ -5,8 +5,8 @@ module IRC
     , IRCT
     , runIRCT
 
-    , module Network.IRC.Base
-    , module Network.IRC.Commands
+    , module IRC.Base
+    , module IRC.Commands
     ) where
 
 import Control.Applicative
@@ -16,11 +16,11 @@ import Data.ByteString (ByteString)
 import qualified Data.ByteString as B
 import qualified Data.ByteString.Char8 as B8
 import Network
-import Network.IRC.Base
-import Network.IRC.Commands
 import System.IO
 
-import qualified ParseMessage as Parse
+import IRC.Base
+import IRC.Commands
+import qualified IRC.Parse as Parse
 
 data IRCInfo = IRCInfo
     { ircHandle :: Handle 
