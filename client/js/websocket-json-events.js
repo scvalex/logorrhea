@@ -29,6 +29,7 @@ var FancyWebSocket = function(url) {
   }
 
   var callbacks = {};
+  var defaultCallback = function(_) { };
 
   this.bind = function(event_name, callback) {
     callbacks[event_name] = callbacks[event_name] || [];
@@ -37,13 +38,13 @@ var FancyWebSocket = function(url) {
   };
 
   this.bindMethod = function(method_name, okCallback, errorCallback) {
-    if (typeof okCallback != 'undefined') {
-      this.bind(method_name + ".ok", okCallback);
-    }
-    if (typeof errorCallback != 'undefined') {
-      this.bind(method_name + ".error", errorCallback);
-    }
+    this.bind(method_name + ".ok", okCallback);
+    this.bind(method_name + ".error", errorCallback);
   };
+
+  this.bindDefault = function(callback) {
+    defaultCallback = callback;
+  }
 
   this.send = function(event_name, event_data) {
     var payload = JSON.stringify({event:event_name, data: event_data});
@@ -68,6 +69,9 @@ var FancyWebSocket = function(url) {
   var dispatch = function(event_name, message) {
     var chain = callbacks[event_name];
     if (typeof chain == 'undefined') {
+      if (typeof defaultCallback != 'undefined') {
+        defaultCallback(event_name, message);
+      }
       return; // no callbacks for this event
     }
     for(var i = 0; i < chain.length; i++) {

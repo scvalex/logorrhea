@@ -22,19 +22,34 @@ require(["jquery", "knockout", "websocket-json-events"], function($) {
 
     var socket = new FancyWebSocket('ws://localhost:9999/echo');
 
-    socket.bind('open', function() {
-      console.log('connection open');
-      socket.send('channel1', JSON.stringify({something: 'value'}));
-      $("#connectingLabel").text("Connected");
-    });
-    socket.bind('close', function() {
-      console.log('connection closed');
-      $("#connectingLabel").text("Disconnected");
+    socket.bind(
+      'open',
+      function(_) {
+        console.log('socket open');
+        socket.send('connect',
+                    JSON.stringify({user: conversationsModel.username()}));
+      });
+
+    socket.bind(
+      'close',
+      function(_) {
+        console.log('socket closed');
+        $("#connectingLabel").text("Disconnected");
+      });
+
+    socket.bindDefault(function(event, data) {
+      console.log("Unexpected message: " + event + "(" + data + ")");
     });
 
-    socket.bind('channel1', function(data){
-      console.log("on channel 1: " + data);
-    });
+    socket.bindMethod(
+      'connect',
+      function(_) {
+        console.log("connected ok");
+        $("#connectingLabel").text("Connected");
+      },
+      function(err) {
+        console.log("failed to connect: " + reason);
+      });
   }
 
   $(function() {
