@@ -10,8 +10,6 @@
 
 @interface HomeViewController : UIViewController <UIActionSheetDelegate>
 
-- (IBAction)showActionSheet;
-
-- (void)actionSheet:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
+@property (weak, nonatomic) IBOutlet UILabel *welcomeMessage;
 
 @end

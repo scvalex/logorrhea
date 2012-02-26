@@ -7,43 +7,10 @@
 //
 
 #import "HomeViewController.h"
+#import "AppDelegate.h"
 
 @implementation HomeViewController
-
--(IBAction)showActionSheet {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Let the story begin..." delegate:(id)self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Continue" otherButtonTitles:@"Login",@"Register", @"Logout", nil];
-    [actionSheet showInView:self.view];
-}
-
-- (void)actionSheet:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
-    // the user clicked one of the buttons
-    switch (buttonIndex){
-        case 0:
-            // handle a cancel event
-            break;
-            
-        case 1:
-            //handle a login
-            //[(id)self openLoginView];
-            break;
-            
-        case 2:
-            //handle a register
-           // [(id)self openRegisterView];
-            break;
-            
-        case 3:
-            //[(id)self Logout];
-            break;
-            
-        default:
-            //do whatever
-            break;
-    }
-    
-}
-
+@synthesize welcomeMessage;
 
 - (void)didReceiveMemoryWarning
 {
@@ -61,6 +28,7 @@
 
 - (void)viewDidUnload
 {
+    [self setWelcomeMessage:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -74,6 +42,15 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    NSString* username = [BigDelegate getUsername];
+    
+    if (username == nil)
+    {
+        welcomeMessage.text = @"You are not logged in";
+    } else {
+        welcomeMessage.text = [@"Welcome, "  stringByAppendingString:username];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated

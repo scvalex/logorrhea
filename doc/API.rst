@@ -10,19 +10,19 @@ Overview
 Shows event names. Replies and most parameters are omitted.
 
 
-SERVER                CLIENT
+    SERVER                CLIENT
 
-                      connect
-                      disconnect
-                      list_channels
-                      list_users (channel)
-                      list_conversations (channel)
-                      join (channel)
-                      send_channel (channel)
-                      send_conversation (channel, conversation)
-disconnect
-receive_channel
-receive_conversation
+                          connect
+                          disconnect
+                          list_channels
+                          list_users (channel)
+                          list_conversations (channel)
+                          join (channel)
+                          send_channel (channel)
+                          send_conversation (channel, conversation)
+    disconnect
+    receive_channel
+    receive_conversation
 
 
 JSON format convention
@@ -139,6 +139,8 @@ Server:
 list_conversations
 ^^^^^^^^^^^^^^^^^^
 
+// TODO: move the conversation content retrieval into separate message
+
 Client:
 
     list_conversations { channel: 'haskell' }
@@ -149,7 +151,19 @@ Server:
 
 CONVERSATION:
 
-    { tag: 'why_haskell', topic: 'Why Haskell?', users: ['scvalex', 'rostayob'] }
+    {
+        tag: 'why_haskell',
+        topic: 'Why Haskell?',
+        users: ['scvalex', 'rostayob'],
+        messages: [MESSAGE, MESSAGE]
+    }
+
+MESSAGE:
+
+    {
+        user: 'rostayob',
+        message: 'Because Haskell can save you a lot of time.'
+    }
 
 
 join

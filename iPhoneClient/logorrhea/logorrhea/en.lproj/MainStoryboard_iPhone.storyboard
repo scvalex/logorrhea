@@ -10,38 +10,45 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a9e-zr-UGO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="7cA-QY-2om" customClass="HomeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tqu-ld-DwT">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="411"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" id="rFN-db-qp2">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Home" id="kTU-WF-mHC">
+                                        <barButtonItem key="leftBarButtonItem" title="Login" id="L6F-WV-ycu">
+                                            <connections>
+                                                <action selector="showAlert:" destination="7cA-QY-2om" id="QY4-em-tB3"/>
+                                                <segue destination="NyB-a7-LUB" kind="modal" id="IwJ-pV-RdA"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Logout" id="CXP-tn-mXl"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="12" id="lkE-z0-gAZ">
+                                <rect key="frame" x="23" y="89" width="274" height="67"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="53-house.png" id="RrU-Y9-j6r"/>
                     <navigationItem key="navigationItem" title="Home" id="74O-Bh-jt9">
-                        <barButtonItem key="leftBarButtonItem" title="Login" id="8N5-H3-jQ9">
-                            <connections>
-                                <segue destination="NyB-a7-LUB" kind="push" id="EwS-P5-1hp"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" title="Login" id="8N5-H3-jQ9"/>
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="Logout" id="EfV-dI-ryd"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="welcomeMessage" destination="lkE-z0-gAZ" id="xjX-zP-wlZ"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="980" y="-654"/>
-        </scene>
-        <scene sceneID="5j3-hd-Dcg">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="L7m-d3-PRq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController definesPresentationContext="YES" id="NfE-L0-uYu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="53-house.png" id="4Ge-kj-ALa"/>
-                    <navigationItem key="navigationItem" id="gHp-eH-fiF"/>
-                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="BYQ-QB-Dgw">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="7cA-QY-2om" kind="relationship" relationship="rootViewController" id="Hrb-h1-Dkb"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="446" y="-655"/>
         </scene>
         <scene sceneID="bL5-Yi-lqO">
             <objects>
@@ -123,47 +130,51 @@
                             <outlet property="delegate" destination="4DB-v3-44b" id="dae-G0-536"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="mDl-2F-AwE"/>
+                    <navigationItem key="navigationItem" id="mDl-2F-AwE">
+                        <barButtonItem key="rightBarButtonItem" title="New" id="d1y-Jw-yn5">
+                            <connections>
+                                <segue destination="26E-kK-YD6" kind="modal" id="Gqk-Zl-TMv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="342" y="1144"/>
         </scene>
-        <scene sceneID="13">
+        <scene sceneID="AcD-qm-k3D">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="12" sceneMemberID="firstResponder"/>
-                <viewController title="Preferences" id="3" customClass="PrefViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="17">
-                        <rect key="frame" x="0.0" y="20" width="320" height="411"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cA0-7U-Y36" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="26E-kK-YD6" customClass="NewMessageView" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KCC-hx-Jmw">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Second View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="22">
-                                <rect key="frame" x="54" y="98" width="212" height="43"/>
+                            <navigationBar contentMode="scaleToFill" id="J1q-Cl-ahC">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" editable="NO" text="Loaded by the second view controller — an instance of SecondViewController — specified in the app delegate." textAlignment="center" id="23">
-                                <rect key="frame" x="20" y="181" width="280" height="88"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" size="system"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textView>
+                                <items>
+                                    <navigationItem title="New Message" id="Tek-io-aMt">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="4AN-ED-GFh">
+                                            <connections>
+                                                <action selector="back:" destination="26E-kK-YD6" id="fG0-bh-HJ9"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Preferences" image="28-star.png" id="6"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="653" y="498"/>
+            <point key="canvasLocation" x="742" y="1258"/>
         </scene>
         <scene sceneID="StL-fa-KVf">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Tb-wv-RIw" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="NyB-a7-LUB" customClass="LoginView" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g2A-dK-zKU">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="k4a-Kd-Q2k">
@@ -182,7 +193,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="text" textAlignment="center" minimumFontSize="17" id="eu9-wm-lei">
-                                <rect key="frame" x="127" y="20" width="173" height="31"/>
+                                <rect key="frame" x="127" y="87" width="173" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -191,14 +202,14 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="username" lineBreakMode="tailTruncation" minimumFontSize="10" id="IXS-Zm-jrY">
-                                <rect key="frame" x="25" y="25" width="78" height="20.5"/>
+                                <rect key="frame" x="20" y="92" width="78" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yVb-0r-dfK">
-                                <rect key="frame" x="177" y="71" width="72" height="28"/>
+                                <rect key="frame" x="177" y="132" width="72" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -213,6 +224,13 @@
                                     <action selector="login" destination="NyB-a7-LUB" eventType="touchUpInside" id="fbX-XE-xus"/>
                                 </connections>
                             </button>
+                            <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" id="uPC-Bq-eg9">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Login" id="6fO-S6-ShL"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -236,8 +254,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="NfE-L0-uYu" kind="relationship" relationship="viewControllers" id="QG7-kw-hUJ"/>
-                        <segue destination="3" kind="relationship" relationship="viewControllers" id="27"/>
+                        <segue destination="7cA-QY-2om" kind="relationship" relationship="viewControllers" id="gBd-dN-iXj"/>
                         <segue destination="dK5-xB-Jcp" kind="relationship" relationship="viewControllers" id="yGQ-bF-gb0"/>
                     </connections>
                 </tabBarController>
@@ -247,36 +264,8 @@
     </scenes>
     <resources>
         <image name="09-chat-2.png" width="24" height="22"/>
-        <image name="28-star.png" width="26" height="26"/>
         <image name="53-house.png" width="22" height="22"/>
     </resources>
-    <classes>
-        <class className="DetailViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
-        </class>
-        <class className="HomeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="showActionSheet"/>
-            </relationships>
-        </class>
-        <class className="LoginView" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginView.h"/>
-            <relationships>
-                <relationship kind="action" name="backgroundClick:"/>
-                <relationship kind="action" name="login"/>
-                <relationship kind="action" name="textFieldDoneEditing:"/>
-                <relationship kind="outlet" name="myusername" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="username" candidateClass="NSString"/>
-            </relationships>
-        </class>
-        <class className="PrefViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PrefViewController.h"/>
-        </class>
-        <class className="TableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TableViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

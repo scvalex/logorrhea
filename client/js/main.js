@@ -42,7 +42,7 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     self.conversationsReceived = ko.observable(false);
     self.conversation = ko.observable({topic: "", messages: []});
     self.conversationSelected = ko.computed(function() {
-      return (typeof self.conversation()['tag'] != "undefined");
+      return (typeof self.conversation().tag !== "undefined");
     });
 
     self.conversationsDict = ko.computed(function() {
@@ -87,7 +87,7 @@ require(['jquery', 'knockout', 'websocket-json-events'],
       });
 
     socket.bindDefault(function(event, data) {
-      console.log("Unexpected message: " + event + "(" + data + ")");
+      console.error("Warning: Received unexpected message: " + event + "(" + data + ")");
     });
 
     socket.bindMethod(
@@ -171,6 +171,13 @@ require(['jquery', 'knockout', 'websocket-json-events'],
 
   function conversationClickedInternal(tag) {
     console.log("Conversation clicked: ", tag);
+
+    var conv = conversationsModel.conversationsDict()[tag];
+    if (!conv || !conv.tag)
+      console.error("Warning: Could not find conversation for tag '"
+                    + tag + "' in conversation dict: ", conversationsDict());
+    else
+      conversationsModel.conversation(conv);
   }
 
   $(function() {
@@ -180,14 +187,16 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     window.conversationsModel = conversationsModel;
     ko.applyBindings(conversationsModel);
 
-    $("#usernameInput")[0].focus();
+    $("#usernameInput").focus();
   });
 
   /* Turns an array of object into a "dictionary" for fast access,
      using the given member of each object as the key.
      Example:
 
-        objectArrayToDict([{ user: 'nh2', age: 20 }], 'user') == { 'nh2': { user: 'nh2', age: 20 } }
+        objectArrayToDict([{ user: 'nh2', age: 20 }], 'user')
+        ==
+        { 'nh2': { user: 'nh2', age: 20 } }
   */
   function objectArrayToDict(array, keyMemberName) {
     var dict = {};

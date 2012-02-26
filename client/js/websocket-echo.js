@@ -42,18 +42,34 @@ echo.on('request', function(request) {
         } else if (msgObj['event'] === 'list_conversations') {
           if (msgObj['data']['channel'] === 'stats') {
             var convs = [
-              {tag: 'client_development',
-               topic: 'Why is client development so easy?',
-               users: ['scvalex', 'nh2']},
-              {tag: 'server_development',
-               topic: 'Is it OK to have more LANGUAGE pragmas than lines of code?',
-               users: ['ex_falso', 'rostayob']}];
+              {
+                tag: 'client_development',
+                topic: 'Why is client development so easy?',
+                users: ['scvalex', 'nh2'],
+                messages: [
+                  { user: 'nh2', message: "Can you tell me why our client development runs so super smoothly?" },
+                  { user: 'scvalex', message: "Because we're using MVVM." }
+                ]
+              },
+              {
+                tag: 'server_development',
+                topic: 'Is it OK to have more LANGUAGE pragmas than lines of code?',
+                users: ['ex_falso', 'rostayob'],
+                messages: [
+                  { user: 'ex_falso', message: "That looks a little bit strange to me..." },
+                  { user: 'rostayob', message: "It's OK, have that all the time!" }
+                ]
+              }
+            ];
           } else {
             var convs = [
-              {tag: "scifi_rocks",
-               topic: "Am I the only one who sees the corollary between scifi and comptech",
-               users: ["nh2", "exFalso"]
-              }];
+              {
+                tag: "scifi_rocks",
+                topic: "Am I the only one who sees the corollary between scifi and comptech",
+                users: ["nh2", "exFalso"],
+                messages: []
+              }
+            ];
           }
           msgObj = {event: "list_conversations.ok",
                     data: {conversations: convs,
