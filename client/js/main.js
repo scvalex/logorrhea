@@ -1,11 +1,12 @@
-require(['jquery', 'knockout', 'websocket-json-events', 'jsschema', 'schemas'],
-        function($, _, _, _, schemas) {
+require(['jquery', 'knockout', 'websocket-json-events'],
+        function($, _, websocket_json_events) {
 
   function ConversationsModel() {
     var self = this;
 
     self.username = ko.observable();
     self.channels = ko.observableArray([]);
+    self.channel = ko.observable();
     self.users = ko.observableArray(['scvalex', 'ex_falso', 'rostayob', 'nh2']);
     self.conversations = ko.observableArray([
       { name: 'client_development', topic: 'Why is client development so easy?', users: ['scvalex', 'nh2'] },
@@ -31,22 +32,7 @@ require(['jquery', 'knockout', 'websocket-json-events', 'jsschema', 'schemas'],
 
     console.log("Connecting as " + conversationsModel.username());
 
-    socket = new FancyWebSocket('ws://localhost:9999/echo');
-    socket.bindSchema = function(eventName, callback) {
-      this.bind(eventName, function(data) {
-        return jsschema.check(schemas[data.event], callback(data));
-      });
-    };
-    socket.bindSchemaMethod = function(eventName, okCallback, errorCallback) {
-      this.bindMethod(
-        eventName,
-        function(data) {
-          return jsschema.check(schemas[data.event], okCallback(data));
-        },
-        // Dont schema-check errors (yet)
-        errorCallback
-      );
-    }
+    socket = new websocket_json_events.FancyWebSocket('ws://localhost:9999/echo');
 
     socket.bind(
       'open',
@@ -67,7 +53,7 @@ require(['jquery', 'knockout', 'websocket-json-events', 'jsschema', 'schemas'],
       console.log("Unexpected message: " + event + "(" + data + ")");
     });
 
-    socket.bindSchemaMethod(
+    socket.bindMethod(
       'connect',
       function(_) {
         console.log("connected ok");
@@ -80,7 +66,7 @@ require(['jquery', 'knockout', 'websocket-json-events', 'jsschema', 'schemas'],
         console.log("failed to connect: ", err);
       });
 
-    socket.bindSchemaMethod(
+    socket.bindMethod(
       'list_channels',
       function(data) {
         conversationsModel.channels(data['channels']);
@@ -93,7 +79,7 @@ require(['jquery', 'knockout', 'websocket-json-events', 'jsschema', 'schemas'],
   function disconnectInternal() {
     $("#disconnectButton").addClass("hidden");
 
-    socket.bindSchemaMethod(
+    socket.bindMethod(
       'disconnect',
       function(_) {
         console.log(socket);
@@ -107,6 +93,8 @@ require(['jquery', 'knockout', 'websocket-json-events', 'jsschema', 'schemas'],
 
   function browseChannelInternal(channel) {
     console.log("Channel clicked: " + channel);
+    conversationsModel.channel(channel);
+    $("#channelBox").removeClass("hidden");
   }
 
   $(function() {

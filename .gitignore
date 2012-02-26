@@ -11,3 +11,5 @@ client/js/sockjs.js
 client/staticfetcher.py*
 client/*.css
 client/css/jasmine.css
+Setup.hs
+dist

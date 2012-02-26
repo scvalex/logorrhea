@@ -9,6 +9,7 @@
 #import "LoginView.h"
 
 @implementation LoginView
+
 @synthesize logged_in;
 @synthesize myusername;
 
@@ -40,7 +41,33 @@
     return result;
 }
 
+
+- (void) webSocketDidOpen:(SRWebSocket *)webSocket
+{
+    NSLog(@"Socket-ul e gata");
+}
+
+- (void) webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error
+{
+    NSLog(@"A murit aici %@", error);
+}
+
+- (void) webSocket:(SRWebSocket *)webSocket didReceiveMessage:(NSString *)message
+{
+    NSLog(@"Am primit un mesaj: %@", message);
+}
+
 - (IBAction)login {
+    
+    myWS = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"ws://129.31.197.27:9999/echo"]]];
+    
+    myWS.delegate = self;
+    
+    [myWS open];
+    
+    NSLog(@"am deschis, cica");
+    
+    [myWS send:(@"salut")];
     
     //check the crashing problem when connected to a wi-fi but without password.
    /* 

@@ -13,6 +13,7 @@ echo.on('request', function(request) {
   var conn = request.accept(null, request.origin);
 
   conn.on('message', function(message) {
+    console.log("Got: ", message);
     if (message.type === 'utf8') {
       try {
         var msgObj = JSON.parse(message.utf8Data,
@@ -22,6 +23,7 @@ echo.on('request', function(request) {
         if (msgObj['event'] === 'ping') {
           msgObj['event'] = 'pong';
         } else if (msgObj['event'] === 'connect') {
+          /* msgObj = {event: "connect.error", data: {reason: "Meh"}}; */
           msgObj = {event: "connect.ok", data: {}};
         } else if (msgObj['event'] === 'disconnect') {
           msgObj = {event: "disconnect.ok", data: {}};
