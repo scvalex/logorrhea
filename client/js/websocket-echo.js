@@ -42,18 +42,25 @@ echo.on('request', function(request) {
         } else if (msgObj['event'] === 'list_conversations') {
           if (msgObj['data']['channel'] === 'stats') {
             var convs = [
-              {tag: 'client_development',
-               topic: 'Why is client development so easy?',
-               users: ['scvalex', 'nh2']},
-              {tag: 'server_development',
-               topic: 'Is it OK to have more LANGUAGE pragmas than lines of code?',
-               users: ['ex_falso', 'rostayob']}];
+              {
+                tag: 'client_development',
+                topic: 'Why is client development so easy?',
+                users: ['scvalex', 'nh2']
+              },
+              {
+                tag: 'server_development',
+                topic: 'Is it OK to have more LANGUAGE pragmas than lines of code?',
+                users: ['ex_falso', 'rostayob']
+              }
+            ];
           } else {
             var convs = [
-              {tag: "scifi_rocks",
-               topic: "Am I the only one who sees the corollary between scifi and comptech",
-               users: ["nh2", "exFalso"]
-              }];
+              {
+                tag: "scifi_rocks",
+                topic: "Am I the only one who sees the corollary between scifi and comptech",
+                users: ["nh2", "exFalso"]
+              }
+            ];
           }
           msgObj = {event: "list_conversations.ok",
                     data: {conversations: convs,
