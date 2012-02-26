@@ -60,72 +60,78 @@
 
       <hr />
 
-      <div id="loginBox" data-bind="visible: !isConnected()">
-        <h3>Connect</h3>
-        <form data-bind="submit: connect">
-          <input id="usernameInput" data-bind="value: username"
-                 placeholder="username" />
-          <input type="submit" value="Connect" />
-        </form>
-      </div>
+      <div class="row">
+        <div class="span10">
+          <div id="loginBox" data-bind="visible: !isConnected()">
+            <h3>Connect</h3>
+            <form data-bind="submit: connect">
+              <input id="usernameInput" data-bind="value: username"
+                     placeholder="username" />
+              <input type="submit" value="Connect" />
+            </form>
+          </div>
 
-      <div id="loggedInBox" style="display: none" data-bind="visible: isConnected">
-        You are <strong data-bind="text: username">USER</strong>
-        <span id="connectionStatusLabel" data-bind="text: connectionStatusText">STATUS</span>
-        <form data-bind="submit: disconnect">
-          <input type="submit" value="Disconnect" />
-        </form>
-      </div>
+          <div id="loggedInBox" style="display: none" data-bind="visible: isConnected">
+            You are <strong data-bind="text: username">USER</strong>
+            <span id="connectionStatusLabel" data-bind="text: connectionStatusText">STATUS</span>
+            <form data-bind="submit: disconnect">
+              <input type="submit" value="Disconnect" />
+            </form>
+          </div>
 
-      <div id="channelsBox" style="display: none" data-bind="visible: isConnected">
-        <h3>Channels</h3>
-        <ul class="channels" data-bind="foreach: channels">
-          <li><a data-bind="text: $data, click: $root.channelClicked">CHANNEL</a></li>
-        </ul>
-      </div>
+          <div id="channelsBox" style="display: none" data-bind="visible: isConnected">
+            <h3>Channels</h3>
+            <ul class="channels" data-bind="foreach: channels">
+              <li><a data-bind="text: $data, click: $root.channelClicked">CHANNEL</a></li>
+            </ul>
+          </div>
 
-      <div id="channelBox" style="display: none"
-           data-bind="visible: channelSelected">
-        This channel is <strong data-bind="text: channel">CHANNEL</strong>
-      </div>
+          <div id="channelBox" style="display: none"
+               data-bind="visible: channelSelected">
+            This channel is <strong data-bind="text: channel">CHANNEL</strong>
+          </div>
 
-      <div id="usersBox" style="display: none"
-           data-bind="visible: usersReceived">
-        <h3>Users</h3>
-        <ul class="users" data-bind="foreach: users">
-          <li data-bind="text: $data"></li>
-        </ul>
-      </div>
+          <div id="usersBox" style="display: none"
+               data-bind="visible: usersReceived">
+            <h3>Users</h3>
+            <ul class="users" data-bind="foreach: users">
+              <li data-bind="text: $data"></li>
+            </ul>
+          </div>
 
-      <div id="conversationsBox" style="display: none"
-           data-bind="visible: conversationsReceived">
-        <h3>Conversations</h3>
-        <ul class="conversations" data-bind="foreach: conversations">
-          <li data-bind="click: $root.conversationClicked">
-            <strong>Question: </strong><span data-bind="text: topic"></span>
-            <strong>Users: </strong>
-            <span data-bind="foreach: users">
-              <span data-bind="text: $data"></span>
-            </span>
-          </li>
-        </ul>
-      </div>
+          <div id="conversationsBox" style="display: none"
+               data-bind="visible: conversationsReceived">
+            <h3>Conversations</h3>
+            <ul class="conversations" data-bind="foreach: conversations">
+              <li data-bind="click: $root.conversationClicked">
+                <strong>Question: </strong><span data-bind="text: topic"></span>
+                <strong>Users: </strong>
+                <span data-bind="foreach: users">
+                  <span data-bind="text: $data"></span>
+                </span>
+              </li>
+            </ul>
+          </div>
 
-      <div id="chatBox" style="display: none"
-           data-bind="visible: conversationSelected">
-        <h3>Chat <em>(fr. cat!)</em></h3>
-        <h4>Topic: <span data-bind="text: conversation().topic">TOPIC</span></h4>
-        <div data-bind="if: conversation().messages.length > 0">
-          <ul class="chatWindow" data-bind="foreach: conversation().messages">
-            <li>
-              <strong data-bind="text: user"></strong>:
-              <span data-bind="text: message"></span>
-            </li>
-          </ul>
+          <div id="chatBox" style="display: none"
+               data-bind="visible: conversationSelected">
+            <h3>Chat <em>(fr. cat!)</em></h3>
+            <h4>Topic: <span data-bind="text: conversation().topic">TOPIC</span></h4>
+            <div data-bind="if: conversation().messages.length > 0">
+              <ul class="chatWindow" data-bind="foreach: conversation().messages">
+                <li>
+                  <strong data-bind="text: user"></strong>:
+                  <span data-bind="text: message"></span>
+                </li>
+              </ul>
+            </div>
+            <em data-bind="ifnot: conversation().messages.length > 0">No messages</em>
+          </div>
         </div>
-        <em data-bind="ifnot: conversation().messages.length > 0">No messages</em>
       </div>
+
       <hr />
+
       <footer>
         <p>&copy; Team Six
         2012. <a href="https://github.com/aif1990/">Andreea-Ingrid
