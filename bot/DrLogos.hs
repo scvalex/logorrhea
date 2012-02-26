@@ -16,14 +16,12 @@ import qualified Data.Map as Map
 import Text.Parsec hiding (many)
 import Text.Parsec.String
 
+import DrLogos.Parser
 import Bot
 import IRC
 
 -- DEBUG
 import Debug.Trace
-
-type Tag      = Channel
-type NickName = String
 
 data Question = Question
     { qFull     :: String
@@ -49,32 +47,6 @@ newBotState chans admins =
              , botClosed    = Map.empty
              }
 
-data UserCommand
-    = NewQuestion (Maybe Tag) String
-    | ListQuestions
-
-tok :: Parser a -> Parser a
-tok p = p <* space <* spaces
-
-p_startCommand :: Parser ()
-p_startCommand = string "??" >> return ()
-
-p_tag :: Parser String
-p_tag = (:) <$> char '#' <*> ((:) <$> letter <*> many alphaNum)
-
-p_userCommand :: Parser UserCommand
-p_userCommand = choice . map try $
-                [ p_newQuestion
-                , p_listQuestions ]
-  where
-    p_newQuestion =
-        NewQuestion
-            <$> (tok p_startCommand >> optionMaybe p_tag)
-            <*> (manyTill anyChar eof)
-    p_listQuestions =
-        p_startCommand >> string "list" >> spaces >> eof >> return ListQuestions
-
-
 parse' :: Parser a -> String -> Maybe a
 parse' p s = either (const Nothing) Just $ parse p "" s
 
@@ -98,20 +70,18 @@ newQuestion chan nn tagM body = do
         -- FIXME: Better error handling
         chanTags = qs Map.! chan
         qs'      = Map.insert chan (tag : chanTags) qs
-        ad       = "<" ++ nn ++ "> asked: " ++ body
-        parentAd = ad ++ ". Join " ++ tag ++ " to help him/her."
+        ad       = unParse u_botMessage $ UserMessage nn tag body
     put bs {botQuestions = qs', botTags = tags'}
     return [ joinChan tag
            , privmsg tag ad
-           , privmsg chan parentAd
+           , privmsg chan ad
            ]
 
 listQuestions :: NickName -> Channel -> Bot BotState [Message]
 listQuestions nn chan = do
     tags <- gets botTags
     questions <- map (tags Map.!) . (Map.! chan) <$> gets botQuestions
-    let questionDesc q =
-            qTag q ++ " <" ++ qAsker q ++ "> " ++ qFull q
+    let questionDesc q = unParse u_botMessage $ UserMessage (qAsker q) (qTag q) (qFull q)
     trace (show questions) $ return . map (privmsg nn . questionDesc) $ questions
 
 drLogos :: BotProcess BotState
@@ -127,7 +97,7 @@ drLogos wholeMsg@Message { msg_prefix  = Just (NickName nn _ _)
             Nothing -> return []
             Just q@(Question { qParent   = parent
                              , qMessages = messages}) -> do
-                let parentMsg = "<" ++ nn ++ "> on " ++ chan ++ ": " ++ msg
+                let parentMsg = unParse u_botMessage $ UserMessage nn chan msg
                 bs@BotState {botTags = tags} <- get
                 put bs {botTags = Map.insert chan
                                   q {qMessages = wholeMsg : messages} tags}

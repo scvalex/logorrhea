@@ -23,6 +23,12 @@ botProcess :: (MonadIO m, MonadIRC m) => BotProcess s -> s -> m ()
 botProcess proc bs = forever $ do
     msg <- popMessage
     liftIO . putStrLn . encode $ msg
-    let (replies, bs') = runBot (proc msg) bs
-    mapM sendMessage replies
-    botProcess proc bs'
+    case msg of
+        Message { msg_prefix = Nothing
+                , msg_command = "PING"
+                , msg_params = params } ->
+            sendMessage (Message Nothing "PONG" params) >>
+            botProcess proc bs
+        _ -> let (replies, bs') = runBot (proc msg) bs
+             in  mapM sendMessage replies >> botProcess proc bs'
+
