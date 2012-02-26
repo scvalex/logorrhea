@@ -63,7 +63,7 @@ handleEvent event go = case event of
         lift $ outEvent (Response (Right DisConnectOk))
     ListChannels -> sendMessage (privmsg "DrLogos" (uCmd ListMonitoredChannels)) >> go
     ListUsers chan -> do
-        lift $ outEvent (Response (Left (event, "not implemented lol no users")))
+        lift $ outEvent (Response (Right (ListUsersOk ["rostayob", "exFalso", "nh2", "scvalex"])))
         go
     ListConversations chan -> do
         sendMessage (privmsg chan (uCmd ListQuestions))
