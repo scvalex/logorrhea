@@ -6,8 +6,8 @@ define(['jsschema'], function() {
   var repeated = jsschema.repeated;
 
   var eventSchema = schema(function() {
-    this.event = required('string'),
-    this.data  = required('object')
+    this.event = required('string')
+    // keep data optional, it could be of any type or null
   });
 
   var makeSpecificEventSchema = function(dataSchema) {
