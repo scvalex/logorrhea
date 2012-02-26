@@ -105,16 +105,25 @@
             <h3>
               This channel is <strong data-bind="text:
               channel">CHANNEL</strong>
-            </h2>
+            </h3>
           </div>
         </div>
       </div>
+
+      <div class="row pagination-centered">
+        <div class="two-thirds"
+             style="display: none"
+             data-bind="visible:usersReceived">
+          <hr />
+        </div>
+      </div>
+
 
       <div class="row">
         <div class="span4 float-right">
           <div id="usersBox" style="display: none"
                data-bind="visible: usersReceived">
-            <h3>Users</h3>
+            <h2>Users</h2>
             <ul class="users" data-bind="foreach: users">
               <li data-bind="text: $data"></li>
             </ul>
@@ -124,7 +133,7 @@
         <div class="span8">
           <div id="conversationsBox" style="display: none"
                data-bind="visible: conversationsReceived">
-            <h3>Conversations</h3>
+            <h2>Conversations</h2>
             <ul class="conversations" data-bind="foreach: conversations">
               <li data-bind="click: $root.conversationClicked">
                 <strong>Question: </strong><span data-bind="text: topic"></span>
@@ -140,7 +149,7 @@
         <div class="span8">
           <div id="chatBox" style="display: none"
                data-bind="visible: conversationSelected">
-            <h3>Chat <em>(fr. cat!)</em></h3>
+            <h2>Chat <em>(fr. cat!)</em></h2>
             <h4>Topic: <span data-bind="text: conversation().topic">TOPIC</span></h4>
             <div data-bind="if: conversation().messages.length > 0">
               <ul class="chatWindow" data-bind="foreach: conversation().messages">
