@@ -30,14 +30,13 @@ require(['jquery', 'knockout', 'websocket-json-events'],
 
     console.log("Connecting as " + conversationsModel.username());
 
-    socket = new websocket_json_events.FancyWebSocket('ws://localhost:9999/echo');
+    var socket = new websocket_json_events.FancyWebSocket('ws://localhost:9999/echo');
 
     socket.bind(
       'open',
       function(_) {
         console.log('socket open');
-        socket.send('connect',
-                    JSON.stringify({user: conversationsModel.username()}));
+        socket.send('connect', { user: conversationsModel.username() });
       });
 
     socket.bind(
