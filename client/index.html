@@ -127,21 +127,23 @@
               <li class="nav-header"><h3 class="inline">Users<h3></li>
             </ul>
             <ul class="nav nav-list" data-bind="foreach: users">
-              <li>★ <h4 class="inline" data-bind="text: $data"></h4></li>
+              <li>★ <span class="username inline" data-bind="text: $data">
+              </span></li>
             </ul>
           </div>
         </div>
 
         <div class="span10">
-          <div id="conversationsBox" style="display: none"
+          <div id="conversationsBox" class="well"
+               style="display: none"
                data-bind="visible: conversationsReceived">
-            <h2>Conversations</h2>
-            <ul class="conversations" data-bind="foreach: conversations">
+            <h2>Discussions</h2>
+            <ul id="discussions" data-bind="foreach: conversations">
               <li data-bind="click: $root.conversationClicked">
-                <strong>Question: </strong><span data-bind="text: topic"></span>
-                <strong>Users: </strong>
+                <strong>Q: </strong><span data-bind="text: topic"></span>
+                <strong>A: </strong>
                 <span data-bind="foreach: users">
-                  <span data-bind="text: $data"></span>
+                  <span class="username" data-bind="text: $data"></span>
                 </span>
               </li>
             </ul>
@@ -149,11 +151,12 @@
         </div>
 
         <div class="span10">
-          <div id="chatBox" style="display: none"
+          <div id="chatBox" class="well"
+               style="display: none"
                data-bind="visible: conversationSelected">
-            <h2>Chat <em>(fr. cat!)</em></h2>
-            <h4>Topic: <span data-bind="text: conversation().topic">TOPIC</span></h4>
-            <div data-bind="if: conversation().messages.length > 0">
+            <h3 data-bind="text: conversation().topic">TOPIC</h3>
+            <div class="chatText"
+                 data-bind="if: conversation().messages.length > 0">
               <ul class="chatWindow" data-bind="foreach: conversation().messages">
                 <li>
                   <strong data-bind="text: user"></strong>:
@@ -164,7 +167,7 @@
             <em data-bind="ifnot: conversation().messages.length > 0">No messages</em>
 
             <form data-bind="submit: postInCurrent">
-              <input data-bind="value: currentMessage" />
+              <input style="width: 59%;" data-bind="value: currentMessage" />
               <input type="submit" value="Send" />
             </form>
           </div>
