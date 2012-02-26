@@ -6,11 +6,15 @@ module IRC
     , runIRCT
     , Tag
     , NickName
+    , connectToServer
+    , withConnection
+    , forkIRC
       
     , module IRC.Base
     , module IRC.Commands
     ) where
 
+import Control.Concurrent
 import Control.Applicative
 import Control.Monad.Reader
 import Control.Monad.State
@@ -63,3 +67,30 @@ instance (Applicative m, MonadIO m) => MonadIRC (IRCT m) where
         liftIO (B.hPut h bs >> hFlush h)
         
     getUserName = IRCT . lift $ get
+
+forkIRC :: MonadIO m => IRCT IO () -> IRCT m ()
+forkIRC (IRCT irc) = IRCT $ do
+    r <- ask
+    s <- lift get
+    _ <- liftIO $ forkIO (evalStateT (runReaderT irc r) s)
+    return ()
+
+
+connectToServer :: String -> PortNumber -> IO IRCInfo
+connectToServer server port = do
+    h <- connectTo server (PortNumber port)
+    hSetBuffering h (BlockBuffering Nothing)
+    return IRCInfo { ircHandle = h
+                   , ircName   = server
+                   , ircPort   = port
+                   }
+    
+withConnection :: (Applicative m, MonadIO m) => UserName -> m IRCInfo -> IRCT m () -> m ()
+withConnection un conn act = do
+    i <- conn
+    runIRCT un i $ do
+        sendMessage $ nick un
+        sendMessage $ user un "*" "*" un
+        act
+        sendMessage $ quit Nothing
+        return ()
