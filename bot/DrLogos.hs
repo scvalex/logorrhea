@@ -20,9 +20,6 @@ import DrLogos.Parser
 import Bot
 import IRC
 
--- DEBUG
-import Debug.Trace
-
 data Question = Question
     { qFull     :: String
     , qAsker    :: NickName
@@ -79,10 +76,19 @@ newQuestion chan nn tagM body = do
 
 listQuestions :: NickName -> Channel -> Bot BotState [Message]
 listQuestions nn chan = do
-    tags <- gets botTags
-    questions <- map (tags Map.!) . (Map.! chan) <$> gets botQuestions
-    let questionDesc q = unParse u_botMessage $ UserMessage (qAsker q) (qTag q) (qFull q)
-    trace (show questions) $ return . map (privmsg nn . questionDesc) $ questions
+    chanTagsM <- Map.lookup chan <$> gets botQuestions
+    let noQs = undefined
+    case chanTagsM of
+        Nothing       -> return [noQs]
+        Just chanTags ->
+            case chanTags of
+                [] -> return [noQs]
+                _  -> do
+                    tags <- gets botTags
+                    let questions = map (tags Map.!) chanTags
+                        questionDesc q =
+                            unParse u_botMessage $ UserMessage (qAsker q) (qTag q) (qFull q)
+                    return . map (privmsg nn . questionDesc) $ questions
 
 drLogos :: BotProcess BotState
 drLogos wholeMsg@Message { msg_prefix  = Just (NickName nn _ _)
