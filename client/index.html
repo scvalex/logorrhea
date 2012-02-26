@@ -29,79 +29,109 @@
     <div class="container">
       <div class="hero-unit">
         <h1>No questions unanswered!</h1>
-        <p>Logorrhea is a real-time QA system: 1. Join a
-        channel. 2. Browse unanswered qustions. 3. Ask or answer
-        questions.</p>
+        <p>Logorrhea is a real-time QA system for university lectures.
+        It lets students ask questions during lectures and gives
+        professors an overview of the class' current level of
+        understanding.</p>
         <p><a class="btn btn-primary btn-large" href="#usage">Learn
         more</a></p>
       </div>
 
-      <div id="loginBox" data-bind="visible: !isConnected()">
-        <h3>Connect</h3>
-        <form data-bind="submit: connect">
-          <input id="usernameInput" data-bind="value: username"
-                 placeholder="username" />
-          <input type="submit" value="Connect" />
-        </form>
-      </div>
-
-      <div id="loggedInBox" style="display: none" data-bind="visible: isConnected">
-        You are <strong data-bind="text: username">USER</strong>
-        <span id="connectionStatusLabel" data-bind="text: connectionStatusText">STATUS</span>
-        <form data-bind="submit: disconnect">
-          <input type="submit" value="Disconnect" />
-        </form>
-      </div>
-
-      <div id="channelsBox" style="display: none" data-bind="visible: isConnected">
-        <h3>Channels</h3>
-        <ul class="channels" data-bind="foreach: channels">
-          <li><a data-bind="text: $data, click: $root.channelClicked">CHANNEL</a></li>
-        </ul>
-      </div>
-
-      <div id="channelBox" style="display: none"
-           data-bind="visible: channelSelected">
-        This channel is <strong data-bind="text: channel">CHANNEL</strong>
-      </div>
-
-      <div id="usersBox" style="display: none"
-           data-bind="visible: usersReceived">
-        <h3>Users</h3>
-        <ul class="users" data-bind="foreach: users">
-          <li data-bind="text: $data"></li>
-        </ul>
-      </div>
-
-      <div id="conversationsBox" style="display: none"
-           data-bind="visible: conversationsReceived">
-        <h3>Conversations</h3>
-        <ul class="conversations" data-bind="foreach: conversations">
-          <li data-bind="click: $root.conversationClicked">
-            <strong>Question: </strong><span data-bind="text: topic"></span>
-            <strong>Users: </strong>
-            <span data-bind="foreach: users">
-              <span data-bind="text: $data"></span>
-            </span>
-          </li>
-        </ul>
-      </div>
-
-      <div id="chatBox" style="display: none"
-           data-bind="visible: conversationSelected">
-        <h3>Chat <em>(fr. cat!)</em></h3>
-        <h4>Topic: <span data-bind="text: conversation().topic">TOPIC</span></h4>
-        <div data-bind="if: conversation().messages.length > 0">
-          <ul class="chatWindow" data-bind="foreach: conversation().messages">
-            <li>
-              <strong data-bind="text: user"></strong>:
-              <span data-bind="text: message"></span>
-            </li>
-          </ul>
+      <div class="row">
+        <div class="span4">
+          <h2>1. Join a channel</h2>
+          <p>Use the webclient to connect to a Logorrhea server and
+          choose a channel to join.  Alternatively, use any IRC client
+          to connect to the public server and join a channel.</p>
         </div>
-        <em data-bind="ifnot: conversation().messages.length > 0">No messages</em>
+        <div class="span4">
+          <h2>2. Browse the questions</h2>
+          <p>The webclient will show you a list of questions and
+          wherether they have been answered yet.  Alternatively,
+          private message the IRC bot.</p>
+        </div>
+        <div class="span4">
+          <h2>3. Ask or answer questions</h2>
+          <p>Joining a question's discussion will let you answer it.
+          You can also ask new questions.  Alternatively, join the IRC
+          sub-channels.</p>
+        </div>
       </div>
+
       <hr />
+
+      <div class="row">
+        <div class="span10">
+          <div id="loginBox" data-bind="visible: !isConnected()">
+            <h3>Connect</h3>
+            <form data-bind="submit: connect">
+              <input id="usernameInput" data-bind="value: username"
+                     placeholder="username" />
+              <input type="submit" value="Connect" />
+            </form>
+          </div>
+
+          <div id="loggedInBox" style="display: none" data-bind="visible: isConnected">
+            You are <strong data-bind="text: username">USER</strong>
+            <span id="connectionStatusLabel" data-bind="text: connectionStatusText">STATUS</span>
+            <form data-bind="submit: disconnect">
+              <input type="submit" value="Disconnect" />
+            </form>
+          </div>
+
+          <div id="channelsBox" style="display: none" data-bind="visible: isConnected">
+            <h3>Channels</h3>
+            <ul class="channels" data-bind="foreach: channels">
+              <li><a data-bind="text: $data, click: $root.channelClicked">CHANNEL</a></li>
+            </ul>
+          </div>
+
+          <div id="channelBox" style="display: none"
+               data-bind="visible: channelSelected">
+            This channel is <strong data-bind="text: channel">CHANNEL</strong>
+          </div>
+
+          <div id="usersBox" style="display: none"
+               data-bind="visible: usersReceived">
+            <h3>Users</h3>
+            <ul class="users" data-bind="foreach: users">
+              <li data-bind="text: $data"></li>
+            </ul>
+          </div>
+
+          <div id="conversationsBox" style="display: none"
+               data-bind="visible: conversationsReceived">
+            <h3>Conversations</h3>
+            <ul class="conversations" data-bind="foreach: conversations">
+              <li data-bind="click: $root.conversationClicked">
+                <strong>Question: </strong><span data-bind="text: topic"></span>
+                <strong>Users: </strong>
+                <span data-bind="foreach: users">
+                  <span data-bind="text: $data"></span>
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <div id="chatBox" style="display: none"
+               data-bind="visible: conversationSelected">
+            <h3>Chat <em>(fr. cat!)</em></h3>
+            <h4>Topic: <span data-bind="text: conversation().topic">TOPIC</span></h4>
+            <div data-bind="if: conversation().messages.length > 0">
+              <ul class="chatWindow" data-bind="foreach: conversation().messages">
+                <li>
+                  <strong data-bind="text: user"></strong>:
+                  <span data-bind="text: message"></span>
+                </li>
+              </ul>
+            </div>
+            <em data-bind="ifnot: conversation().messages.length > 0">No messages</em>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
       <footer>
         <p>&copy; Team Six
         2012. <a href="https://github.com/aif1990/">Andreea-Ingrid
