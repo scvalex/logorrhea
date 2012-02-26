@@ -48,4 +48,6 @@ Executable server
     text,
     aeson,
     transformers,
-    mtl
+    mtl,
+    unordered-containers,
+    bytestring

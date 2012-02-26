@@ -2,7 +2,7 @@ import Control.Monad.IO.Class
 import Control.Monad
 import Control.Monad.Trans
 import Network.WebSockets
-import Data.Text
+import Data.ByteString.Lazy (ByteString)
 
 import Event
 import IRC
@@ -18,7 +18,7 @@ main = runServer "0.0.0.0" 9999 server
 server :: Request -> WebSockets Prot ()
 server rq = do
     acceptRequest rq 
-    connect <- receiveData :: WebSockets Prot Text
+    connect <- receiveData :: WebSockets Prot ByteString
     case parseInEvent connect of
         Just (Connect nn) -> do
             let conn = liftIO $ connectToServer _IRCServer _IRCPort
