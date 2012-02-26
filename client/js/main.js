@@ -156,9 +156,9 @@ require(['jquery', 'knockout', 'websocket-json-events'],
         // TODO conversation creation
         // TODO user "creation"
 
-        // console.log("dict ", conversationsModel.conversationsDict(), "tag: ", e.tag, e);
+        console.log("dict ", conversationsModel.conversationsDict(), "tag: ", e.tag, e);
         var conv = conversationsModel.conversationsDict()[e.tag];
-        // console.log("receive_conversation", e, conv);
+        console.log("receive_conversation", e, conv);
 
         // TODO extract !conv handling, share with conversationClickedInternal
         if (!conv) {
@@ -170,7 +170,7 @@ require(['jquery', 'knockout', 'websocket-json-events'],
         // TODO check if we have to update 'conversations'
         conv.messages.push({ user: e.user, message: e.message });
         conversationsModel.conversation(conv);
-        // console.log("new conv:", conv);
+        console.log("new conv:", conv);
       });
   }
 
