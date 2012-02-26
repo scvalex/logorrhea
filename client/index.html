@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
       <div class="navbar-inner">
         <div class="container">
           <a class="brand" href="#">Logorrhea client</a>
@@ -18,6 +18,15 @@
     </div>
 
     <div class="container">
+      <div class="hero-unit">
+        <h1>No questions unanswered</h1>
+        <p>Logorrhea is a real-time QA system: 1. Join a
+        channel. 2. Browse unanswered qustions. 3. Ask or answer
+        questions.</p>
+        <p><a class="btn btn-primary btn-large" href="#usage">Learn
+        more</a></p>
+      </div>
+
       <div id="loginBox" data-bind="visible: !isConnected()">
         <h3>Connect</h3>
         <form data-bind="submit: connect">
