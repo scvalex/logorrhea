@@ -39,12 +39,33 @@ echo.on('request', function(request) {
           msgObj = {event: 'list_users.ok',
                     data: {users: users,
                            channel: msgObj['data']['channel']}};
+        } else if (msgObj['event'] === 'list_conversations') {
+          if (msgObj['data']['channel'] === 'stats') {
+            var convs = [
+              {tag: 'client_development',
+               topic: 'Why is client development so easy?',
+               users: ['scvalex', 'nh2']},
+              {tag: 'server_development',
+               topic: 'Is it OK to have more LANGUAGE pragmas than lines of code?',
+               users: ['ex_falso', 'rostayob']}];
+          } else {
+            var convs = [
+              {tag: "scifi_rocks",
+               topic: "Am I the only one who sees the corollary between scifi and comptech",
+               users: ["nh2", "exFalso"]
+              }];
+          }
+          msgObj = {event: "list_conversations.ok",
+                    data: {conversations: convs,
+                           channel: msgObj['data']['channel']}};
         }
         var replyStr = JSON.stringify(msgObj);
       } catch (err) {
         console.error("WARNING: received non-JSON message: " + message.utf8Data);
+        console.log("  ", err);
         var replyStr = message.utf8Data;
       }
+      console.log("Sending back ", replyStr);
       conn.sendUTF(replyStr);
     } else {
       console.error("ERROR: received non-utf8 data, ignoring");

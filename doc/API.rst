@@ -149,7 +149,7 @@ Server:
 
 CONVERSATION:
 
-    { hash: 'why_haskell', topic: 'Why Haskell?' }
+    { tag: 'why_haskell', topic: 'Why Haskell?', users: ['scvalex', 'rostayob'] }
 
 
 join

@@ -9,8 +9,8 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     self.channel = ko.observable("");
     self.users = ko.observableArray([]);
     self.conversations = ko.observableArray([
-      { name: 'client_development', topic: 'Why is client development so easy?', users: ['scvalex', 'nh2'] },
-      { name: 'server_development', topic: 'Is it OK to have more LANGUAGE pragmas than lines of code?', users: ['ex_falso', 'rostayob'] }
+      { tag: 'client_development', topic: 'Why is client development so easy?', users: ['scvalex', 'nh2'] },
+      { tag: 'server_development', topic: 'Is it OK to have more LANGUAGE pragmas than lines of code?', users: ['ex_falso', 'rostayob'] }
     ]);
 
     self.connect = function() {
@@ -103,9 +103,26 @@ require(['jquery', 'knockout', 'websocket-json-events'],
         conversationsModel.users(users['users']);
         $("#usersBox").removeClass('hidden');
       },
-      undefined);
+      function(err) {
+        console.log("failed to get users: ", err);
+      });
 
-    socket.send('list_users', {"channel": conversationsModel.channel()});
+    socket.bindMethod(
+      'list_conversations',
+      function(conversations) {
+        console.log("Conversations in ", conversationsModel.channel(),
+                    " are ", conversations['conversations']);
+        conversationsModel.conversations(conversations['conversations']);
+        $("#conversationsBox").removeClass('hidden');
+      },
+      function(err) {
+        console.log("failed to get conversations: ", err);
+      });
+
+    socket.send('list_users',
+                {"channel": conversationsModel.channel()});
+    socket.send('list_conversations',
+                {"channel": conversationsModel.channel()});
   }
 
   $(function() {
