@@ -16,6 +16,8 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     disconnected: 'Disconnected'
   };
 
+  socket = null;
+
   function ConversationsModel() {
     var self = this;
 
@@ -56,7 +58,7 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     console.log("Connecting as " + conversationsModel.username());
     conversationsModel.connectionStatus(status.connecting);
 
-    var socket = new websocket_json_events.FancyWebSocket('ws://localhost:9999/echo');
+    socket = new websocket_json_events.FancyWebSocket('ws://localhost:9999/echo');
 
     socket.bind(
       'open',
@@ -105,7 +107,9 @@ require(['jquery', 'knockout', 'websocket-json-events'],
         console.log(socket);
         socket.close();
       },
-      undefined);
+      function(_) {
+        /* whoosh */
+      });
 
     socket.send('disconnect', {});
   }
@@ -113,7 +117,7 @@ require(['jquery', 'knockout', 'websocket-json-events'],
   function browseChannelInternal(channel) {
     console.log("Channel clicked: " + channel);
     conversationsModel.channel(channel);
-    $("#channelBox").removeClass("hidden");
+    $("#channelsBox").removeClass("hidden");
     socket.bindMethod(
       'list_users',
       function(users) {
@@ -154,8 +158,6 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     var conversationsModel = new ConversationsModel();
     window.conversationsModel = conversationsModel;
     ko.applyBindings(conversationsModel);
-
-    socket = null;
 
     $("#usernameInput")[0].focus();
   });
