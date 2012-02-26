@@ -6,6 +6,6 @@ wait_all() { trap control_c SIGINT; for job in `jobs -p`; do wait $job; done }
 
 ~/bin/stylus --watch &
 python -m SimpleHTTPServer &
-node js/websocket-echo.js
+# node js/websocket-echo.js
 
 wait_all

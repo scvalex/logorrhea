@@ -62,7 +62,10 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     };
 
     self.channelClicked = function(channelName) {
-      browseChannelInternal(channelName);
+
+      socket.send('join',
+                  { channel: channelName });
+
     }
 
     self.conversationClicked = function(conversation) {
@@ -88,7 +91,7 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     console.log("Connecting as " + conversationsModel.username());
     conversationsModel.connectionStatus(status.connecting);
 
-    socket = new websocket_json_events.FancyWebSocket('ws://localhost:9999/echo');
+    socket = new websocket_json_events.FancyWebSocket('ws://0.0.0.0:9999');
     // For debuging / event injection
     window.socket = socket;
 
@@ -121,6 +124,15 @@ require(['jquery', 'knockout', 'websocket-json-events'],
         console.log("failed to connect: ", err);
       });
 
+    socket.bind('join.ok', function(e){
+      console.log("eee: ", e);
+      var channel = e.channel;
+      conversationsModel.channel(channel);
+      // TODO
+      browseChannelInternal(channel);
+    });
+
+
     socket.bindMethod(
       'list_channels',
       function(data) {
@@ -134,6 +146,11 @@ require(['jquery', 'knockout', 'websocket-json-events'],
       'receive_conversation',
       function(receiveConversationEvent) {
         var e = receiveConversationEvent;
+
+        conversationsModel.conversations([{ tag: e.tag, topic: "This is cool!", users: ['nh2', 'scvalex', 'rostayob', 'exfalso'], messages: [] }]);
+        conversationsModel.conversationsReceived(true);
+
+
         // TODO we can currently be in only one channel, so ignore e.channel
 
         // TODO conversation creation

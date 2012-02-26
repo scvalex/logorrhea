@@ -29,6 +29,7 @@ define(['jsschema', 'schemas'], function(_, schemas) {
       } else {
         throw 'WebSocket seems to not be supported by this browser!';
       }
+      console.log("websocket: ", conn);
 
       var callbacks = {};
       var defaultCallback = function(_) { };
@@ -50,6 +51,7 @@ define(['jsschema', 'schemas'], function(_, schemas) {
 
       this.send = function(event_name, event_data) {
         var payload = JSON.stringify({event:event_name, data: event_data});
+        console.log("sending on socket ", payload);
         conn.send(payload); // <= send JSON data to socket server
         return this;
       };
@@ -65,6 +67,8 @@ define(['jsschema', 'schemas'], function(_, schemas) {
 
       // dispatch to the right handlers
       conn.onmessage = function(evt) {
+        console.log("websocket receive: ", evt);
+
         var json = JSON.parse(evt.data);
 
         // not an event, throw exception
@@ -89,6 +93,7 @@ define(['jsschema', 'schemas'], function(_, schemas) {
       };
 
       conn.onopen = function() {
+        console.log("websocket open");
         dispatch('open',null);
       };
 
