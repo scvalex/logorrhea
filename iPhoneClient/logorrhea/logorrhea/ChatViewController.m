@@ -6,11 +6,11 @@
 //  Copyright (c) 2012 ICL. All rights reserved.
 //
 
-#import "DetailViewController.h"
+#import "ChatViewController.h"
 //#import "Chat.h"
 
 
-@implementation DetailViewController
+@implementation ChatViewController
 
 @synthesize chat;
 

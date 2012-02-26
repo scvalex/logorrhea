@@ -49,8 +49,9 @@
 		15B32D1914F942470006FEF9 /* 28-star.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B32D1814F942470006FEF9 /* 28-star.png */; };
 		15DB5F1814FA445B00AA1DB1 /* ItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DB5F1714FA445B00AA1DB1 /* ItemViewController.m */; };
 		15DB5F1C14FA44D300AA1DB1 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DB5F1B14FA44D300AA1DB1 /* TableViewController.m */; };
-		15DB5F2314FA486C00AA1DB1 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DB5F2214FA486C00AA1DB1 /* DetailViewController.m */; };
+		15DB5F2314FA486C00AA1DB1 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DB5F2214FA486C00AA1DB1 /* ChatViewController.m */; };
 		15DB5F2A14FA4F7000AA1DB1 /* NewMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DB5F2914FA4F7000AA1DB1 /* NewMessageView.m */; };
+		15DB5F3214FA662200AA1DB1 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DB5F3114FA662200AA1DB1 /* DetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,10 +133,12 @@
 		15DB5F1714FA445B00AA1DB1 /* ItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemViewController.m; sourceTree = "<group>"; };
 		15DB5F1A14FA44D300AA1DB1 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		15DB5F1B14FA44D300AA1DB1 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
-		15DB5F2114FA486C00AA1DB1 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		15DB5F2214FA486C00AA1DB1 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		15DB5F2114FA486C00AA1DB1 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		15DB5F2214FA486C00AA1DB1 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		15DB5F2814FA4F7000AA1DB1 /* NewMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMessageView.h; sourceTree = "<group>"; };
 		15DB5F2914FA4F7000AA1DB1 /* NewMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMessageView.m; sourceTree = "<group>"; };
+		15DB5F3014FA662200AA1DB1 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; name = DetailViewController.h; path = ../../../../SocketRocket/SocketRocket/DetailViewController.h; sourceTree = "<group>"; };
+		15DB5F3114FA662200AA1DB1 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailViewController.m; path = ../../../../SocketRocket/SocketRocket/DetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +253,8 @@
 			children = (
 				15A9BA6C14F9B8C500B72A35 /* SocketRocket */,
 				15B32D1814F942470006FEF9 /* 28-star.png */,
+				15DB5F3014FA662200AA1DB1 /* DetailViewController.h */,
+				15DB5F3114FA662200AA1DB1 /* DetailViewController.m */,
 				15B32D0B14F935760006FEF9 /* 53-house.png */,
 				15B32D0814F9356B0006FEF9 /* 09-chat-2.png */,
 				15B32CC814F92EE90006FEF9 /* AppDelegate.h */,
@@ -269,8 +274,8 @@
 				15DB5F1714FA445B00AA1DB1 /* ItemViewController.m */,
 				15DB5F1A14FA44D300AA1DB1 /* TableViewController.h */,
 				15DB5F1B14FA44D300AA1DB1 /* TableViewController.m */,
-				15DB5F2114FA486C00AA1DB1 /* DetailViewController.h */,
-				15DB5F2214FA486C00AA1DB1 /* DetailViewController.m */,
+				15DB5F2114FA486C00AA1DB1 /* ChatViewController.h */,
+				15DB5F2214FA486C00AA1DB1 /* ChatViewController.m */,
 				15DB5F2814FA4F7000AA1DB1 /* NewMessageView.h */,
 				15DB5F2914FA4F7000AA1DB1 /* NewMessageView.m */,
 			);
@@ -443,8 +448,9 @@
 				15B1384B14F9C3CD00592D6A /* SBJsonWriter.m in Sources */,
 				15DB5F1814FA445B00AA1DB1 /* ItemViewController.m in Sources */,
 				15DB5F1C14FA44D300AA1DB1 /* TableViewController.m in Sources */,
-				15DB5F2314FA486C00AA1DB1 /* DetailViewController.m in Sources */,
+				15DB5F2314FA486C00AA1DB1 /* ChatViewController.m in Sources */,
 				15DB5F2A14FA4F7000AA1DB1 /* NewMessageView.m in Sources */,
+				15DB5F3214FA662200AA1DB1 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
