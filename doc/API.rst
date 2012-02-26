@@ -197,7 +197,7 @@ Client:
 
     send_conversation {
         channel: 'haskell',
-        conversation: 'why_haskell',
+        tag: 'why_haskell',
         message: 'Why would you recommend Haskell for my next project?'
     }
 
