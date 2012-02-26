@@ -147,9 +147,8 @@ require(['jquery', 'knockout', 'websocket-json-events'],
       function(receiveConversationEvent) {
         var e = receiveConversationEvent;
 
-        conversationsModel.conversations([{ tag: e.tag, topic: "What is Lecturea!", users: ['nh2', 'scvalex', 'rostayob', 'exfalso'], messages: [] }]);
+        conversationsModel.conversations().push({ tag: e.tag, topic: "What is Lecturea!", users: ['nh2', 'scvalex', 'rostayob', 'exfalso'], messages: [] });
         conversationsModel.conversationsReceived(true);
-
 
         // TODO we can currently be in only one channel, so ignore e.channel
 
