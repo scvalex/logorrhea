@@ -159,7 +159,7 @@ unParseResponse (ListUsersOk chan users) =
            ]
 unParseResponse (ListConversationsOk convos) =
     object [ "event" .= ("list_conversations.ok" :: Text)
-           , "data"  .= object ["conversations" .= convos]
+           , "data"  .= object ["tags" .= convos]
            ]
 unParseResponse (JoinOk chan) =
     object [ "event" .= ("join.ok" :: Text)
