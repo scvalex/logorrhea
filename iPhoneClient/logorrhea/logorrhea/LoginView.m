@@ -73,11 +73,9 @@
             NSArray* channels = [data valueForKey:@"channels"];
             NSEnumerator *enumerator = [channels objectEnumerator];
             NSString* item;
-            
             while (item = (NSString*)[enumerator nextObject]){
                 NSLog(@"Am gasit canalul: %@", item);
             }
-            
             //users
         } else {
              NSLog(@"Am primit un mesaj nerecunoscut: %@", message);

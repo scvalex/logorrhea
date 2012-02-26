@@ -48,6 +48,9 @@
 		15B32D0C14F935760006FEF9 /* 53-house.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B32D0B14F935760006FEF9 /* 53-house.png */; };
 		15B32D1614F93A7B0006FEF9 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B32D1414F93A7B0006FEF9 /* LoginView.m */; };
 		15B32D1914F942470006FEF9 /* 28-star.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B32D1814F942470006FEF9 /* 28-star.png */; };
+		15DB5F1814FA445B00AA1DB1 /* ItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DB5F1714FA445B00AA1DB1 /* ItemViewController.m */; };
+		15DB5F1C14FA44D300AA1DB1 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DB5F1B14FA44D300AA1DB1 /* TableViewController.m */; };
+		15DB5F2314FA486C00AA1DB1 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DB5F2214FA486C00AA1DB1 /* DetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +130,12 @@
 		15B32D1314F93A7B0006FEF9 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
 		15B32D1414F93A7B0006FEF9 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		15B32D1814F942470006FEF9 /* 28-star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "28-star.png"; sourceTree = "<group>"; };
+		15DB5F1614FA445B00AA1DB1 /* ItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemViewController.h; sourceTree = "<group>"; };
+		15DB5F1714FA445B00AA1DB1 /* ItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemViewController.m; sourceTree = "<group>"; };
+		15DB5F1A14FA44D300AA1DB1 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		15DB5F1B14FA44D300AA1DB1 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		15DB5F2114FA486C00AA1DB1 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		15DB5F2214FA486C00AA1DB1 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +267,12 @@
 				15B32CC014F92EE90006FEF9 /* Supporting Files */,
 				15B32D1314F93A7B0006FEF9 /* LoginView.h */,
 				15B32D1414F93A7B0006FEF9 /* LoginView.m */,
+				15DB5F1614FA445B00AA1DB1 /* ItemViewController.h */,
+				15DB5F1714FA445B00AA1DB1 /* ItemViewController.m */,
+				15DB5F1A14FA44D300AA1DB1 /* TableViewController.h */,
+				15DB5F1B14FA44D300AA1DB1 /* TableViewController.m */,
+				15DB5F2114FA486C00AA1DB1 /* DetailViewController.h */,
+				15DB5F2214FA486C00AA1DB1 /* DetailViewController.m */,
 			);
 			path = logorrhea;
 			sourceTree = "<group>";
@@ -427,6 +442,9 @@
 				15B1384914F9C3CD00592D6A /* SBJsonTokeniser.m in Sources */,
 				15B1384A14F9C3CD00592D6A /* SBJsonUTF8Stream.m in Sources */,
 				15B1384B14F9C3CD00592D6A /* SBJsonWriter.m in Sources */,
+				15DB5F1814FA445B00AA1DB1 /* ItemViewController.m in Sources */,
+				15DB5F1C14FA44D300AA1DB1 /* TableViewController.m in Sources */,
+				15DB5F2314FA486C00AA1DB1 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
