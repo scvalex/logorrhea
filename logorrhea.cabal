@@ -1,18 +1,12 @@
-Name:                logorrhea
-
-Version:             0.1
-
-License:             BSD3
-
-License-file:        LICENSE
-
-Author:              Alexandru Scvortov, Francesco Mazzoli, Nicklas Hambuechen, Andreea-Ingrid Funie, Andras Slemmer
-
-Category:            Web
-
-Build-type:          Simple
-
-Cabal-version:       >=1.10
+Name:          logorrhea
+Version:       0.1
+License:       BSD3
+License-file:  LICENSE
+Author:        Alexandru Scvortov, Francesco Mazzoli, Niklas Hambuechen,
+               Andreea-Ingrid Funie, Andras Slemmer
+Category:      Web
+Build-type:    Simple
+Cabal-version: >=1.10
 
 Library
   Hs-source-dirs: lib
@@ -40,5 +34,4 @@ Executable bot
     mtl,
     parsec,
     containers
-  
-  
+ 
