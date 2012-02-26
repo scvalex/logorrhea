@@ -9,6 +9,7 @@
 #import "TableViewController.h"
 #import "ItemViewController.h"
 #import "DetailViewController.h"
+#import "AppDelegate.h"
 
 @implementation TableViewController
 
@@ -18,7 +19,7 @@
     [super viewDidLoad];
     
     // Define our test data
-    myData = [NSMutableArray arrayWithObjects:
+   /* myData = [NSMutableArray arrayWithObjects:
               @"Chasing Amy",
               @"Mallrats",
               @"Dogma",
@@ -27,7 +28,9 @@
               @"Red State",
               @"Cop Out",
               @"Jersey Girl",
-              nil];
+              nil];*/
+    myData = [BigDelegate getChannels];
+    
 }
 
 // Return number of sections in table (always 1 for this demo!)
