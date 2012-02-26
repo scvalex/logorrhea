@@ -16,6 +16,7 @@ import IRC
 
 data BotMessage
     = UserMessage NickName Tag String
+    | NoQuestions Tag
     deriving (Show)
 
 data UserCommand
@@ -42,10 +43,19 @@ p_userCommand = choice . map try $
         p_startCommand "list" >> spaces >> eof >> return ListQuestions
 
 p_botMessage :: Parser BotMessage
-p_botMessage = UserMessage
-               <$> (sp p_nickName <* sp (string "@"))
-               <*> (sp p_tag <* string ": ") 
-               <*> manyTill anyChar eof
+p_botMessage = choice . map try $
+               [ p_userMessage
+               , p_noQuestions
+               ]
+
+p_userMessage :: Parser BotMessage
+p_userMessage = UserMessage
+             <$> (sp p_nickName <* sp (string "@"))
+             <*> (sp p_tag <* string ": ") 
+             <*> manyTill anyChar eof
+
+p_noQuestions :: Parser BotMessage
+p_noQuestions = NoQuestions <$> (string "No questions in " >> p_tag)
 
 p_nickName :: Parser NickName
 p_nickName = (:) <$> letter <*> many alphaNum
@@ -68,7 +78,7 @@ u_string = (++)
 u_botMessage :: UnParser BotMessage
 u_botMessage (UserMessage n t s) = foldl (.) id . map u_string $  
                                    [n, " @ ", t, " : ", s]
-
+u_botMessage (NoQuestions t) = u_string $ "No questions in " ++ t
 
 u_startCommand :: UnParser String
 u_startCommand cmd = u_string "??" . u_string cmd

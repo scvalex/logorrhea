@@ -77,7 +77,7 @@ newQuestion chan nn tagM body = do
 listQuestions :: NickName -> Channel -> Bot BotState [Message]
 listQuestions nn chan = do
     chanTagsM <- Map.lookup chan <$> gets botQuestions
-    let noQs = undefined
+    let noQs = privmsg nn . unParse u_botMessage $ NoQuestions chan
     case chanTagsM of
         Nothing       -> return [noQs]
         Just chanTags ->
