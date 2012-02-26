@@ -39,7 +39,15 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     self.users = ko.observableArray([]);
     self.usersReceived = ko.observable(false);
     self.conversations = ko.observableArray([]);
+    self.conversationsReceived = ko.observable(false);
     self.conversation = ko.observable({topic: "", messages: []});
+    self.conversationSelected = ko.computed(function() {
+      return (typeof self.conversation()['tag'] != "undefined");
+    });
+
+    self.conversationsDict = ko.computed(function() {
+      return objectArrayToDict(self.conversations(), 'tag');
+    });
 
     self.connect = function() {
       connectInternal();
@@ -107,12 +115,20 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     socket.bindMethod(
       'disconnect',
       function(_) {
-        console.log(socket);
+        console.log("Socket disconnected");
         socket.close();
       },
       function(_) {
         /* whoosh */
       });
+
+    conversationsModel.conversation({topic: "", messages: []});
+    conversationsModel.conversationsReceived(false);
+    conversationsModel.conversations([]);
+    conversationsModel.usersReceived(false);
+    conversationsModel.users([]);
+    conversationsModel.channel("");
+    conversationsModel.channels([]);
 
     socket.send('disconnect', {});
   }
@@ -122,10 +138,10 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     conversationsModel.channel(channel);
     socket.bindMethod(
       'list_users',
-      function(users) {
+      function(usersEvent) {
         console.log("Users on ", conversationsModel.channel(),
-                    " are ", users['users']);
-        conversationsModel.users(users['users']);
+                    " are ", usersEvent.users);
+        conversationsModel.users(usersEvent.users);
         conversationsModel.usersReceived(true);
       },
       function(err) {
@@ -134,11 +150,14 @@ require(['jquery', 'knockout', 'websocket-json-events'],
 
     socket.bindMethod(
       'list_conversations',
-      function(conversations) {
+      function(conversationsEvent) {
+        var conversationsArray = conversationsEvent.conversations;
+
         console.log("Conversations in ", conversationsModel.channel(),
-                    " are ", conversations['conversations']);
-        conversationsModel.conversations(conversations['conversations']);
-        $("#conversationsBox").removeClass('hidden');
+                    " are ", conversationsArray);
+
+        conversationsModel.conversations(conversationsArray);
+        conversationsModel.conversationsReceived(true);
       },
       function(err) {
         console.log("failed to get conversations: ", err);
@@ -163,4 +182,18 @@ require(['jquery', 'knockout', 'websocket-json-events'],
 
     $("#usernameInput")[0].focus();
   });
+
+  /* Turns an array of object into a "dictionary" for fast access,
+     using the given member of each object as the key.
+     Example:
+
+        objectArrayToDict([{ user: 'nh2', age: 20 }], 'user') == { 'nh2': { user: 'nh2', age: 20 } }
+  */
+  function objectArrayToDict(array, keyMemberName) {
+    var dict = {};
+    ko.utils.arrayForEach(array, function(obj) {
+      dict[obj[keyMemberName]] = obj;
+    });
+    return dict;
+  }
 });
