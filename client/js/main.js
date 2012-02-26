@@ -147,7 +147,16 @@ require(['jquery', 'knockout', 'websocket-json-events'],
       function(receiveConversationEvent) {
         var e = receiveConversationEvent;
 
-        conversationsModel.conversations().push({ tag: e.tag, topic: "What is Lecturea!", users: ['nh2', 'scvalex', 'rostayob', 'exfalso'], messages: [] });
+        console.log("BEFORE", conversationsModel.conversations());
+
+        // Hack
+        e.tag = '#whatislecturea';
+
+        if (conversationsModel.conversations().length == 0) {
+          console.log('adding');
+          // conversationsModel.conversations.push({ tag: e.tag, topic: "What is Lecturea!", users: ['nh2', 'scvalex', 'rostayob', 'exfalso'], messages: [] });
+          conversationsModel.conversations([{ tag: e.tag, topic: "What is Lecturea!", users: ['nh2', 'scvalex', 'rostayob', 'exfalso'], messages: [] }]);
+        }
         conversationsModel.conversationsReceived(true);
 
         // TODO we can currently be in only one channel, so ignore e.channel
@@ -156,6 +165,7 @@ require(['jquery', 'knockout', 'websocket-json-events'],
         // TODO user "creation"
 
         console.log("dict ", conversationsModel.conversationsDict(), "tag: ", e.tag, e);
+        // var conv = conversationsModel.conversationsDict()[e.tag];
         var conv = conversationsModel.conversationsDict()[e.tag];
         console.log("receive_conversation", e, conv);
 
@@ -170,6 +180,9 @@ require(['jquery', 'knockout', 'websocket-json-events'],
         conv.messages.push({ user: e.user, message: e.message });
         conversationsModel.conversation(conv);
         console.log("new conv:", conv);
+
+
+
       });
   }
 
