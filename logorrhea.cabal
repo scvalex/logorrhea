@@ -44,4 +44,8 @@ Executable server
     base,
     network,
     logorrhea,
-    websockets
+    websockets,
+    text,
+    aeson,
+    transformers,
+    mtl
