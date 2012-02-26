@@ -111,6 +111,32 @@ require(['jquery', 'knockout', 'websocket-json-events'],
       function(err) {
         console.log("failed to get channels: ", err);
       });
+
+    socket.bind(
+      'receive_conversation',
+      function(receiveConversationEvent) {
+        var e = receiveConversationEvent;
+        // TODO we can currently be in only one channel, so ignore e.channel
+
+        // TODO conversation creation
+        // TODO user "creation"
+
+        // console.log("dict ", conversationsModel.conversationsDict(), "tag: ", e.tag, e);
+        var conv = conversationsModel.conversationsDict()[e.tag];
+        // console.log("receive_conversation", e, conv);
+
+        // TODO extract !conv handling, share with conversationClickedInternal
+        if (!conv) {
+          console.error("Warning: Could not find conversation for receive_conversation event: ", e);
+          return;
+        }
+
+        // Update conversation
+        // TODO check if we have to update 'conversations'
+        conv.messages.push({ user: e.user, message: e.message });
+        conversationsModel.conversation(conv);
+        // console.log("new conv:", conv);
+      });
   }
 
   function disconnectInternal() {
