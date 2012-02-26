@@ -95,9 +95,9 @@ define(['jsschema'], function() {
 
 
     'send_conversation': schema(function() {
-      this.channel      = required('string');
-      this.conversation = required('string');
-      this.message      = required('string');
+      this.channel = required('string');
+      this.tag     = required('string');
+      this.message = required('string');
     }),
 
     'send_conversation.ok': schema(function() {
@@ -112,10 +112,10 @@ define(['jsschema'], function() {
 
 
     'receive_conversation': schema(function() {
-      this.channel      = required('string');
-      this.conversation = required('string');
-      this.user         = required('string');
-      this.message      = required('string');
+      this.channel = required('string');
+      this.tag     = required('string');
+      this.user    = required('string');
+      this.message = required('string');
     })
 
   };

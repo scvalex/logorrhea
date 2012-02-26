@@ -1,12 +1,47 @@
 body
-	color: #222
-	font-family: sans-serif
+    color: #222
+    font-family: sans-serif
 
 .channels
-.users
-.conversations
-.chatWindow
-	border: 1px solid red
+    list-style: none
+    margin-top: 0.4em;
 
-.hidden
-	display: none
+.channels li
+    display: inline
+    font-size: 1.2em
+    font-weight: bold
+
+.channels li a
+    color: #333
+    cursor: pointer
+
+.inline
+    display: inline
+
+.top-spaced
+    margin-top: 1em
+
+
+.navbar-inner
+    border-radius: 0
+    border-bottom-left-radius: 30px
+
+.float-right
+    float: right
+
+.two-thirds
+    margin-left: auto;
+    margin-right: auto;
+    width: 67%
+
+/* Mixins */
+
+border-radius()
+    -webkit-border-radius arguments
+    -moz-border-radius arguments
+    border-radius arguments
+
+border-bottom-left-radius()
+    border-bottom-left-radius arguments
+    -webkit-border-bottom-left-radius arguments
+    -moz-border-bottom-left-radius arguments

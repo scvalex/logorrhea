@@ -48,4 +48,9 @@ Executable server
     text,
     aeson,
     transformers,
-    mtl
+    mtl,
+    unordered-containers,
+    bytestring,
+    parsec
+
+  Cpp-Options: -DBOTNAME="DrLogos"

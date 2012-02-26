@@ -63,7 +63,12 @@ instance (Applicative m, MonadIO m) => MonadIRC (IRCT m) where
     popMessage = IRCT $ do
         h <- asks ircHandle
         msg <- decode =<< liftIO (B.hGetLine h)
-        return msg
+        case msg of
+            Message { msg_prefix = Nothing
+                    , msg_command = "PING"
+                    , msg_params = params } ->
+                unIRC $ sendMessage (Message Nothing "PONG" params) >> popMessage
+            _ -> return msg
     
     sendMessage msg = do
         h <- IRCT $ asks ircHandle

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Logorrhea Client</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+    <title>Lecturea</title>
     <script src="js/require.js" data-main="js/main.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css" />
@@ -12,84 +14,171 @@
     <div class="navbar">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="#">Logorrhea client</a>
+          <a class="brand" href="#">Lecturea</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li>
+                <a href="#usage">Learn more</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="container">
       <div class="hero-unit">
-        <h1>No questions unanswered</h1>
-        <p>Logorrhea is a real-time QA system: 1. Join a
-        channel. 2. Browse unanswered qustions. 3. Ask or answer
-        questions.</p>
+        <h1>No questions unanswered!</h1>
+        <p>Lecturea is a real-time QA system for university lectures.
+        It lets students ask questions during lectures and gives
+        professors an overview of the class' current level of
+        understanding.</p>
         <p><a class="btn btn-primary btn-large" href="#usage">Learn
         more</a></p>
       </div>
 
-      <div id="loginBox" data-bind="visible: !isConnected()">
-        <h3>Connect</h3>
-        <form data-bind="submit: connect">
-          <input id="usernameInput" data-bind="value: username"
-                 placeholder="username" />
-          <input type="submit" value="Connect" />
-        </form>
-      </div>
-
-      <div id="loggedInBox" style="display: none" data-bind="visible: isConnected">
-        You are <strong data-bind="text: username">USER</strong>
-        <span id="connectionStatusLabel" data-bind="text: connectionStatusText">STATUS</span>
-        <button id="disconnectButton" data-bind="click: disconnect">Disconnect</button>
-      </div>
-
-      <div id="channelsBox" style="display: none" data-bind="visible: isConnected">
-        <h3>Channels</h3>
-        <ul class="channels" data-bind="foreach: channels">
-          <li><a data-bind="text: $data, click: $root.channelClicked">CHANNEL</a></li>
-        </ul>
-      </div>
-
-      <div id="channelBox" style="display: none"
-           data-bind="visible: channelSelected">
-        This channel is <strong data-bind="text: channel">CHANNEL</strong>
-      </div>
-
-      <div id="usersBox" style="display: none"
-           data-bind="visible: usersReceived">
-        <h3>Users</h3>
-        <ul class="users" data-bind="foreach: users">
-          <li data-bind="text: $data"></li>
-        </ul>
-      </div>
-
-      <div id="conversationsBox" style="display: none"
-           data-bind="visible: conversationsReceived">
-        <h3>Conversations</h3>
-        <ul class="conversations" data-bind="foreach: conversations">
-          <li data-bind="click: $root.conversationClicked">
-            <strong>Question: </strong><span data-bind="text: topic"></span>
-            <strong>Users: </strong>
-            <span data-bind="foreach: users">
-              <span data-bind="text: $data"></span>
-            </span>
-          </li>
-        </ul>
-      </div>
-
-      <div id="chatBox" style="display: none"
-           data-bind="visible: conversationSelected">
-        <h3>Chat <em>(fr. cat!)</em></h3>
-        <h4>Topic: <span data-bind="text: conversation().topic">TOPIC</span></h4>
-        <div data-bind="if: conversation().messages.length > 0">
-          <ul class="chatWindow" data-bind="foreach: conversation().messages">
-            <li>
-              <strong data-bind="text: user"></strong>:
-              <span data-bind="text: message"></span>
-            </li>
-          </ul>
+      <div class="row">
+        <div class="span4">
+          <h2>★ Join a channel</h2>
+          <p>Use the webclient to connect to a Lecturea server and
+          choose a channel to join.  Alternatively, use any IRC client
+          to connect to the public server and join a channel.</p>
         </div>
-        <em data-bind="ifnot: conversation().messages.length > 0">No messages</em>
+        <div class="span4">
+          <h2>★ Browse the questions</h2>
+          <p>The webclient will show you a list of questions and
+          wherether they have been answered yet.  Alternatively,
+          private message the IRC bot.</p>
+        </div>
+        <div class="span4">
+          <h2>★ Ask or answer questions</h2>
+          <p>Joining a question's discussion will let you answer it.
+          You can also ask new questions.  Alternatively, join the IRC
+          sub-channels.</p>
+        </div>
       </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="span12 pagination-centered">
+          <h1>Enough talk. Let's QA!</h1>
+        </div>
+      </div>
+
+      <div class="row top-spaced">
+        <div class="span4">
+          <h2>1. Choose a nick</h2>
+          <div id="loginBox" data-bind="visible: !isConnected()">
+            <form data-bind="submit: connect">
+              <input id="usernameInput" data-bind="value: username"
+                     placeholder="username" />
+              <input type="submit" value="Connect" />
+            </form>
+          </div>
+
+          <div id="loggedInBox" style="display: none" data-bind="visible: isConnected">
+            <h3 class="inline">
+              You are <strong data-bind="text: username">USER</strong>
+            </h3>
+            <span id="connectionStatusLabel" data-bind="text: connectionStatusText">STATUS</span>
+            <form class="inline" data-bind="submit: disconnect">
+              <input type="submit" value="Disconnect" />
+            </form>
+          </div>
+        </div>
+
+        <div class="span4">
+          <div id="channelsBox" style="display: none" data-bind="visible: isConnected">
+            <h2>2. Join a channel</h2>
+            <ul class="channels" data-bind="foreach: channels">
+              <li><a data-bind="text: $data, click: $root.channelClicked">CHANNEL</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="span4">
+          <div id="channelBox" style="display: none"
+               data-bind="visible: channelSelected">
+            <h2>3. Choose a question</h2>
+
+            <h3>
+              This channel is <strong data-bind="text:
+              channel">CHANNEL</strong>
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="row pagination-centered">
+        <div class="two-thirds"
+             style="display: none"
+             data-bind="visible:usersReceived">
+          <hr />
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="span2 float-right">
+          <div id="usersBox" class="well"
+               style="display: none"
+               data-bind="visible: usersReceived">
+            <h2>QAers</h2>
+            <ul class="users" data-bind="foreach: users">
+              <li data-bind="text: $data"></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="span10">
+          <div id="conversationsBox" style="display: none"
+               data-bind="visible: conversationsReceived">
+            <h2>Conversations</h2>
+            <ul class="conversations" data-bind="foreach: conversations">
+              <li data-bind="click: $root.conversationClicked">
+                <strong>Question: </strong><span data-bind="text: topic"></span>
+                <strong>Users: </strong>
+                <span data-bind="foreach: users">
+                  <span data-bind="text: $data"></span>
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="span10">
+          <div id="chatBox" style="display: none"
+               data-bind="visible: conversationSelected">
+            <h2>Chat <em>(fr. cat!)</em></h2>
+            <h4>Topic: <span data-bind="text: conversation().topic">TOPIC</span></h4>
+            <div data-bind="if: conversation().messages.length > 0">
+              <ul class="chatWindow" data-bind="foreach: conversation().messages">
+                <li>
+                  <strong data-bind="text: user"></strong>:
+                  <span data-bind="text: message"></span>
+                </li>
+              </ul>
+            </div>
+            <em data-bind="ifnot: conversation().messages.length > 0">No messages</em>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <footer>
+        <p>© Team Six
+        2012. <a href="https://github.com/aif1990/">Andreea-Ingrid
+        Funie</a>, <a href="http://www.abstractbinary.org/">Alexandru
+        Scvorţov</a>, <a href="https://github.com/exFalso/">Andras
+        Slemmer</a>, <a href="http://mazzo.li/">Francesco
+        Mazzoli</a>, <a href="http://nh2.me/">Niklas
+        Hambüchen</a>.</p>
+        <p>Written in 36h for the Spring Hackathon
+        at <a href="http://www.imperial.ac.uk/">Imperial College
+        London</a>.</p>
+      </footer>
     </div>
   </body>
 </html>
