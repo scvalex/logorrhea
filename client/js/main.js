@@ -1,5 +1,5 @@
-require(['jquery', 'knockout', 'websocket-json-events', 'jsschema', 'schemas'],
-        function($, _, _, _, schemas) {
+require(['jquery', 'knockout', 'websocket-json-events'],
+        function($, _, websocket_json_events) {
 
   function ConversationsModel() {
     var self = this;
@@ -32,27 +32,6 @@ require(['jquery', 'knockout', 'websocket-json-events', 'jsschema', 'schemas'],
     console.log("Connecting as " + conversationsModel.username());
 
     socket = new websocket_json_events.FancyWebSocket('ws://localhost:9999/echo');
-    socket.bindSchema = function(eventName, callback) {
-      this.bind(eventName, function(data) {
-        return jsschema.check(schemas[data.event], callback(data));
-      });
-    };
-    socket.bindSchemaMethod = function(eventName, okCallback, errorCallback) {
-      this.bindMethod(
-        eventName,
-        function(data) {
-          console.log("schema-check ", eventName, data);
-          if (schemas[data.event] !== undefined)
-            return jsschema.check(schemas[data.event], okCallback(data));
-          else {
-            console.log("Warning: received object without schema for event type '" + eventName + "'", data);
-            return okCallback(data);
-          }
-        },
-        // Dont schema-check errors (yet)
-        errorCallback
-      );
-    }
 
     socket.bind(
       'open',
@@ -73,7 +52,7 @@ require(['jquery', 'knockout', 'websocket-json-events', 'jsschema', 'schemas'],
       console.log("Unexpected message: " + event + "(" + data + ")");
     });
 
-    socket.bindSchemaMethod(
+    socket.bindMethod(
       'connect',
       function(_) {
         console.log("connected ok");
@@ -86,7 +65,7 @@ require(['jquery', 'knockout', 'websocket-json-events', 'jsschema', 'schemas'],
         console.log("failed to connect: ", err);
       });
 
-    socket.bindSchemaMethod(
+    socket.bindMethod(
       'list_channels',
       function(data) {
         conversationsModel.channels(data['channels']);
@@ -99,7 +78,7 @@ require(['jquery', 'knockout', 'websocket-json-events', 'jsschema', 'schemas'],
   function disconnectInternal() {
     $("#disconnectButton").addClass("hidden");
 
-    socket.bindSchemaMethod(
+    socket.bindMethod(
       'disconnect',
       function(_) {
         console.log(socket);
