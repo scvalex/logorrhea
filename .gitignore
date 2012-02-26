@@ -11,5 +11,7 @@ client/js/sockjs.js
 client/staticfetcher.py*
 client/*.css
 client/css/jasmine.css
+client/css/bootstrap.css
+client/css/bootstrap-responsive.css
 Setup.hs
 dist
