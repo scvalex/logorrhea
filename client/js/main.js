@@ -147,7 +147,7 @@ require(['jquery', 'knockout', 'websocket-json-events'],
       function(receiveConversationEvent) {
         var e = receiveConversationEvent;
 
-        conversationsModel.conversations([{ tag: e.tag, topic: "This is cool!", users: ['nh2', 'scvalex', 'rostayob', 'exfalso'], messages: [] }]);
+        conversationsModel.conversations([{ tag: e.tag, topic: "What is Lecturea!", users: ['nh2', 'scvalex', 'rostayob', 'exfalso'], messages: [] }]);
         conversationsModel.conversationsReceived(true);
 
 
