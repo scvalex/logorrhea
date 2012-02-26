@@ -62,12 +62,15 @@
          data-bind="visible: conversationSelected">
       <h3>Chat <em>(fr. cat!)</em></h3>
       <h4>Topic: <span data-bind="text: conversation().topic">TOPIC</span></h4>
-      <ul class="chatWindow" data-bind="foreach: conversation().messages">
-        <li>
-          <strong data-bind="text: user"></strong>:
-          <span data-bind="text: message"></span>
-        </li>
-      </ul>
+      <div data-bind="if: conversation().messages.length > 0">
+        <ul class="chatWindow" data-bind="foreach: conversation().messages">
+          <li>
+            <strong data-bind="text: user"></strong>:
+            <span data-bind="text: message"></span>
+          </li>
+        </ul>
+      </div>
+      <em data-bind="ifnot: conversation().messages.length > 0">No messages</em>
     </div>
   </body>
 </html>
