@@ -9,7 +9,7 @@
   <body>
     <h1>Logorrhea client</h1>
 
-    <div id="loginBox">
+    <div id="loginBox" data-bind="visible: !isConnected()">
       <h3>Connect</h3>
       <form data-bind="submit: connect">
         <input id="usernameInput" data-bind="value: username"
@@ -18,25 +18,26 @@
       </form>
     </div>
 
-    <div id="loggedInBox" class="hidden">
-      You are <strong data-bind="text: username">&nbsp;</strong>
-      <span id="connectionStatusLabel">Connecting</span>
-      <button id="disconnectButton" class="hidden"
-              data-bind="click: disconnect">Disconnect</button>
+    <div id="loggedInBox" style="display: none" data-bind="visible: isConnected">
+      You are <strong data-bind="text: username">USER</strong>
+      <span id="connectionStatusLabel" data-bind="text: connectionStatusText">STATUS</span>
+      <button id="disconnectButton" data-bind="click: disconnect">Disconnect</button>
     </div>
 
-    <div id="channelsBox" class="hidden">
+    <div id="channelsBox" style="display: none" data-bind="visible: isConnected">
       <h3>Channels</h3>
       <ul class="channels" data-bind="foreach: channels">
         <li><a data-bind="text: $data, click: $root.channelClicked">&nbsp;</a></li>
       </ul>
     </div>
 
-    <div id="channelBox" class="hidden">
+    <div id="channelBox" style="display: none"
+         data-bind="visible: channelSelected">
       This channel is <strong data-bind="text: channel">&nbsp;</strong>
     </div>
 
-    <div id="usersBox" class="hidden">
+    <div id="usersBox" style="display: none"
+         data-bind="visible: usersReceived">
       <h3>Users</h3>
       <ul class="users" data-bind="foreach: users">
         <li data-bind="text: $data"></li>
@@ -46,7 +47,7 @@
     <div id="conversationsBox" class="hidden">
       <h3>Conversations</h3>
       <ul class="conversations" data-bind="foreach: conversations">
-        <li>
+        <li data-bind="click: $root.conversationClicked">
           <strong>Question: </strong><span data-bind="text: topic"></span>
           <strong>Users: </strong>
           <span data-bind="foreach: users">
@@ -56,5 +57,15 @@
       </ul>
     </div>
 
+    <div id="chatBox" class="hidden">
+      <h3>Chat <em>(fr. cat!)</em></h3>
+      <h4 data-bind="text: conversation().topic">&nbsp;</h4>
+      <ul class="chatWindow" data-bind="foreach: conversation().messages">
+        <li>
+          <strong data-bind="text: user"></strong>
+          <span data-bind="message"></span>
+        </li>
+      </ul>
+    </div>
   </body>
 </html>

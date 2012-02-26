@@ -19,8 +19,9 @@ define(['jsschema'], function() {
   };
 
   var conversation_schema = schema(function() {
-    this.hash  = required('string');
+    this.tag   = required('string');
     this.topic = required('string');
+    this.users = repeated('string');
   });
 
 
@@ -59,11 +60,11 @@ define(['jsschema'], function() {
     }),
 
 
-    'list_coversations': schema(function() {
+    'list_conversations': schema(function() {
       this.channel = required('string');
     }),
 
-    'list_coversations.ok': schema(function() {
+    'list_conversations.ok': schema(function() {
       this.channel       = required('string');
       this.conversations = repeated(conversation_schema);
     }),
