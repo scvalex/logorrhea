@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		156380A314F98B1700D683E0 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 156380A214F98B1700D683E0 /* CFNetwork.framework */; };
+		156380A614F98B2100D683E0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 156380A514F98B2100D683E0 /* Security.framework */; };
+		15A9BA7414F9B8C500B72A35 /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = 15A9BA6D14F9B8C500B72A35 /* base64.c */; };
+		15A9BA7514F9B8C500B72A35 /* NSData+SRB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 15A9BA7014F9B8C500B72A35 /* NSData+SRB64Additions.m */; };
+		15A9BA7614F9B8C500B72A35 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 15A9BA7314F9B8C500B72A35 /* SRWebSocket.m */; };
+		15B20D3314F9A6F800F065B0 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B20D3214F9A6F800F065B0 /* libicucore.dylib */; };
 		15B32CBA14F92EE90006FEF9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B32CB914F92EE90006FEF9 /* UIKit.framework */; };
 		15B32CBC14F92EE90006FEF9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B32CBB14F92EE90006FEF9 /* Foundation.framework */; };
 		15B32CBE14F92EE90006FEF9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B32CBD14F92EE90006FEF9 /* CoreGraphics.framework */; };
@@ -43,6 +49,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		156380A214F98B1700D683E0 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		156380A514F98B2100D683E0 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		15A9BA6D14F9B8C500B72A35 /* base64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = base64.c; sourceTree = "<group>"; };
+		15A9BA6E14F9B8C500B72A35 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
+		15A9BA6F14F9B8C500B72A35 /* NSData+SRB64Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+SRB64Additions.h"; sourceTree = "<group>"; };
+		15A9BA7014F9B8C500B72A35 /* NSData+SRB64Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+SRB64Additions.m"; sourceTree = "<group>"; };
+		15A9BA7114F9B8C500B72A35 /* SocketRocket-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-Prefix.pch"; sourceTree = "<group>"; };
+		15A9BA7214F9B8C500B72A35 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
+		15A9BA7314F9B8C500B72A35 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
+		15B20D3214F9A6F800F065B0 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		15B32CB514F92EE90006FEF9 /* logorrhea.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = logorrhea.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15B32CB914F92EE90006FEF9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		15B32CBB14F92EE90006FEF9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -59,7 +75,7 @@
 		15B32CD214F92EE90006FEF9 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		15B32CD414F92EE90006FEF9 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		15B32CD614F92EE90006FEF9 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		15B32CD814F92EE90006FEF9 /* PrefViewController.h */ = {isa = PBXFileReference; path = PrefViewController.h; sourceTree = "<group>"; };
+		15B32CD814F92EE90006FEF9 /* PrefViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefViewController.h; sourceTree = "<group>"; };
 		15B32CD914F92EE90006FEF9 /* PrefViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrefViewController.m; sourceTree = "<group>"; };
 		15B32CDB14F92EE90006FEF9 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		15B32CDD14F92EE90006FEF9 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
@@ -81,8 +97,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15B32CBA14F92EE90006FEF9 /* UIKit.framework in Frameworks */,
+				15B20D3314F9A6F800F065B0 /* libicucore.dylib in Frameworks */,
 				15B32CBC14F92EE90006FEF9 /* Foundation.framework in Frameworks */,
+				156380A614F98B2100D683E0 /* Security.framework in Frameworks */,
+				156380A314F98B1700D683E0 /* CFNetwork.framework in Frameworks */,
+				15B32CBA14F92EE90006FEF9 /* UIKit.framework in Frameworks */,
 				15B32CBE14F92EE90006FEF9 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,9 +119,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		15A9BA6C14F9B8C500B72A35 /* SocketRocket */ = {
+			isa = PBXGroup;
+			children = (
+				15A9BA6D14F9B8C500B72A35 /* base64.c */,
+				15A9BA6E14F9B8C500B72A35 /* base64.h */,
+				15A9BA6F14F9B8C500B72A35 /* NSData+SRB64Additions.h */,
+				15A9BA7014F9B8C500B72A35 /* NSData+SRB64Additions.m */,
+				15A9BA7114F9B8C500B72A35 /* SocketRocket-Prefix.pch */,
+				15A9BA7214F9B8C500B72A35 /* SRWebSocket.h */,
+				15A9BA7314F9B8C500B72A35 /* SRWebSocket.m */,
+			);
+			path = SocketRocket;
+			sourceTree = "<group>";
+		};
 		15B32CAA14F92EE80006FEF9 = {
 			isa = PBXGroup;
 			children = (
+				15B20D3214F9A6F800F065B0 /* libicucore.dylib */,
 				15B32CBF14F92EE90006FEF9 /* logorrhea */,
 				15B32CEB14F92EE90006FEF9 /* logorrheaTests */,
 				15B32CB814F92EE90006FEF9 /* Frameworks */,
@@ -122,6 +156,8 @@
 		15B32CB814F92EE90006FEF9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				156380A514F98B2100D683E0 /* Security.framework */,
+				156380A214F98B1700D683E0 /* CFNetwork.framework */,
 				15B32CB914F92EE90006FEF9 /* UIKit.framework */,
 				15B32CBB14F92EE90006FEF9 /* Foundation.framework */,
 				15B32CBD14F92EE90006FEF9 /* CoreGraphics.framework */,
@@ -133,6 +169,7 @@
 		15B32CBF14F92EE90006FEF9 /* logorrhea */ = {
 			isa = PBXGroup;
 			children = (
+				15A9BA6C14F9B8C500B72A35 /* SocketRocket */,
 				15B32D1814F942470006FEF9 /* 28-star.png */,
 				15B32D0B14F935760006FEF9 /* 53-house.png */,
 				15B32D0814F9356B0006FEF9 /* 09-chat-2.png */,
@@ -305,6 +342,9 @@
 				15B32CD314F92EE90006FEF9 /* HomeViewController.m in Sources */,
 				15B32CDA14F92EE90006FEF9 /* PrefViewController.m in Sources */,
 				15B32D1614F93A7B0006FEF9 /* LoginView.m in Sources */,
+				15A9BA7414F9B8C500B72A35 /* base64.c in Sources */,
+				15A9BA7514F9B8C500B72A35 /* NSData+SRB64Additions.m in Sources */,
+				15A9BA7614F9B8C500B72A35 /* SRWebSocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,10 +452,31 @@
 		15B32CF714F92EE90006FEF9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "logorrhea/logorrhea-Prefix.pch";
+				"HEADER_SEARCH_PATHS[arch=*]" = "\"/Users/aif/Desktop/UnittWebSocketClient/include\"";
 				INFOPLIST_FILE = "logorrhea/logorrhea-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/logorrhea/UnittWebSocketClient/bin/Release-iphonesimulator\"",
+					"\"$(SRCROOT)/logorrhea/UnittWebSocketClient/bin/Debug-iphonesimulator\"",
+					"\"$(SRCROOT)/../../../UnittWebSocketClient/bin/Debug-iphonesimulator\"",
+					"\"$(SRCROOT)/../../../UnittWebSocketClient/bin/Release-iphonesimulator\"",
+				);
+				"LIBRARY_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"\"$(SRCROOT)/logorrhea/UnittWebSocketClient/bin/Release-iphonesimulator\"",
+					"\"$(SRCROOT)/logorrhea/UnittWebSocketClient/bin/Debug-iphonesimulator\"",
+					"\"$(SRCROOT)/../../../UnittWebSocketClient/bin/Debug-iphonesimulator\"",
+					"\"$(SRCROOT)/../../../UnittWebSocketClient/bin/Release-iphonesimulator\"",
+				);
+				"OTHER_CFLAGS[arch=*]" = "-g";
+				"OTHER_CPLUSPLUSFLAGS[arch=*]" = "-g";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REZ_SEARCH_PATHS = "$(inherited)";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -423,10 +484,27 @@
 		15B32CF814F92EE90006FEF9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "logorrhea/logorrhea-Prefix.pch";
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"\"/Users/aif/Desktop/UnittWebSocketClient/include\"",
+				);
 				INFOPLIST_FILE = "logorrhea/logorrhea-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../UnittWebSocketClient/bin/Debug-iphonesimulator\"",
+					"\"$(SRCROOT)/../../../UnittWebSocketClient/bin/Release-iphonesimulator\"",
+				);
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "$(inherited)";
+				OTHER_CFLAGS = (
+					"-all_load",
+					"-DNS_BLOCK_ASSERTIONS=1",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REZ_SEARCH_PATHS = "$(inherited)";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
