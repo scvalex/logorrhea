@@ -32,7 +32,11 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     self.username = ko.observable("");
     self.channels = ko.observableArray([]);
     self.channel = ko.observable("");
+    self.channelSelected = ko.computed(function() {
+      return (self.channel().length > 0);
+    });
     self.users = ko.observableArray([]);
+    self.usersReceived = ko.observable(false);
     self.conversations = ko.observableArray([]);
     self.conversation = ko.observable({topic: "", messages: []});
 
@@ -54,7 +58,6 @@ require(['jquery', 'knockout', 'websocket-json-events'],
   }
 
   function connectInternal() {
-
     console.log("Connecting as " + conversationsModel.username());
     conversationsModel.connectionStatus(status.connecting);
 
@@ -100,7 +103,6 @@ require(['jquery', 'knockout', 'websocket-json-events'],
   }
 
   function disconnectInternal() {
-
     socket.bindMethod(
       'disconnect',
       function(_) {
@@ -117,14 +119,13 @@ require(['jquery', 'knockout', 'websocket-json-events'],
   function browseChannelInternal(channel) {
     console.log("Channel clicked: " + channel);
     conversationsModel.channel(channel);
-    $("#channelsBox").removeClass("hidden");
     socket.bindMethod(
       'list_users',
       function(users) {
         console.log("Users on ", conversationsModel.channel(),
                     " are ", users['users']);
         conversationsModel.users(users['users']);
-        $("#usersBox").removeClass('hidden');
+        conversationsModel.usersReceived(true);
       },
       function(err) {
         console.log("failed to get users: ", err);

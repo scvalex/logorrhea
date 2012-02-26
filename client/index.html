@@ -31,11 +31,13 @@
       </ul>
     </div>
 
-    <div id="channelBox" class="hidden">
+    <div id="channelBox" style="display: none"
+         data-bind="visible: channelSelected">
       This channel is <strong data-bind="text: channel">&nbsp;</strong>
     </div>
 
-    <div id="usersBox" class="hidden">
+    <div id="usersBox" style="display: none"
+         data-bind="visible: usersReceived">
       <h3>Users</h3>
       <ul class="users" data-bind="foreach: users">
         <li data-bind="text: $data"></li>
