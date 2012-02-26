@@ -13,6 +13,7 @@ echo.on('request', function(request) {
   var conn = request.accept(null, request.origin);
 
   conn.on('message', function(message) {
+    console.log("Got: ", message);
     if (message.type === 'utf8') {
       try {
         var msgObj = JSON.parse(message.utf8Data,
