@@ -151,19 +151,19 @@ unParseResponse DisConnectOk =
            ]
 unParseResponse (ListChannelsOk chans) =
     object [ "event" .= ("list_channels.ok" :: Text)
-           , "data"  .= chans
+           , "data"  .= object ["channels" .= chans]
            ]
 unParseResponse (ListUsersOk users) =
     object [ "event" .= ("list_users.ok" :: Text)
-           , "data"  .= users
+           , "data"  .= object ["users" .= users]
            ]
 unParseResponse (ListConversationsOk convos) =
     object [ "event" .= ("list_conversations.ok" :: Text)
-           , "data"  .= convos
+           , "data"  .= object ["conversations" .= convos]
            ]
 unParseResponse (JoinOk chan) =
     object [ "event" .= ("join.ok" :: Text)
-           , "data"  .= chan
+           , "data"  .= object ["channel" .= chan]
            ]
 unParseResponse SendChannelOk =
     object [ "event" .= ("send_channel.ok" :: Text)
