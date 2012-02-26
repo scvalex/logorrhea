@@ -113,6 +113,15 @@ define(['jsschema'], function() {
 
   };
 
+  var errableMethods = ['connect', 'disconnect', 'list_channels',
+                        'list_users', 'list_conversations', 'join',
+                        'send_channel', 'send_conversation'];
+  for (methodName in errableMethods) {
+    eventSchemas[errableMethods[methodName] + ".error"] = schema(function() {
+      this.reason = required('string');
+    });
+  }
+
   return {
     event: eventSchema,
     makeSpecificEventSchema: makeSpecificEventSchema,

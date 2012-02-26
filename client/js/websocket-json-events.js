@@ -20,9 +20,7 @@ The server has to send websocket data of form
 */
 
 define(['jsschema', 'schemas'], function(_, schemas) {
-
   return {
-
     FancyWebSocket: function(url) {
       if (typeof WebSocket !== 'undefined') {
         var conn = new WebSocket(url);
