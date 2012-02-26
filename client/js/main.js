@@ -45,6 +45,10 @@ require(['jquery', 'knockout', 'websocket-json-events'],
       return (typeof self.conversation()['tag'] != "undefined");
     });
 
+    self.conversationsDict = ko.computed(function() {
+      return objectArrayToDict(self.conversations(), 'tag');
+    });
+
     self.connect = function() {
       connectInternal();
     };
@@ -178,4 +182,18 @@ require(['jquery', 'knockout', 'websocket-json-events'],
 
     $("#usernameInput")[0].focus();
   });
+
+  /* Turns an array of object into a "dictionary" for fast access,
+     using the given member of each object as the key.
+     Example:
+
+        objectArrayToDict([{ user: 'nh2', age: 20 }], 'user') == { 'nh2': { user: 'nh2', age: 20 } }
+  */
+  function objectArrayToDict(array, keyMemberName) {
+    var dict = {};
+    ko.utils.arrayForEach(array, function(obj) {
+      dict[obj[keyMemberName]] = obj;
+    });
+    return dict;
+  }
 });
