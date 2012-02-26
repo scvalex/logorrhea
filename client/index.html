@@ -56,5 +56,15 @@
       </ul>
     </div>
 
+    <div id="chatBox" class="hidden">
+      <h3>Chat <em>(fr. cat!)</em></h3>
+      <h4 data-bind="text: conversation().topic">&nbsp;</h4>
+      <ul class="chatWindow" data-bind="foreach: conversation().messages">
+        <li>
+          <strong data-bind="text: user"></strong>
+          <span data-bind="message"></span>
+        </li>
+      </ul>
+    </div>
   </body>
 </html>

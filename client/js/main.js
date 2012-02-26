@@ -8,10 +8,8 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     self.channels = ko.observableArray([]);
     self.channel = ko.observable("");
     self.users = ko.observableArray([]);
-    self.conversations = ko.observableArray([
-      { tag: 'client_development', topic: 'Why is client development so easy?', users: ['scvalex', 'nh2'] },
-      { tag: 'server_development', topic: 'Is it OK to have more LANGUAGE pragmas than lines of code?', users: ['ex_falso', 'rostayob'] }
-    ]);
+    self.conversations = ko.observableArray([]);
+    self.conversation = ko.observable({topic: "", messages: []});
 
     self.connect = function() {
       connectInternal();
