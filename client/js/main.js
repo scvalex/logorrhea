@@ -64,6 +64,11 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     self.conversationClicked = function(conversation) {
       conversationClickedInternal(conversation.tag);
     }
+
+    self.post = function(channel, tag, message) {
+      socket.send('send_conversation',
+                  { channel: channel, tag: tag, message: message });
+    }
   }
 
   function connectInternal() {
@@ -206,11 +211,6 @@ require(['jquery', 'knockout', 'websocket-json-events'],
                     + tag + "' in conversation dict: ", conversationsDict());
     else
       conversationsModel.conversation(conv);
-  }
-
-  function post(channel, tag, message) {
-    socket.send('send_conversation',
-                { channel: channel, tag: tag, message: message });
   }
 
   $(function() {
