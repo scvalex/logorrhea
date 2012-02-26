@@ -188,9 +188,9 @@ unParseServerIssued (ReceiveChannel chan nn msg) =
            ]
 unParseServerIssued (ReceiveConversation chan nn tag msg) =
     object [ "event" .= ("receive_conversation" :: Text)
-           , "data"  .= object [ "channel"      .= chan
-                               , "user"         .= nn
-                               , "conversation" .= tag
-                               , "message"      .= msg
+           , "data"  .= object [ "channel" .= chan
+                               , "user"    .= nn
+                               , "tag"     .= tag
+                               , "message" .= msg
                                ]
            ]
