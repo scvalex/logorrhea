@@ -61,9 +61,15 @@
       <hr />
 
       <div class="row">
-        <div class="span10">
+        <div class="span12 pagination-centered">
+          <h1>Enough talk. Let's QA!</h1>
+        </div>
+      </div>
+
+      <div class="row top-spaced">
+        <div class="span4">
+          <h2>1. Choose a nick</h2>
           <div id="loginBox" data-bind="visible: !isConnected()">
-            <h3>Connect</h3>
             <form data-bind="submit: connect">
               <input id="usernameInput" data-bind="value: username"
                      placeholder="username" />
@@ -72,25 +78,40 @@
           </div>
 
           <div id="loggedInBox" style="display: none" data-bind="visible: isConnected">
-            You are <strong data-bind="text: username">USER</strong>
+            <h3 class="inline">
+              You are <strong data-bind="text: username">USER</strong>
+            </h3>
             <span id="connectionStatusLabel" data-bind="text: connectionStatusText">STATUS</span>
-            <form data-bind="submit: disconnect">
+            <form class="inline" data-bind="submit: disconnect">
               <input type="submit" value="Disconnect" />
             </form>
           </div>
+        </div>
 
+        <div class="span4">
           <div id="channelsBox" style="display: none" data-bind="visible: isConnected">
-            <h3>Channels</h3>
+            <h2>2. Join a channel</h2>
             <ul class="channels" data-bind="foreach: channels">
               <li><a data-bind="text: $data, click: $root.channelClicked">CHANNEL</a></li>
             </ul>
           </div>
+        </div>
 
+        <div class="span4">
           <div id="channelBox" style="display: none"
                data-bind="visible: channelSelected">
-            This channel is <strong data-bind="text: channel">CHANNEL</strong>
-          </div>
+            <h2>3. Choose a question</h2>
 
+            <h3>
+              This channel is <strong data-bind="text:
+              channel">CHANNEL</strong>
+            </h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="span9">
           <div id="usersBox" style="display: none"
                data-bind="visible: usersReceived">
             <h3>Users</h3>
@@ -140,7 +161,7 @@
         Slemmer</a>, <a href="http://mazzo.li/">Francesco
         Mazzoli</a>, <a href="http://nh2.me/">Niklas
         Hambüchen</a>.</p>
-        <p>Written for the Spring Hackathon
+        <p>Written in 36h for the Spring Hackathon
         at <a href="http://www.imperial.ac.uk/">Imperial College
         London</a>.</p>
       </footer>
