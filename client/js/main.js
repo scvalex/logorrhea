@@ -171,6 +171,13 @@ require(['jquery', 'knockout', 'websocket-json-events'],
 
   function conversationClickedInternal(tag) {
     console.log("Conversation clicked: ", tag);
+
+    var conv = conversationsModel.conversationsDict()[tag];
+    if (!conv || !conv.tag)
+      console.error("Warning: Could not find conversation for tag '"
+                    + tag + "' in conversation dict: ", conversationsDict());
+    else
+      conversationsModel.conversation(conv);
   }
 
   $(function() {
