@@ -7,16 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SocketRocket/SRWebSocket.h"
 #import "AppDelegate.h"
 
-@interface LoginView : UIViewController<SRWebSocketDelegate> {
+@interface LoginView : UIViewController {
     IBOutlet NSString *username;
-    //bool logged_in;
 }
 
 @property (weak, nonatomic) IBOutlet UITextField *myusername;
-//@property(nonatomic, assign) bool logged_in;
 
 -(IBAction)textFieldDoneEditing:(id)sender;
 -(IBAction)backgroundClick:(id)sender;

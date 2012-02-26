@@ -98,6 +98,15 @@
     [myWS open];
 }
 
+- (bool) getStatus
+{
+    return loggedIn;
+}
+
+- (NSString* ) getUsername
+{
+    return username;
+}
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {

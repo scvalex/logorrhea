@@ -38,16 +38,13 @@
 }
 
 - (IBAction)login {
-    
     username = myusername.text;
     
     [BigDelegate connect:username];
     
      NSLog(@"am deschis, cica");
     
-    [self dismissViewControllerAnimated:(TRUE) completion:nil];
-    
-    //logged_in = true;
+    [self dismissModalViewControllerAnimated:(TRUE)];
 }
 
 
@@ -68,6 +65,17 @@
     
     NSUserDefaults *name = [NSUserDefaults standardUserDefaults];
     myusername.text = [name stringForKey:@"textFieldKey"];
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:(TRUE)];
+    
+    if ([BigDelegate getStatus]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You are already connected" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        [alert show];
+        [self dismissModalViewControllerAnimated:(TRUE)];
+    }
 }
 
 - (void)viewDidUnload

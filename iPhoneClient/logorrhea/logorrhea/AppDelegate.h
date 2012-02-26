@@ -20,6 +20,8 @@
 }
 @property (strong, nonatomic) UIWindow *window;
 
+- (bool) getStatus;
+- (NSString*) getUsername;
 - (void) doConnect:(NSString *)username;
 - (NSMutableDictionary *) makeRequest:(NSString *)event withData:(NSMutableDictionary*)data;
 - (void) doListChannels;

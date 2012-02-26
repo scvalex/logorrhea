@@ -36,7 +36,6 @@
 		15B32CD314F92EE90006FEF9 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B32CD214F92EE90006FEF9 /* HomeViewController.m */; };
 		15B32CD514F92EE90006FEF9 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B32CD414F92EE90006FEF9 /* first.png */; };
 		15B32CD714F92EE90006FEF9 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B32CD614F92EE90006FEF9 /* first@2x.png */; };
-		15B32CDA14F92EE90006FEF9 /* PrefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B32CD914F92EE90006FEF9 /* PrefViewController.m */; };
 		15B32CDC14F92EE90006FEF9 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B32CDB14F92EE90006FEF9 /* second.png */; };
 		15B32CDE14F92EE90006FEF9 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B32CDD14F92EE90006FEF9 /* second@2x.png */; };
 		15B32CE614F92EE90006FEF9 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B32CE514F92EE90006FEF9 /* SenTestingKit.framework */; };
@@ -116,8 +115,6 @@
 		15B32CD214F92EE90006FEF9 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		15B32CD414F92EE90006FEF9 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		15B32CD614F92EE90006FEF9 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		15B32CD814F92EE90006FEF9 /* PrefViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefViewController.h; sourceTree = "<group>"; };
-		15B32CD914F92EE90006FEF9 /* PrefViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrefViewController.m; sourceTree = "<group>"; };
 		15B32CDB14F92EE90006FEF9 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		15B32CDD14F92EE90006FEF9 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		15B32CE414F92EE90006FEF9 /* logorrheaTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = logorrheaTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -263,8 +260,6 @@
 				15B32CD214F92EE90006FEF9 /* HomeViewController.m */,
 				15B32CD414F92EE90006FEF9 /* first.png */,
 				15B32CD614F92EE90006FEF9 /* first@2x.png */,
-				15B32CD814F92EE90006FEF9 /* PrefViewController.h */,
-				15B32CD914F92EE90006FEF9 /* PrefViewController.m */,
 				15B32CDB14F92EE90006FEF9 /* second.png */,
 				15B32CDD14F92EE90006FEF9 /* second@2x.png */,
 				15B32CC014F92EE90006FEF9 /* Supporting Files */,
@@ -430,7 +425,6 @@
 				15B32CC614F92EE90006FEF9 /* main.m in Sources */,
 				15B32CCA14F92EE90006FEF9 /* AppDelegate.m in Sources */,
 				15B32CD314F92EE90006FEF9 /* HomeViewController.m in Sources */,
-				15B32CDA14F92EE90006FEF9 /* PrefViewController.m in Sources */,
 				15B32D1614F93A7B0006FEF9 /* LoginView.m in Sources */,
 				15A9BA7414F9B8C500B72A35 /* base64.c in Sources */,
 				15A9BA7514F9B8C500B72A35 /* NSData+SRB64Additions.m in Sources */,
