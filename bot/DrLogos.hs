@@ -13,8 +13,8 @@ import Control.Applicative
 import Control.Monad.State
 import Data.Map (Map)
 import qualified Data.Map as Map
-import Text.Parsec hiding (many)
-import Text.Parsec.String
+import Text.Parsec (parse)
+import Text.Parsec.String (Parser)
 
 import DrLogos.Parser
 import Bot

@@ -31,4 +31,3 @@ botProcess proc bs = forever $ do
             botProcess proc bs
         _ -> let (replies, bs') = runBot (proc msg) bs
              in  mapM sendMessage replies >> botProcess proc bs'
-

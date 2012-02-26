@@ -11,11 +11,12 @@ Cabal-version: >=1.10
 Library
   Hs-source-dirs: lib
   Default-language: Haskell2010
-  Exposed-modules:    
+  Exposed-modules:
     IRC,
     IRC.Commands,
     IRC.Base,
-    IRC.Parse
+    IRC.Parse,
+    DrLogos.Parser
   Build-depends:
     base,
     network,
@@ -32,6 +33,15 @@ Executable bot
     network,
     logorrhea,
     mtl,
-    parsec,
-    containers
- 
+    containers,
+    parsec
+
+Executable server
+  Hs-Source-Dirs: server
+  Default-language: Haskell2010
+  Main-is: Main.hs
+  Build-depends:
+    base,
+    network,
+    logorrhea,
+    websockets
