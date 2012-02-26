@@ -70,6 +70,7 @@
             }else if (event != nil && [event compare:@"list_messages.ok"] == 0) {
                 NSDictionary* datas = [resp valueForKey:@"data"];
                 // convs = [[NSMutableArray alloc] init];
+                NSLog(@" am primit lista de mesaje");
                 messages = [datas valueForKey:@"messages"];
             } else {
                  NSLog(@"Am primit un mesaj nerecunoscut: %@", message);
@@ -93,7 +94,7 @@
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
     [params setValue:conv forKey:(@"conversation")];
     NSString* request = [[[SBJsonWriter alloc] init] stringWithObject:[self makeRequest:@"list_messages" withData:params]];
-    NSLog(@"voi lista conversatiile %@", request);
+    NSLog(@"voi lista mesajele %@", request);
     
     [myWS send:request];
 }
