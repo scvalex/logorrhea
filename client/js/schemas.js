@@ -18,10 +18,16 @@ define(['jsschema'], function() {
     });
   };
 
+  var message_schema = schema(function() {
+    this.user    = required('string');
+    this.message = required('string');
+  });
+
   var conversation_schema = schema(function() {
     this.tag   = required('string');
     this.topic = required('string');
     this.users = repeated('string');
+    this.messages = repeated(message_schema);
   });
 
 
