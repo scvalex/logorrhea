@@ -163,7 +163,7 @@ unParseResponse SendConversationOk =
 unParseServerIssued :: ServerIssued -> Value
 unParseServerIssued (DisConnectS reason) =
     object [ "event" .= ("disconnect" :: Text)
-           , "data"  .= object []
+           , "data"  .= object ["reason" .= reason]
            ]
 unParseServerIssued (ReceiveChannel chan nn msg) =
     object [ "event" .= ("receive_channel" :: Text)
