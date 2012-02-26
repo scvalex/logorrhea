@@ -12,7 +12,7 @@ botState = newBotState ["#testlogo"] []
 
 server   = "irc.freenode.org"
 port     = fromIntegral 6667
-userName = "maaantrh5rhguasd"
+userName = "DrLogos"
 
 main :: IO ()
 main = do
