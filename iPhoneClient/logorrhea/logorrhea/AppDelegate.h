@@ -17,6 +17,7 @@
      IBOutlet NSString *username;
      SRWebSocket* myWS;
      bool loggedIn; 
+    NSMutableArray* channels;
 }
 @property (strong, nonatomic) UIWindow *window;
 
@@ -26,5 +27,6 @@
 - (NSMutableDictionary *) makeRequest:(NSString *)event withData:(NSMutableDictionary*)data;
 - (void) doListChannels;
 - (void) connect:(NSString* )username;
+- (NSMutableArray*) getChannels;
 
 @end

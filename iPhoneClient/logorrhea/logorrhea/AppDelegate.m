@@ -46,7 +46,7 @@
             [self doListChannels];
         } else if (event != nil && [event compare:@"list_channels.ok"] == 0) {
             NSDictionary* data = [resp valueForKey:@"data"];
-            NSArray* channels = [data valueForKey:@"channels"];
+            channels = [data valueForKey:@"channels"];
             NSEnumerator *enumerator = [channels objectEnumerator];
             NSString* item;
             while (item = (NSString*)[enumerator nextObject]){
@@ -57,6 +57,10 @@
             NSLog(@"Am primit un mesaj nerecunoscut: %@", message);
         }
     }
+}
+
+- (NSArray* ) getChannels {
+    return channels;
 }
 
 - (void) doListChannels {
