@@ -23,7 +23,7 @@ import IRC
 data Question = Question
     { qFull     :: String
     , qAsker    :: NickName
-    , qMessages :: [Message]
+    , qMessages :: [(NickName, String)]
     , qParent   :: Channel
     , qTag :: Tag
     }
@@ -90,13 +90,22 @@ listQuestions nn chan = do
                             unParse u_botMessage $ UserMessage (qAsker q) (qTag q) (qFull q)
                     return . map (privmsg nn . questionDesc) $ questions
 
+questionHistory :: NickName -> Channel -> Bot BotState [Message]
+questionHistory nn chan = do
+    qM <- Map.lookup chan <$> gets botTags
+    return $ case qM of
+        Nothing -> [privmsg nn (unParse u_botMessage $ NotAQuestion chan)]
+        Just Question {qMessages = msgs} ->
+            map (privmsg nn . unParse u_botMessage . uncurry QuestionMessage) msgs
+    
 drLogos :: BotProcess BotState
-drLogos wholeMsg@Message { msg_prefix  = Just (NickName nn _ _)
-                         , msg_command = "PRIVMSG"
-                         , msg_params  = [chan, msg]
-                         }
+drLogos Message { msg_prefix  = Just (NickName nn _ _)
+                , msg_command = "PRIVMSG"
+                , msg_params  = [chan, msg]
+                }
     | Just (NewQuestion tagM body) <- parseRes = newQuestion chan nn tagM body
     | Just ListQuestions <- parseRes = listQuestions nn chan
+    | Just History <- parseRes = questionHistory nn chan
     | otherwise = do
         mq <- Map.lookup chan <$> gets botTags
         case mq of
@@ -106,7 +115,7 @@ drLogos wholeMsg@Message { msg_prefix  = Just (NickName nn _ _)
                 let parentMsg = unParse u_botMessage $ UserMessage nn chan msg
                 bs@BotState {botTags = tags} <- get
                 put bs {botTags = Map.insert chan
-                                  q {qMessages = wholeMsg : messages} tags}
+                                  q {qMessages = (nn, msg) : messages} tags}
                 return [ privmsg parent parentMsg ]
   where
     parseRes = parse' p_userCommand msg
