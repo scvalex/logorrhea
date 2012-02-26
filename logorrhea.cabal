@@ -1,0 +1,37 @@
+Name:          logorrhea
+Version:       0.1
+License:       BSD3
+License-file:  LICENSE
+Author:        Alexandru Scvortov, Francesco Mazzoli, Niklas Hambuechen,
+               Andreea-Ingrid Funie, Andras Slemmer
+Category:      Web
+Build-type:    Simple
+Cabal-version: >=1.10
+
+Library
+  Hs-source-dirs: lib
+  Default-language: Haskell2010
+  Exposed-modules:    
+    IRC,
+    IRC.Commands,
+    IRC.Base,
+    IRC.Parse
+  Build-depends:
+    base,
+    network,
+    bytestring,
+    mtl,
+    parsec
+
+Executable bot
+  Hs-source-dirs: bot
+  Default-language: Haskell2010
+  Main-is: Main.hs
+  Build-depends:
+    base,
+    network,
+    logorrhea,
+    mtl,
+    parsec,
+    containers
+ 

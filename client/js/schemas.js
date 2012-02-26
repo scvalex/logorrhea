@@ -5,7 +5,12 @@ define(['jsschema'], function() {
   var optional = jsschema.optional;
   var repeated = jsschema.repeated;
 
-  var eventSchema = function(dataSchema) {
+  var eventSchema = schema(function() {
+    this.event = required('string')
+    // keep data optional, it could be of any type or null
+  });
+
+  var makeSpecificEventSchema = function(dataSchema) {
     return schema(function() {
       this.event = required('string'),
       // TODO check if optional is all right (vs jsschema, null and {} in API spec)
@@ -19,95 +24,108 @@ define(['jsschema'], function() {
   });
 
 
-  var schemas = {
+  var eventSchemas = {
 
-    'connect': eventSchema(schema(function() {
-    })),
+    'connect': schema(function() {
+    }),
 
-    'connect.ok': eventSchema(schema(function() {
-    })),
+    'connect.ok': schema(function() {
+    }),
 
 
     // Note that this currently is for both server and client isssued disconnect
-    'disconnect': eventSchema(schema(function() {
-    })),
+    'disconnect': schema(function() {
+    }),
 
-    'disconnect.ok': eventSchema(schema(function() {
-    })),
+    'disconnect.ok': schema(function() {
+    }),
 
 
-    'list_channels': eventSchema(schema(function() {
-    })),
+    'list_channels': schema(function() {
+    }),
 
-    'list_channels.ok': eventSchema(schema(function() {
+    'list_channels.ok': schema(function() {
       this.channels = repeated('string');
-    })),
+    }),
 
 
-    'list_users': eventSchema(schema(function() {
+    'list_users': schema(function() {
       this.channel = required('string');
-    })),
+    }),
 
-    'list_users.ok': eventSchema(schema(function() {
+    'list_users.ok': schema(function() {
       this.channel  = required('string');
       this.users    = repeated('string');
-    })),
+    }),
 
 
-    'list_coversations': eventSchema(schema(function() {
+    'list_coversations': schema(function() {
       this.channel = required('string');
-    })),
+    }),
 
-    'list_coversations.ok': eventSchema(schema(function() {
+    'list_coversations.ok': schema(function() {
       this.channel       = required('string');
       this.conversations = repeated(conversation_schema);
-    })),
+    }),
 
 
-    'join': eventSchema(schema(function() {
+    'join': schema(function() {
       this.channel = required('string');
-    })),
+    }),
 
-    'join.ok': eventSchema(schema(function() {
+    'join.ok': schema(function() {
       this.channel = required('string');
-    })),
+    }),
 
 
-    'send_channel': eventSchema(schema(function() {
+    'send_channel': schema(function() {
       this.channel = required('string');
       this.message = required('string');
-    })),
+    }),
 
-    'send_channel.ok': eventSchema(schema(function() {
-    })),
+    'send_channel.ok': schema(function() {
+    }),
 
 
-    'send_conversation': eventSchema(schema(function() {
+    'send_conversation': schema(function() {
       this.channel      = required('string');
       this.conversation = required('string');
       this.message      = required('string');
-    })),
+    }),
 
-    'send_conversation.ok': eventSchema(schema(function() {
-    })),
+    'send_conversation.ok': schema(function() {
+    }),
 
 
-    'receive_channel': eventSchema(schema(function() {
+    'receive_channel': schema(function() {
       this.channel = required('string');
       this.user    = required('string');
       this.message = required('string');
-    })),
+    }),
 
 
-    'receive_conversation': eventSchema(schema(function() {
+    'receive_conversation': schema(function() {
       this.channel      = required('string');
       this.conversation = required('string');
       this.user         = required('string');
       this.message      = required('string');
-    }))
+    })
 
   };
 
-  return schemas;
+  var errableMethods = ['connect', 'disconnect', 'list_channels',
+                        'list_users', 'list_conversations', 'join',
+                        'send_channel', 'send_conversation'];
+  for (methodName in errableMethods) {
+    eventSchemas[errableMethods[methodName] + ".error"] = schema(function() {
+      this.reason = required('string');
+    });
+  }
+
+  return {
+    event: eventSchema,
+    makeSpecificEventSchema: makeSpecificEventSchema,
+    events: eventSchemas,
+  };
 
 });

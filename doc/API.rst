@@ -93,7 +93,7 @@ connect
 
 Client:
 
-    connect {}
+    connect { user: 'scvalex' }
 
 Server:
 
