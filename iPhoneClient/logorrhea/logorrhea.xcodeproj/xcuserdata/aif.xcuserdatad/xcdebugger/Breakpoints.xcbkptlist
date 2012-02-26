@@ -31,5 +31,19 @@
          landmarkName = "-startMyWebSocket"
          landmarkType = "5">
       </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "logorrhea/LoginView.m"
+         timestampString = "351949654.388283"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "13"
+         endingLineNumber = "13"
+         landmarkName = "@implementation LoginView"
+         landmarkType = "3">
+      </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

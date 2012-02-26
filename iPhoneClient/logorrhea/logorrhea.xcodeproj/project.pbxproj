@@ -51,6 +51,7 @@
 		15DB5F1814FA445B00AA1DB1 /* ItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DB5F1714FA445B00AA1DB1 /* ItemViewController.m */; };
 		15DB5F1C14FA44D300AA1DB1 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DB5F1B14FA44D300AA1DB1 /* TableViewController.m */; };
 		15DB5F2314FA486C00AA1DB1 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DB5F2214FA486C00AA1DB1 /* DetailViewController.m */; };
+		15DB5F2A14FA4F7000AA1DB1 /* NewMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DB5F2914FA4F7000AA1DB1 /* NewMessageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +137,8 @@
 		15DB5F1B14FA44D300AA1DB1 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		15DB5F2114FA486C00AA1DB1 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		15DB5F2214FA486C00AA1DB1 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		15DB5F2814FA4F7000AA1DB1 /* NewMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMessageView.h; sourceTree = "<group>"; };
+		15DB5F2914FA4F7000AA1DB1 /* NewMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMessageView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +276,8 @@
 				15DB5F1B14FA44D300AA1DB1 /* TableViewController.m */,
 				15DB5F2114FA486C00AA1DB1 /* DetailViewController.h */,
 				15DB5F2214FA486C00AA1DB1 /* DetailViewController.m */,
+				15DB5F2814FA4F7000AA1DB1 /* NewMessageView.h */,
+				15DB5F2914FA4F7000AA1DB1 /* NewMessageView.m */,
 			);
 			path = logorrhea;
 			sourceTree = "<group>";
@@ -445,6 +450,7 @@
 				15DB5F1814FA445B00AA1DB1 /* ItemViewController.m in Sources */,
 				15DB5F1C14FA44D300AA1DB1 /* TableViewController.m in Sources */,
 				15DB5F2314FA486C00AA1DB1 /* DetailViewController.m in Sources */,
+				15DB5F2A14FA4F7000AA1DB1 /* NewMessageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

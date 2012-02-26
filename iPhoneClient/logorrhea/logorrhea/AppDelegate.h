@@ -7,9 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SocketRocket/SRWebSocket.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+#define BigDelegate \
+  ((AppDelegate*) [UIApplication sharedApplication].delegate)
 
+@interface AppDelegate : UIResponder <UIApplicationDelegate, SRWebSocketDelegate>
+{
+     IBOutlet NSString *username;
+     SRWebSocket* myWS;
+     bool loggedIn; 
+}
 @property (strong, nonatomic) UIWindow *window;
+
+- (void) doConnect:(NSString *)username;
+- (NSMutableDictionary *) makeRequest:(NSString *)event withData:(NSMutableDictionary*)data;
+- (void) doListChannels;
+- (void) connect:(NSString* )username;
 
 @end

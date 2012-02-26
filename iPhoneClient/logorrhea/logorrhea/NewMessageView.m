@@ -1,20 +1,14 @@
 //
-//  LoginView.m
+//  NewMessageView.m
 //  logorrhea
 //
-//  Created by Ingrid Funie on 25/02/2012.
+//  Created by Ingrid Funie on 26/02/2012.
 //  Copyright (c) 2012 ICL. All rights reserved.
 //
 
-#import "LoginView.h"
-#import "SBJson.h"
-#import "AppDelegate.h"
+#import "NewMessageView.h"
 
-@implementation LoginView
-
-//@synthesize logged_in;
-@synthesize myusername;
-//@synthesize username;
+@implementation NewMessageView
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -25,31 +19,10 @@
     return self;
 }
 
-- (IBAction)textFieldDoneEditing:(id)sender {
-	
-	[sender resignFirstResponder];
-	
+- (IBAction)back:(id)sender
+{
+    [self dismissModalViewControllerAnimated:(TRUE)];
 }
-
-- (IBAction)backgroundClick:(id)sender {
-    
-	[myusername resignFirstResponder];
-    
-}
-
-- (IBAction)login {
-    
-    username = myusername.text;
-    
-    [BigDelegate connect:username];
-    
-     NSLog(@"am deschis, cica");
-    
-    [self dismissViewControllerAnimated:(TRUE) completion:nil];
-    
-    //logged_in = true;
-}
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -61,18 +34,23 @@
 
 #pragma mark - View lifecycle
 
+/*
+// Implement loadView to create a view hierarchy programmatically, without using a nib.
+- (void)loadView
+{
+}
+*/
+
+/*
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
-    NSUserDefaults *name = [NSUserDefaults standardUserDefaults];
-    myusername.text = [name stringForKey:@"textFieldKey"];
 }
+*/
 
 - (void)viewDidUnload
 {
-    [self setMyusername:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
