@@ -58,6 +58,11 @@ define(['jsschema', 'schemas'], function(_, schemas) {
         conn.close();
       }
 
+      this.inject = function (event_name, message) {
+        console.log("Receiving injected message from socket on channel '" + event_name +"': ", message);
+        dispatch(event_name, message);
+      }
+
       // dispatch to the right handlers
       conn.onmessage = function(evt) {
         var json = JSON.parse(evt.data);

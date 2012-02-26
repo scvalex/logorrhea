@@ -71,6 +71,8 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     conversationsModel.connectionStatus(status.connecting);
 
     socket = new websocket_json_events.FancyWebSocket('ws://localhost:9999/echo');
+    // For debuging / event injection
+    window.socket = socket;
 
     socket.bind(
       'open',
@@ -87,7 +89,7 @@ require(['jquery', 'knockout', 'websocket-json-events'],
       });
 
     socket.bindDefault(function(event, data) {
-      console.error("Warning: Received unexpected message: " + event + "(" + data + ")");
+      console.error("Warning: Received unexpected event '" + event + "' with data: ", data);
     });
 
     socket.bindMethod(

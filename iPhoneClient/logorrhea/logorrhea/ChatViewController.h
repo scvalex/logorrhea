@@ -10,7 +10,7 @@
 
 //@class Chat;
 
-@interface DetailViewController : UITableViewController 
+@interface ChatViewController : UITableViewController 
 
 @property (nonatomic, strong) NSMutableArray *chat;
 
