@@ -59,7 +59,7 @@ define(['jsschema', 'schemas'], function(_, schemas) {
       }
 
       this.inject = function (event_name, message) {
-        console.log("Receiving injected message from socket on channel '" + channel +"': ", message);
+        console.log("Receiving injected message from socket on channel '" + event_name +"': ", message);
         dispatch(event_name, message);
       }
 
