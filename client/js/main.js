@@ -1,9 +1,11 @@
-require(["jquery", "knockout", "websocket-json-events"], function($) {
+require(['jquery', 'knockout', 'websocket-json-events', 'jsschema', 'schemas'],
+        function($, _, _, _, schemas) {
 
   function ConversationsModel() {
     var self = this;
 
     self.username = ko.observable();
+    self.channels = ko.observableArray([]);
     self.users = ko.observableArray(['scvalex', 'ex_falso', 'rostayob', 'nh2']);
     self.conversations = ko.observableArray([
       { name: 'client_development', topic: 'Why is client development so easy?', users: ['scvalex', 'nh2'] },
@@ -14,18 +16,37 @@ require(["jquery", "knockout", "websocket-json-events"], function($) {
       connectInternal();
     };
 
-    self.disconnect = function () {
+    self.disconnect = function() {
       disconnectInternal();
     };
+
+    self.channelClicked = function(channelName) {
+      browseChannelInternal(channelName);
+    }
   }
 
   function connectInternal() {
     $('#loginBox').addClass('hidden');
-    $('#mainBox').removeClass('hidden');
+    $('#loggedInBox').removeClass('hidden');
 
     console.log("Connecting as " + conversationsModel.username());
 
     socket = new FancyWebSocket('ws://localhost:9999/echo');
+    socket.bindSchema = function(eventName, callback) {
+      this.bind(eventName, function(data) {
+        return jsschema.check(schemas[data.event], callback(data));
+      });
+    };
+    socket.bindSchemaMethod = function(eventName, okCallback, errorCallback) {
+      this.bindMethod(
+        eventName,
+        function(data) {
+          return jsschema.check(schemas[data.event], okCallback(data));
+        },
+        // Dont schema-check errors (yet)
+        errorCallback
+      );
+    }
 
     socket.bind(
       'open',
@@ -46,22 +67,33 @@ require(["jquery", "knockout", "websocket-json-events"], function($) {
       console.log("Unexpected message: " + event + "(" + data + ")");
     });
 
-    socket.bindMethod(
+    socket.bindSchemaMethod(
       'connect',
       function(_) {
         console.log("connected ok");
         $("#disconnectButton").removeClass("hidden");
+        $('#channelsBox').removeClass('hidden');
         $("#connectionStatusLabel").text("Connected").addClass("hidden");
+        socket.send('list_channels', {});
       },
       function(err) {
-        console.log("failed to connect: " + reason);
+        console.log("failed to connect: ", err);
+      });
+
+    socket.bindSchemaMethod(
+      'list_channels',
+      function(data) {
+        conversationsModel.channels(data['channels']);
+      },
+      function(err) {
+        console.log("failed to get channels: ", err);
       });
   }
 
   function disconnectInternal() {
     $("#disconnectButton").addClass("hidden");
 
-    socket.bindMethod(
+    socket.bindSchemaMethod(
       'disconnect',
       function(_) {
         console.log(socket);
@@ -71,6 +103,10 @@ require(["jquery", "knockout", "websocket-json-events"], function($) {
       undefined);
 
     socket.send('disconnect', {});
+  }
+
+  function browseChannelInternal(channel) {
+    console.log("Channel clicked: " + channel);
   }
 
   $(function() {

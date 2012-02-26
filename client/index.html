@@ -18,19 +18,28 @@
       </form>
     </div>
 
-    <div id="mainBox" class="hidden">
-      <div id="loggedInBox">
-        You are <strong data-bind="text: username">&nbsp;</strong>
-        <span id="connectionStatusLabel">Connecting</span>
-        <button id="disconnectButton" class="hidden"
-                data-bind="click: disconnect">Disconnect</button>
-      </div>
+    <div id="loggedInBox" class="hidden">
+      You are <strong data-bind="text: username">&nbsp;</strong>
+      <span id="connectionStatusLabel">Connecting</span>
+      <button id="disconnectButton" class="hidden"
+              data-bind="click: disconnect">Disconnect</button>
+    </div>
 
+    <div id="channelsBox" class="hidden">
+      <h3>Channels</h3>
+      <ul class="channels" data-bind="foreach: channels">
+        <li><a data-bind="text: $data, click: $root.channelClicked">&nbsp;</a></li>
+      </ul>
+    </div>
+
+    <div id="usersBox" class="hidden">
       <h3>Users</h3>
       <ul class="users" data-bind="foreach: users">
         <li data-bind="text: $data"></li>
       </ul>
+    </div>
 
+    <div id="conversationsBox" class="hidden">
       <h3>Conversations</h3>
       <ul class="conversations" data-bind="foreach: conversations">
         <li>

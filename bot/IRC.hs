@@ -4,7 +4,9 @@ module IRC
     , MonadIRC (..)
     , IRCT
     , runIRCT
-
+    , Tag
+    , NickName
+      
     , module IRC.Base
     , module IRC.Commands
     ) where
@@ -21,6 +23,9 @@ import System.IO
 import IRC.Base
 import IRC.Commands
 import qualified IRC.Parse as Parse
+
+type Tag      = Channel
+type NickName = String
 
 data IRCInfo = IRCInfo
     { ircHandle :: Handle 
