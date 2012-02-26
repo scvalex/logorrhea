@@ -50,4 +50,7 @@ Executable server
     transformers,
     mtl,
     unordered-containers,
-    bytestring
+    bytestring,
+    parsec
+
+  Cpp-Options: -DBOTNAME="DrLogos"

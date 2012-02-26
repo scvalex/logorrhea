@@ -17,6 +17,7 @@ import IRC
 
 data BotMessage
     = UserMessage NickName Tag String
+    | QuestionCreated NickName Tag String
     | NoQuestions Tag
     | NotAQuestion Channel
     | StartHistory Tag
@@ -65,7 +66,14 @@ p_botMessage = choice . map try $
                , p_historyMessage
                , p_endHistory
                , p_monitoredChannels
+               , p_questionCreated
                ]
+
+p_questionCreated :: Parser BotMessage
+p_questionCreated = QuestionCreated
+                    <$> (sp p_nickName <* sp (string "@"))
+                    <*> (sp p_tag <* string "asked \"") 
+                    <*> manyTill anyChar (try $ char '"' >> eof)
 
 p_userMessage :: Parser BotMessage
 p_userMessage = UserMessage
@@ -123,6 +131,8 @@ u_botMessage (MonitoredChannels chans) =
     u_string $ "Monitored channels: " ++ intercalate "," chans
 u_botMessage (StartHistory tag) = u_string $ "History for question " ++ tag
 u_botMessage (EndHistory tag) = u_string $ "End of history for question " ++ tag
+u_botMessage (QuestionCreated nn t q) = u_string . concat $
+                                        [nn, " @ ", t, " asked \"", q, "\""]
 
 u_startCommand :: UnParser String
 u_startCommand cmd = u_string "??" . u_string cmd

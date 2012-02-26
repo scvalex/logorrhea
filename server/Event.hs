@@ -51,7 +51,7 @@ data ServerIssued
 data OutEvent
     = ServerIssued ServerIssued
     | Response (Either (InEvent, String) Response)
-    | GenericError
+    | GenericError String
 
 parseInEvent :: ByteString -> Maybe InEvent
 parseInEvent t = do
@@ -129,9 +129,9 @@ unParseOutEvent (Response (Left (SendChannel _ _, err))) =
 unParseOutEvent (Response (Left (SendConversation _ _ _, err))) =
     encode $ unParseError "send_conversation" err
 unParseOutEvent (Response (Right resp)) = encode . unParseResponse $ resp
-unParseOutEvent GenericError =
+unParseOutEvent (GenericError str) =
     encode $ object [ "event"  .= ("error" :: Text)
-                    , "reason" .= ("We don't know" :: Text)
+                    , "reason" .= str
                     ]
 
 unParseError :: String -> String -> Value
