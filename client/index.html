@@ -48,7 +48,9 @@
       <div id="loggedInBox" style="display: none" data-bind="visible: isConnected">
         You are <strong data-bind="text: username">USER</strong>
         <span id="connectionStatusLabel" data-bind="text: connectionStatusText">STATUS</span>
-        <button id="disconnectButton" data-bind="click: disconnect">Disconnect</button>
+        <form data-bind="submit: disconnect">
+          <input type="submit" value="Disconnect" />
+        </form>
       </div>
 
       <div id="channelsBox" style="display: none" data-bind="visible: isConnected">
