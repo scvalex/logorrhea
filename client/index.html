@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
     <title>Logorrhea Client</title>
     <script src="js/require.js" data-main="js/main.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -13,13 +15,20 @@
       <div class="navbar-inner">
         <div class="container">
           <a class="brand" href="#">Logorrhea client</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li>
+                <a href="#usage">Learn more</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="container">
       <div class="hero-unit">
-        <h1>No questions unanswered</h1>
+        <h1>No questions unanswered!</h1>
         <p>Logorrhea is a real-time QA system: 1. Join a
         channel. 2. Browse unanswered qustions. 3. Ask or answer
         questions.</p>
@@ -90,6 +99,19 @@
         </div>
         <em data-bind="ifnot: conversation().messages.length > 0">No messages</em>
       </div>
+      <hr />
+      <footer>
+        <p>&copy; Team Six
+        2012. <a href="https://github.com/aif1990/">Andreea-Ingrid
+        Funie</a>, <a href="http://www.abstractbinary.org/">Alexandru
+        Scvorţov</a>, <a href="https://github.com/exFalso/">Andras
+        Slemmer</a>, <a href="http://mazzo.li/">Francesco
+        Mazzoli</a>, <a href="http://nh2.me/">Niklas
+        Hambüchen</a>.</p>
+        <p>Written for the Spring Hackathon
+        at <a href="http://www.imperial.ac.uk/">Imperial College
+        London</a>.</p>
+      </footer>
     </div>
   </body>
 </html>
