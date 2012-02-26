@@ -17,6 +17,7 @@ import Control.Monad.State
 import Data.ByteString (ByteString)
 import qualified Data.ByteString as B
 import qualified Data.ByteString.Char8 as B8
+import Data.List (intersperse)
 import Network
 import System.IO
 
@@ -35,8 +36,12 @@ data IRCInfo = IRCInfo
 
 class (Applicative m, Monad m) => MonadIRC m where
     popMessage  :: m Message
-    sendMessage :: Message -> m ()
+    sendMessage :: Message -> m ()    
+    sendMessages :: [Message] -> m ()
     getUserName :: m UserName
+    
+    sendMessages = mapM_ sendMessage
+    sendMessage msg = sendMessages [msg]
 
 newtype IRCT m a = IRCT {unIRC :: ReaderT IRCInfo (StateT UserName m) a}
     deriving (Functor, Applicative, Monad, MonadIO)
@@ -61,5 +66,12 @@ instance (Applicative m, MonadIO m) => MonadIRC (IRCT m) where
         let bs = B8.pack . (++"\r\n") . encode $ msg
         liftIO $ B.putStr bs
         liftIO (B.hPut h bs >> hFlush h)
+    
+    -- sendMessages msgs = do
+    --     h <- IRCT $ asks ircHandle
+    --     let reply = concat . (++ ["\r\n"]) . intersperse "\r\n"  . map encode $ msgs
+    --         bs    = B8.pack reply
+    --     liftIO $ B.putStr bs
+    --     liftIO (B.hPut h bs >> hFlush h)
         
     getUserName = IRCT . lift $ get

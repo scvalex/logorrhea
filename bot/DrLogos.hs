@@ -27,7 +27,6 @@ data Question = Question
     , qParent   :: Channel
     , qTag :: Tag
     }
-    deriving (Show)
 
 data BotState = BotState
     { botQuestions    :: Map Channel [Tag]
@@ -46,6 +45,9 @@ newBotState chans admins =
 
 parse' :: Parser a -> String -> Maybe a
 parse' p s = either (const Nothing) Just $ parse p "" s
+
+unParseBM :: BotMessage -> String
+unParseBM = unParse u_botMessage
 
 -- FIXME: actually generate unique tag
 createUniqueTag :: Maybe String -> Bot BotState Tag
@@ -67,7 +69,7 @@ newQuestion chan nn tagM body = do
         -- FIXME: Better error handling
         chanTags = qs Map.! chan
         qs'      = Map.insert chan (tag : chanTags) qs
-        ad       = unParse u_botMessage $ UserMessage nn tag body
+        ad       = unParseBM $ UserMessage nn tag body
     put bs {botQuestions = qs', botTags = tags'}
     return [ joinChan tag
            , privmsg tag ad
@@ -77,7 +79,7 @@ newQuestion chan nn tagM body = do
 listQuestions :: NickName -> Channel -> Bot BotState [Message]
 listQuestions nn chan = do
     chanTagsM <- Map.lookup chan <$> gets botQuestions
-    let noQs = privmsg nn . unParse u_botMessage $ NoQuestions chan
+    let noQs = privmsg nn . unParseBM $ NoQuestions chan
     case chanTagsM of
         Nothing       -> return [noQs]
         Just chanTags ->
@@ -87,8 +89,10 @@ listQuestions nn chan = do
                     tags <- gets botTags
                     let questions = map (tags Map.!) chanTags
                         questionDesc q =
-                            unParse u_botMessage $ UserMessage (qAsker q) (qTag q) (qFull q)
-                    return . map (privmsg nn . questionDesc) $ questions
+                            unParseBM $ UserMessage (qAsker q) (qTag q) (qFull q)
+                    return $ map (privmsg nn . questionDesc) questions
+
+                        
 
 questionHistory :: NickName -> Channel -> Bot BotState [Message]
 questionHistory nn chan = do
@@ -96,8 +100,17 @@ questionHistory nn chan = do
     return $ case qM of
         Nothing -> [privmsg nn (unParse u_botMessage $ NotAQuestion chan)]
         Just Question {qMessages = msgs} ->
-            map (privmsg nn . unParse u_botMessage . uncurry QuestionMessage) msgs
+            let start = privmsg nn . unParseBM $ StartHistory chan
+                end   = privmsg nn . unParseBM $ EndHistory chan
+            in  start :
+                map (privmsg nn . unParseBM . uncurry HistoryMessage) (reverse msgs) ++
+                [end]
     
+listMonitoredChannels :: NickName -> Bot BotState [Message]
+listMonitoredChannels nn =
+    (pure . privmsg nn . unParse u_botMessage . MonitoredChannels . Map.keys)
+    <$> gets botQuestions
+
 drLogos :: BotProcess BotState
 drLogos Message { msg_prefix  = Just (NickName nn _ _)
                 , msg_command = "PRIVMSG"
@@ -105,7 +118,8 @@ drLogos Message { msg_prefix  = Just (NickName nn _ _)
                 }
     | Just (NewQuestion tagM body) <- parseRes = newQuestion chan nn tagM body
     | Just ListQuestions <- parseRes = listQuestions nn chan
-    | Just History <- parseRes = questionHistory nn chan
+    | Just (History tag) <- parseRes = questionHistory nn tag
+    | Just ListMonitoredChannels <- parseRes = listMonitoredChannels nn
     | otherwise = do
         mq <- Map.lookup chan <$> gets botTags
         case mq of
