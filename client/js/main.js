@@ -111,12 +111,20 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     socket.bindMethod(
       'disconnect',
       function(_) {
-        console.log(socket);
+        console.log("Socket disconnected");
         socket.close();
       },
       function(_) {
         /* whoosh */
       });
+
+    conversationsModel.conversation({topic: "", messages: []});
+    conversationsModel.conversationsReceived(false);
+    conversationsModel.conversations([]);
+    conversationsModel.usersReceived(false);
+    conversationsModel.users([]);
+    conversationsModel.channel("");
+    conversationsModel.channels([]);
 
     socket.send('disconnect', {});
   }
