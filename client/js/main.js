@@ -180,7 +180,7 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     window.conversationsModel = conversationsModel;
     ko.applyBindings(conversationsModel);
 
-    $("#usernameInput")[0].focus();
+    $("#usernameInput").focus();
   });
 
   /* Turns an array of object into a "dictionary" for fast access,
