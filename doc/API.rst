@@ -139,6 +139,8 @@ Server:
 list_conversations
 ^^^^^^^^^^^^^^^^^^
 
+// TODO: move the conversation content retrieval into separate message
+
 Client:
 
     list_conversations { channel: 'haskell' }
@@ -149,7 +151,19 @@ Server:
 
 CONVERSATION:
 
-    { tag: 'why_haskell', topic: 'Why Haskell?', users: ['scvalex', 'rostayob'] }
+    {
+        tag: 'why_haskell',
+        topic: 'Why Haskell?',
+        users: ['scvalex', 'rostayob'],
+        messages: [MESSAGE, MESSAGE]
+    }
+
+MESSAGE:
+
+    {
+        user: 'rostayob',
+        message: 'Because Haskell can save you a lot of time.'
+    }
 
 
 join

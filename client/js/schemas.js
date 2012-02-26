@@ -6,15 +6,15 @@ define(['jsschema'], function() {
   var repeated = jsschema.repeated;
 
   var eventSchema = schema(function() {
-    this.event = required('string')
+    this.event = required('string');
     // keep data optional, it could be of any type or null
   });
 
   var makeSpecificEventSchema = function(dataSchema) {
     return schema(function() {
-      this.event = required('string'),
+      this.event = required('string');
       // TODO check if optional is all right (vs jsschema, null and {} in API spec)
-      this.data = optional(dataSchema)
+      this.data = optional(dataSchema);
     });
   };
 
