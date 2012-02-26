@@ -31,7 +31,7 @@ require(['jquery', 'knockout', 'websocket-json-events', 'jsschema', 'schemas'],
 
     console.log("Connecting as " + conversationsModel.username());
 
-    socket = new FancyWebSocket('ws://localhost:9999/echo');
+    socket = new websocket_json_events.FancyWebSocket('ws://localhost:9999/echo');
     socket.bindSchema = function(eventName, callback) {
       this.bind(eventName, function(data) {
         return jsschema.check(schemas[data.event], callback(data));
