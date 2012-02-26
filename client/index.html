@@ -3,11 +3,19 @@
   <head>
     <title>Logorrhea Client</title>
     <script src="js/require.js" data-main="js/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css" />
     <link rel="stylesheet" type="text/css" href="index.css" />
   </head>
 
   <body>
-    <h1>Logorrhea client</h1>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#">Logorrhea client</a>
+        </div>
+      </div>
+    </div>
 
     <div id="loginBox" data-bind="visible: !isConnected()">
       <h3>Connect</h3>

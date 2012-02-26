@@ -11,6 +11,8 @@ STATICS = {
   'js/jasmine.js': 'https://raw.github.com/pivotal/jasmine/master/lib/jasmine-core/jasmine.js',
   'js/jasmine-html.js': 'https://raw.github.com/pivotal/jasmine/master/lib/jasmine-core/jasmine-html.js',
   'css/jasmine.css': 'https://raw.github.com/pivotal/jasmine/master/lib/jasmine-core/jasmine.css',
+  'css/bootstrap.css': 'http://twitter.github.com/bootstrap/assets/css/bootstrap.css',
+  'css/bootstrap-responsive.css': 'http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css',
 }
 
 if __name__ == '__main__':
