@@ -112,19 +112,30 @@ parseInEvent t = do
     
 unParseOutEvent :: OutEvent -> ByteString
 unParseOutEvent (ServerIssued si) = encode . unParseServerIssued $ si
-unParseOutEvent (Response (Left (Connect _, err))) =  undefined
-unParseOutEvent (Response (Left (DisConnect, err))) =  undefined
-unParseOutEvent (Response (Left (ListChannels, err))) =  undefined
-unParseOutEvent (Response (Left (ListUsers _, err))) =  undefined
-unParseOutEvent (Response (Left (ListConversations _, err))) =  undefined
-unParseOutEvent (Response (Left (Join _, err))) =  undefined
-unParseOutEvent (Response (Left (SendChannel _ _, err))) =  undefined
-unParseOutEvent (Response (Left (SendConversation _ _ _, err))) =  undefined
+unParseOutEvent (Response (Left (Connect _, err))) =
+    encode $ unParseError "connect" err
+unParseOutEvent (Response (Left (DisConnect, err))) =
+    encode $ unParseError "disconnect" err
+unParseOutEvent (Response (Left (ListChannels, err))) =
+    encode $ unParseError "list_channels" err
+unParseOutEvent (Response (Left (ListUsers _, err))) =
+    encode $ unParseError "list_users" err
+unParseOutEvent (Response (Left (ListConversations _, err))) =
+    encode $ unParseError "list_conversations" err
+unParseOutEvent (Response (Left (Join _, err))) =
+    encode $ unParseError "join" err
+unParseOutEvent (Response (Left (SendChannel _ _, err))) =
+    encode $ unParseError "send_channel" err
+unParseOutEvent (Response (Left (SendConversation _ _ _, err))) =
+    encode $ unParseError "send_conversation" err
 unParseOutEvent (Response (Right resp)) = encode . unParseResponse $ resp
 unParseOutEvent GenericError =
     encode $ object [ "event"  .= ("error" :: Text)
                     , "reason" .= ("We don't know" :: Text)
                     ]
+
+unParseError :: String -> String -> Value
+unParseError ev err = object ["event" .= ev, "error" .= err]
 
 unParseResponse :: Response -> Value
 unParseResponse ConnectOk =
