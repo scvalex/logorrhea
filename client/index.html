@@ -79,11 +79,11 @@
 
           <div id="loggedInBox" style="display: none" data-bind="visible: isConnected">
             <h3 class="inline">
-              You are <strong data-bind="text: username">USER</strong>
+              You are <strong data-bind="text: username">USER</strong>.
             </h3>
             <span id="connectionStatusLabel" data-bind="text: connectionStatusText">STATUS</span>
             <form class="inline" data-bind="submit: disconnect">
-              <input type="submit" value="Disconnect" />
+              <input class="loginButton" type="submit" value="Disconnect" />
             </form>
           </div>
         </div>
