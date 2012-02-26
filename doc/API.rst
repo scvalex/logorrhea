@@ -145,7 +145,10 @@ Client:
 
 Server:
 
-    list_conversations.ok { channel: 'haskell', conversations: [CONVERSATION, CONVERSATION] }
+    list_conversations.ok {
+        channel: 'haskell',
+        conversations: { 'why_haskell': CONVERSATION, 'i_dont_understand_the_singleton_pattern': CONVERSATION }
+    }
 
 CONVERSATION:
 
