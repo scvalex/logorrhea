@@ -233,7 +233,7 @@ Server:
 
     receive_conversation {
         channel: 'haskell',
-        conversation: 'why_haskell',
+        tag: 'why_haskell',
         user: 'rostayob',
         message: 'Because Haskell can save you a lot of time.'
     }
