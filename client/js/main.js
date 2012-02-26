@@ -16,6 +16,7 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     disconnected: 'Disconnected'
   };
 
+  // TODO put it into the model
   socket = null;
 
   function ConversationsModel() {
