@@ -89,7 +89,7 @@ require(['jquery', 'knockout', 'websocket-json-events'],
       });
 
     socket.bindDefault(function(event, data) {
-      console.error("Warning: Received unexpected message: " + event + "(" + data + ")");
+      console.error("Warning: Received unexpected event '" + event + "' with data: ", data);
     });
 
     socket.bindMethod(
