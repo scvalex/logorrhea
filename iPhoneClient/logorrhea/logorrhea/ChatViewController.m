@@ -24,6 +24,8 @@
 {
     [super viewDidLoad];
     
+    NSLog(@"sunt aici");
+    
     // Define our test data
     chat = [[NSMutableArray alloc] init];
 }
@@ -31,6 +33,15 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     chat = [BigDelegate getMessages];
+    NSEnumerator *enums = [chat objectEnumerator];
+    NSString* disc;
+    NSLog(@"Chat-ul are ");
+    
+    while(disc = (NSString*)[enums nextObject]){
+        NSLog(@" Asta: %@ ", [disc valueForKey:@"message"]);
+    }
+    
+    [self.tableView reloadData];
 }
 
 // Return number of sections in table (always 1 for this demo!)
@@ -59,34 +70,10 @@
     // Get the cell label using its tag and set it
     UILabel *cellLabel = (UILabel *)[cell viewWithTag:1];
     [cellLabel setText:[[chat objectAtIndex:indexPath.row] valueForKey:@"message"]];
-    
     return cell;
 }
 
 #pragma mark -
 #pragma mark Section header titles
-
-/*
- HIG note: In this case, since the content of each section is obvious, there's probably no need to provide a title, but the code is useful for illustration.
- */
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    
-    NSString *title = nil;
-    switch (section) {
-        case 0:
-            title = NSLocalizedString(@"Date", @"Date section title");
-            break;
-        case 1:
-            title = NSLocalizedString(@"Genre", @"Genre section title");
-            break;
-        case 2:
-            title = NSLocalizedString(@"Main Characters", @"Main Characters section title");
-            break;
-        default:
-            break;
-    }
-    return title;
-}
-
 
 @end
