@@ -8,6 +8,7 @@
 
 #import "ChatViewController.h"
 //#import "Chat.h"
+#import "AppDelegate.h"
 
 
 @implementation ChatViewController
@@ -24,16 +25,12 @@
     [super viewDidLoad];
     
     // Define our test data
-    chat = [NSMutableArray arrayWithObjects:
-              @"Chasing Amy",
-              @"Mallrats",
-              @"Dogma",
-              @"Clerks",
-              @"Jay &amp; Silent Bob Strike Back",
-              @"Red State",
-              @"Cop Out",
-              @"Jersey Girl",
-              nil];
+    chat = [[NSMutableArray alloc] init];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    chat = [BigDelegate getMessages];
 }
 
 // Return number of sections in table (always 1 for this demo!)
@@ -50,43 +47,21 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-	static NSString *CellIdentifier = @"CellIdentifier";
+	// A cell identifier which matches our identifier in IB
+    static NSString *CellIdentifier = @"CellIdentifier";
     
+    // Create or reuse a cell
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    // Cache a date formatter to create a string representation of the date object.
-    static NSDateFormatter *dateFormatter = nil;
-    if (dateFormatter == nil) {
-        dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy"];
-    }
+    // Get the cell label using its tag and set it
+    UILabel *cellLabel = (UILabel *)[cell viewWithTag:1];
+    [cellLabel setText:[[chat objectAtIndex:indexPath.row] valueForKey:@"message"]];
     
-    // Set the text in the cell for the section/row.
-    
-    NSString *cellText = nil;
-    
-   /* switch (indexPath.section) {
-        case 0:
-            cellText = [dateFormatter stringFromDate:play.date];
-            break;
-        case 1:
-            cellText = play.genre;
-            break;
-        case 2:
-            cellText = [play.characters objectAtIndex:indexPath.row];
-            break;
-        default:
-            break;
-    }*/
-    
-    cell.textLabel.text = cellText;
     return cell;
 }
-
 
 #pragma mark -
 #pragma mark Section header titles

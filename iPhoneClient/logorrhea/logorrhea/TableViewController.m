@@ -29,8 +29,14 @@
               @"Cop Out",
               @"Jersey Girl",
               nil];*/
-    myData = [BigDelegate getChannels];
+    myData = [[NSMutableArray alloc] init ];
     
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    myData = [BigDelegate getChannels];
+    [self.tableView reloadData];
 }
 
 // Return number of sections in table (always 1 for this demo!)
@@ -64,6 +70,25 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    // A cell identifier which matches our identifier in IB
+    static NSString *CellIdentifier = @"CellIdentifier";
+    
+    // Create or reuse a cell
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+
+    
+    UILabel *cellLabel = (UILabel *)[cell viewWithTag:1];
+    [cellLabel setText:[myData objectAtIndex:indexPath.row]];
+    
+    [BigDelegate doListConversations:cellLabel.text];
+}
+
 // Do some customisation of our new view when a table item has been selected
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -76,13 +101,12 @@
         // get the selected index
         NSInteger selectedIndex = [[self.tableView indexPathForSelectedRow] row];
         
-        // Pass the name and index of our film
         [vc setSelectedItem:[NSString stringWithFormat:@"%@", [myData objectAtIndex:selectedIndex]]];
         [vc setSelectedIndex:selectedIndex];
         
         
         DetailViewController *detailViewController = [segue destinationViewController];
-        detailViewController.chat = [myData objectAtIndex:selectedIndex];
+        detailViewController.conversations = [myData objectAtIndex:selectedIndex];
     }
 }
 

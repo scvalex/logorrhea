@@ -18,6 +18,8 @@
      SRWebSocket* myWS;
      bool loggedIn; 
     NSMutableArray* channels;
+    NSMutableArray* convs;
+    NSMutableArray* messages;
 }
 @property (strong, nonatomic) UIWindow *window;
 
@@ -28,5 +30,9 @@
 - (void) doListChannels;
 - (void) connect:(NSString* )username;
 - (NSMutableArray*) getChannels;
+- (void) doListConversations:(NSString*)channel;
+- (void) doListMessages:(NSString*)conv;
+- (NSMutableArray*) getConversations;
+- (NSMutableArray*) getMessages;
 
 @end

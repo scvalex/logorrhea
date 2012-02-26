@@ -39,19 +39,19 @@
 
       <div class="row">
         <div class="span4">
-          <h2>1. Join a channel</h2>
+          <h2>★ Join a channel</h2>
           <p>Use the webclient to connect to a Lecturea server and
           choose a channel to join.  Alternatively, use any IRC client
           to connect to the public server and join a channel.</p>
         </div>
         <div class="span4">
-          <h2>2. Browse the questions</h2>
+          <h2>★ Browse the questions</h2>
           <p>The webclient will show you a list of questions and
           wherether they have been answered yet.  Alternatively,
           private message the IRC bot.</p>
         </div>
         <div class="span4">
-          <h2>3. Ask or answer questions</h2>
+          <h2>★ Ask or answer questions</h2>
           <p>Joining a question's discussion will let you answer it.
           You can also ask new questions.  Alternatively, join the IRC
           sub-channels.</p>
@@ -105,24 +105,36 @@
             <h3>
               This channel is <strong data-bind="text:
               channel">CHANNEL</strong>
-            </h2>
+            </h3>
           </div>
         </div>
       </div>
 
+      <div class="row pagination-centered">
+        <div class="two-thirds"
+             style="display: none"
+             data-bind="visible:usersReceived">
+          <hr />
+        </div>
+      </div>
+
+
       <div class="row">
-        <div class="span9">
-          <div id="usersBox" style="display: none"
+        <div class="span2 float-right">
+          <div id="usersBox" class="well"
+               style="display: none"
                data-bind="visible: usersReceived">
-            <h3>Users</h3>
+            <h2>QAers</h2>
             <ul class="users" data-bind="foreach: users">
               <li data-bind="text: $data"></li>
             </ul>
           </div>
+        </div>
 
+        <div class="span10">
           <div id="conversationsBox" style="display: none"
                data-bind="visible: conversationsReceived">
-            <h3>Conversations</h3>
+            <h2>Conversations</h2>
             <ul class="conversations" data-bind="foreach: conversations">
               <li data-bind="click: $root.conversationClicked">
                 <strong>Question: </strong><span data-bind="text: topic"></span>
@@ -133,10 +145,12 @@
               </li>
             </ul>
           </div>
+        </div>
 
+        <div class="span10">
           <div id="chatBox" style="display: none"
                data-bind="visible: conversationSelected">
-            <h3>Chat <em>(fr. cat!)</em></h3>
+            <h2>Chat <em>(fr. cat!)</em></h2>
             <h4>Topic: <span data-bind="text: conversation().topic">TOPIC</span></h4>
             <div data-bind="if: conversation().messages.length > 0">
               <ul class="chatWindow" data-bind="foreach: conversation().messages">
@@ -154,7 +168,7 @@
       <hr />
 
       <footer>
-        <p>&copy; Team Six
+        <p>© Team Six
         2012. <a href="https://github.com/aif1990/">Andreea-Ingrid
         Funie</a>, <a href="http://www.abstractbinary.org/">Alexandru
         Scvorţov</a>, <a href="https://github.com/exFalso/">Andras
