@@ -9,7 +9,7 @@
   <body>
     <h1>Logorrhea client</h1>
 
-    <div id="loginBox">
+    <div id="loginBox" data-bind="visible: !isConnected()">
       <h3>Connect</h3>
       <form data-bind="submit: connect">
         <input id="usernameInput" data-bind="value: username"
@@ -18,14 +18,13 @@
       </form>
     </div>
 
-    <div id="loggedInBox" class="hidden">
-      You are <strong data-bind="text: username">&nbsp;</strong>
-      <span id="connectionStatusLabel">Connecting</span>
-      <button id="disconnectButton" class="hidden"
-              data-bind="click: disconnect">Disconnect</button>
+    <div id="loggedInBox" style="display: none" data-bind="visible: isConnected">
+      You are <strong data-bind="text: username">USER</strong>
+      <span id="connectionStatusLabel" data-bind="text: connectionStatusText">STATUS</span>
+      <button id="disconnectButton" data-bind="click: disconnect">Disconnect</button>
     </div>
 
-    <div id="channelsBox" class="hidden">
+    <div id="channelsBox" style="display: none" data-bind="visible: isConnected">
       <h3>Channels</h3>
       <ul class="channels" data-bind="foreach: channels">
         <li><a data-bind="text: $data, click: $root.channelClicked">&nbsp;</a></li>

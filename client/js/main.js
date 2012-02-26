@@ -1,8 +1,31 @@
+// TODO make it a module
 require(['jquery', 'knockout', 'websocket-json-events'],
         function($, _, websocket_json_events) {
 
+  var status = {
+    unknown: 'unknown',
+    connecting: 'connecting',
+    connected: 'connected',
+    disconnected: 'disconnected'
+  };
+
+  var statusLabels = {
+    unknown: '<<unknown>>',
+    connecting: 'Connecting...',
+    connected: 'Connected',
+    disconnected: 'Disconnected'
+  };
+
   function ConversationsModel() {
     var self = this;
+
+    self.connectionStatus = ko.observable(status.disconnected);
+    self.connectionStatusText = ko.computed(function() {
+      return statusLabels[self.connectionStatus];
+    });
+    self.isConnected = ko.computed(function() {
+      return self.connectionStatus() == status.connected;
+    });
 
     self.username = ko.observable("");
     self.channels = ko.observableArray([]);
@@ -25,10 +48,9 @@ require(['jquery', 'knockout', 'websocket-json-events'],
   }
 
   function connectInternal() {
-    $('#loginBox').addClass('hidden');
-    $('#loggedInBox').removeClass('hidden');
 
     console.log("Connecting as " + conversationsModel.username());
+    conversationsModel.connectionStatus(status.connecting);
 
     var socket = new websocket_json_events.FancyWebSocket('ws://localhost:9999/echo');
 
@@ -43,7 +65,7 @@ require(['jquery', 'knockout', 'websocket-json-events'],
       'close',
       function(_) {
         console.log('socket closed');
-        $("#connectionStatusLabel").text("Disconnected");
+        conversationsModel.connectionStatus(status.disconnected);
       });
 
     socket.bindDefault(function(event, data) {
@@ -54,9 +76,7 @@ require(['jquery', 'knockout', 'websocket-json-events'],
       'connect',
       function(_) {
         console.log("connected ok");
-        $("#disconnectButton").removeClass("hidden");
-        $('#channelsBox').removeClass('hidden');
-        $("#connectionStatusLabel").text("Connected").addClass("hidden");
+        conversationsModel.connectionStatus(status.connected);
         socket.send('list_channels', {});
       },
       function(err) {
@@ -74,14 +94,12 @@ require(['jquery', 'knockout', 'websocket-json-events'],
   }
 
   function disconnectInternal() {
-    $("#disconnectButton").addClass("hidden");
 
     socket.bindMethod(
       'disconnect',
       function(_) {
         console.log(socket);
         socket.close();
-        $("#connectionStatusLabel").removeClass("hidden");
       },
       undefined);
 
