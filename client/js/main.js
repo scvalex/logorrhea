@@ -6,6 +6,7 @@ require(['jquery', 'knockout', 'websocket-json-events'],
 
     self.username = ko.observable();
     self.channels = ko.observableArray([]);
+    self.channel = ko.observable();
     self.users = ko.observableArray(['scvalex', 'ex_falso', 'rostayob', 'nh2']);
     self.conversations = ko.observableArray([
       { name: 'client_development', topic: 'Why is client development so easy?', users: ['scvalex', 'nh2'] },
@@ -92,6 +93,8 @@ require(['jquery', 'knockout', 'websocket-json-events'],
 
   function browseChannelInternal(channel) {
     console.log("Channel clicked: " + channel);
+    conversationsModel.channel(channel);
+    $("#channelBox").removeClass("hidden");
   }
 
   $(function() {
