@@ -10,19 +10,19 @@ Overview
 Shows event names. Replies and most parameters are omitted.
 
 
-SERVER                CLIENT
+    SERVER                CLIENT
 
-                      connect
-                      disconnect
-                      list_channels
-                      list_users (channel)
-                      list_conversations (channel)
-                      join (channel)
-                      send_channel (channel)
-                      send_conversation (channel, conversation)
-disconnect
-receive_channel
-receive_conversation
+                          connect
+                          disconnect
+                          list_channels
+                          list_users (channel)
+                          list_conversations (channel)
+                          join (channel)
+                          send_channel (channel)
+                          send_conversation (channel, conversation)
+    disconnect
+    receive_channel
+    receive_conversation
 
 
 JSON format convention
