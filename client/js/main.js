@@ -134,10 +134,10 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     conversationsModel.channel(channel);
     socket.bindMethod(
       'list_users',
-      function(users) {
+      function(usersEvent) {
         console.log("Users on ", conversationsModel.channel(),
-                    " are ", users['users']);
-        conversationsModel.users(users['users']);
+                    " are ", usersEvent.users);
+        conversationsModel.users(usersEvent.users);
         conversationsModel.usersReceived(true);
       },
       function(err) {
@@ -146,10 +146,13 @@ require(['jquery', 'knockout', 'websocket-json-events'],
 
     socket.bindMethod(
       'list_conversations',
-      function(conversations) {
+      function(conversationsEvent) {
+        var conversationsArray = conversationsEvent.conversations;
+
         console.log("Conversations in ", conversationsModel.channel(),
-                    " are ", conversations['conversations']);
-        conversationsModel.conversations(conversations['conversations']);
+                    " are ", conversationsArray);
+
+        conversationsModel.conversations(conversationsArray);
         conversationsModel.conversationsReceived(true);
       },
       function(err) {
