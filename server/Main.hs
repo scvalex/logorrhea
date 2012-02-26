@@ -4,6 +4,7 @@ import Control.Monad
 import Control.Monad.Trans
 import Network.WebSockets hiding (Response)
 import qualified Data.ByteString.Lazy as L
+import qualified Data.ByteString.Lazy.Char8 as L8
 import Text.Parsec
 import Data.Function
 
@@ -32,7 +33,7 @@ server :: Request -> WebSockets Prot ()
 server rq = do
     acceptRequest rq         
     connect <- recData
-    liftIO $ L.putStrLn connect
+    liftIO $ L8.putStrLn connect
     case parseInEvent connect of
         Just (Connect nn) -> do
             outEvent (Response (Right ConnectOk))
@@ -44,7 +45,9 @@ server rq = do
                 fix $ \go -> do
                     inEvent <- lift recData
                     case parseInEvent inEvent of
-                        Nothing -> lift $ outEvent (GenericError "can't parse")
+                        Nothing ->
+                            lift $ outEvent (GenericError $ "can't parse " ++
+                                             L8.unpack inEvent)
                         Just e -> handleEvent e go
         Just otherEvent -> do
             outEvent (Response (Left (otherEvent, "\"connect\" expected")))
