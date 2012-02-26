@@ -71,6 +71,8 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     conversationsModel.connectionStatus(status.connecting);
 
     socket = new websocket_json_events.FancyWebSocket('ws://localhost:9999/echo');
+    // For debuging / event injection
+    window.socket = socket;
 
     socket.bind(
       'open',
