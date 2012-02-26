@@ -22,4 +22,8 @@
 -(IBAction)backgroundClick:(id)sender;
 -(IBAction)login;
 
+- (void) doConnect:(NSString *)username;
+- (NSMutableDictionary *) makeRequest:(NSString *)event withData:(NSMutableDictionary*)data;
+- (void) doListChannels;
+
 @end
