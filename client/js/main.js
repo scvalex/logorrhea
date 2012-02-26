@@ -42,7 +42,7 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     self.conversationsReceived = ko.observable(false);
     self.conversation = ko.observable({topic: "", messages: []});
     self.conversationSelected = ko.computed(function() {
-      return (typeof self.conversation()['tag'] != "undefined");
+      return (typeof self.conversation().tag !== "undefined");
     });
 
     self.conversationsDict = ko.computed(function() {
