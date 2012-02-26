@@ -187,7 +187,9 @@ require(['jquery', 'knockout', 'websocket-json-events'],
      using the given member of each object as the key.
      Example:
 
-        objectArrayToDict([{ user: 'nh2', age: 20 }], 'user') == { 'nh2': { user: 'nh2', age: 20 } }
+        objectArrayToDict([{ user: 'nh2', age: 20 }], 'user')
+        ==
+        { 'nh2': { user: 'nh2', age: 20 } }
   */
   function objectArrayToDict(array, keyMemberName) {
     var dict = {};
