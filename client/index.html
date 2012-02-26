@@ -39,19 +39,19 @@
 
       <div class="row">
         <div class="span4">
-          <h2>1. Join a channel</h2>
+          <h2>★ Join a channel</h2>
           <p>Use the webclient to connect to a Lecturea server and
           choose a channel to join.  Alternatively, use any IRC client
           to connect to the public server and join a channel.</p>
         </div>
         <div class="span4">
-          <h2>2. Browse the questions</h2>
+          <h2>★ Browse the questions</h2>
           <p>The webclient will show you a list of questions and
           wherether they have been answered yet.  Alternatively,
           private message the IRC bot.</p>
         </div>
         <div class="span4">
-          <h2>3. Ask or answer questions</h2>
+          <h2>★ Ask or answer questions</h2>
           <p>Joining a question's discussion will let you answer it.
           You can also ask new questions.  Alternatively, join the IRC
           sub-channels.</p>
@@ -120,17 +120,18 @@
 
 
       <div class="row">
-        <div class="span4 float-right">
-          <div id="usersBox" style="display: none"
+        <div class="span2 float-right">
+          <div id="usersBox" class="well"
+               style="display: none"
                data-bind="visible: usersReceived">
-            <h2>Users</h2>
+            <h2>QAers</h2>
             <ul class="users" data-bind="foreach: users">
               <li data-bind="text: $data"></li>
             </ul>
           </div>
         </div>
 
-        <div class="span8">
+        <div class="span10">
           <div id="conversationsBox" style="display: none"
                data-bind="visible: conversationsReceived">
             <h2>Conversations</h2>
@@ -146,7 +147,7 @@
           </div>
         </div>
 
-        <div class="span8">
+        <div class="span10">
           <div id="chatBox" style="display: none"
                data-bind="visible: conversationSelected">
             <h2>Chat <em>(fr. cat!)</em></h2>
@@ -167,7 +168,7 @@
       <hr />
 
       <footer>
-        <p>&copy; Team Six
+        <p>© Team Six
         2012. <a href="https://github.com/aif1990/">Andreea-Ingrid
         Funie</a>, <a href="http://www.abstractbinary.org/">Alexandru
         Scvorţov</a>, <a href="https://github.com/exFalso/">Andras
