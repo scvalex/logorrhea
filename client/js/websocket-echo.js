@@ -30,6 +30,15 @@ echo.on('request', function(request) {
         } else if (msgObj['event'] === 'list_channels') {
           msgObj = {event: 'list_channels.ok',
                     data: { channels: ["stats", "comptech"] }};
+        } else if (msgObj['event'] === 'list_users') {
+          if (msgObj['data']['channel'] === 'stats') {
+            var users = ['aif', 'nh2', 'exFalso'];
+          } else {
+            var users = ['scvalex', 'rostayob'];
+          }
+          msgObj = {event: 'list_users.ok',
+                    data: {users: users,
+                           channel: msgObj['data']['channel']}};
         }
         var replyStr = JSON.stringify(msgObj);
       } catch (err) {

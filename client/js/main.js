@@ -4,10 +4,10 @@ require(['jquery', 'knockout', 'websocket-json-events'],
   function ConversationsModel() {
     var self = this;
 
-    self.username = ko.observable();
+    self.username = ko.observable("");
     self.channels = ko.observableArray([]);
-    self.channel = ko.observable();
-    self.users = ko.observableArray(['scvalex', 'ex_falso', 'rostayob', 'nh2']);
+    self.channel = ko.observable("");
+    self.users = ko.observableArray([]);
     self.conversations = ko.observableArray([
       { name: 'client_development', topic: 'Why is client development so easy?', users: ['scvalex', 'nh2'] },
       { name: 'server_development', topic: 'Is it OK to have more LANGUAGE pragmas than lines of code?', users: ['ex_falso', 'rostayob'] }
@@ -95,6 +95,17 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     console.log("Channel clicked: " + channel);
     conversationsModel.channel(channel);
     $("#channelBox").removeClass("hidden");
+    socket.bindMethod(
+      'list_users',
+      function(users) {
+        console.log("Users on ", conversationsModel.channel(),
+                    " are ", users['users']);
+        conversationsModel.users(users['users']);
+        $("#usersBox").removeClass('hidden');
+      },
+      undefined);
+
+    socket.send('list_users', {"channel": conversationsModel.channel()});
   }
 
   $(function() {
