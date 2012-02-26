@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "SBJson.h"
+#import "DetailViewController.h"
 
 @implementation AppDelegate
 
@@ -52,15 +53,58 @@
             while (item = (NSString*)[enumerator nextObject]){
                 NSLog(@"Am gasit canalul: %@", item);
             }
-            //users
-        } else {
-            NSLog(@"Am primit un mesaj nerecunoscut: %@", message);
-        }
+            } else if (event != nil && [event compare:@"list_conversations.ok"] == 0) {
+            
+            NSDictionary* data = [resp valueForKey:@"data"];
+           // convs = [[NSMutableArray alloc] init];
+            convs = [data valueForKey:@"conversations"];
+                
+            NSEnumerator *enums = [convs objectEnumerator];
+            NSString* disc;
+            NSLog(@"Un canal are ");
+                
+            while(disc = (NSString*)[enums nextObject]){
+                NSLog(@" Asta: %@ ", [disc valueForKey:@"topic"]);
+            }
+                
+            }else if (event != nil && [event compare:@"list_messages.ok"] == 0) {
+                NSDictionary* datas = [resp valueForKey:@"data"];
+                // convs = [[NSMutableArray alloc] init];
+                messages = [datas valueForKey:@"messages"];
+            } else {
+                 NSLog(@"Am primit un mesaj nerecunoscut: %@", message);
+            }
     }
 }
 
-- (NSArray* ) getChannels {
+- (NSMutableArray* ) getConversations {
+    return convs;
+}
+
+- (NSMutableArray* ) getChannels {
     return channels;
+}
+
+- (NSMutableArray* ) getMessages {
+    return messages;
+}
+
+- (void) doListMessages:(NSString*)conv {
+    NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
+    [params setValue:conv forKey:(@"conversation")];
+    NSString* request = [[[SBJsonWriter alloc] init] stringWithObject:[self makeRequest:@"list_messages" withData:params]];
+    NSLog(@"voi lista conversatiile %@", request);
+    
+    [myWS send:request];
+}
+
+- (void) doListConversations:(NSString*)channel {
+    NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
+    [params setValue:channel forKey:(@"channel")];
+    NSString* request = [[[SBJsonWriter alloc] init] stringWithObject:[self makeRequest:@"list_conversations" withData:params]];
+    NSLog(@"voi lista conversatiile %@", request);
+    
+    [myWS send:request];
 }
 
 - (void) doListChannels {
