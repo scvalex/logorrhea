@@ -208,6 +208,11 @@ require(['jquery', 'knockout', 'websocket-json-events'],
       conversationsModel.conversation(conv);
   }
 
+  function post(channel, tag, message) {
+    socket.send('send_conversation',
+                { channel: channel, tag: tag, message: message });
+  }
+
   $(function() {
     console.log("hello logorrhea");
 

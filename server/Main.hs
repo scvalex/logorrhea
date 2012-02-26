@@ -30,13 +30,14 @@ outEvent = sendTextData . unParseOutEvent
 
 server :: Request -> WebSockets Prot ()
 server rq = do
+    acceptRequest rq         
     connect <- recData
+    liftIO $ L.putStrLn connect
     case parseInEvent connect of
         Just (Connect nn) -> do
-            acceptRequest rq 
             outEvent (Response (Right ConnectOk))
             let conn = liftIO $ connectToServer _IRCServer _IRCPort
-            (withConnection nn conn :: IRCT (WebSockets Prot) () -> WebSockets Prot ()) $ do
+            withConnection nn conn $ do
                 lift getVersion >>= liftIO . putStrLn . ("Client version: " ++)
                 sink <- lift getSink
                 forkIRC (ircProxy sink)
@@ -47,10 +48,8 @@ server rq = do
                         Just e -> handleEvent e go
         Just otherEvent -> do
             outEvent (Response (Left (otherEvent, "\"connect\" expected")))
-            rejectRequest rq "\"connect\" expected"
         Nothing -> do
             outEvent (GenericError "\"connect\" expected")
-            rejectRequest rq "\"connect\" expected"
 
 uCmd :: UserCommand -> String
 uCmd = unParse u_userCommand
@@ -60,7 +59,6 @@ handleEvent event go = case event of
     Connect _ -> do
         lift $ outEvent (Response (Left (event, "multiple \"connect\""))) 
         go
-                 -- FIXME kill ircProxy
     DisConnect -> do
         lift $ outEvent (Response (Right DisConnectOk))
     ListChannels -> sendMessage (privmsg "DrLogos" (uCmd ListMonitoredChannels)) >> go
@@ -72,6 +70,7 @@ handleEvent event go = case event of
         go
     Join chan -> do
         sendMessage (joinChan chan)
+        lift $ outEvent (Response (Right (JoinOk chan)))
         go
     SendChannel chan msg -> do
         sendMessage (privmsg chan msg)
@@ -83,21 +82,27 @@ handleEvent event go = case event of
 pBMsg :: String -> Maybe BotMessage
 pBMsg = either (const Nothing) Just . parse p_botMessage ""
 
+pUCmd :: String -> Maybe UserCommand
+pUCmd = either (const Nothing) Just . parse p_userCommand ""
+
 ircProxy :: Sink Prot -> IRCT IO ()
-ircProxy sink = do
+ircProxy sink = forever $ do
     let ss = liftIO . sendSink sink . DataMessage . Text . unParseOutEvent
     msg <- popMessage
+    liftIO . putStrLn . encode $ msg
     case msg of 
         Message { msg_prefix = Just (NickName "DrLogos" _ _)
                 , msg_command = "PRIVMSG"
-                , msg_params = [chan, msg] } -> case pBMsg msg of
+                , msg_params = [chan, msg'] } -> case pBMsg msg' of
             Just (UserMessage nn t s) ->
                 ss (ServerIssued (ReceiveConversation chan nn t s))
-            Just (NoQuestions t) ->
+            Just (NoQuestions _) ->
                 ss (Response (Right (ListConversationsOk [])))
-            Just (NotAQuestion ch) ->
-                ss (Response (Left (ListConversations undefined, "this channel cannot have a conversation")))
-            Just (HistoryMessage nn body) -> ss (ServerIssued (ReceiveConversation chan nn chan body))
+            Just (NotAQuestion _) ->
+                ss (Response (Left (ListConversations undefined,
+                                    "this channel cannot have a conversation")))
+            Just (HistoryMessage nn body) ->
+                ss (ServerIssued (ReceiveConversation chan nn chan body))
             Just (MonitoredChannels chans) -> ss (Response (Right (ListChannelsOk chans)))
             Just (StartHistory _) -> return ()
             Just (EndHistory _) -> return ()
@@ -106,5 +111,8 @@ ircProxy sink = do
             Nothing -> return ()
         Message { msg_prefix = Just (NickName nn _ _)
                 , msg_command = "PRIVMSG"
-                , msg_params = [chan, msg] } -> ss (ServerIssued (ReceiveConversation chan nn chan msg))
+                , msg_params = [chan, msg'] } ->
+            case pUCmd msg' of
+                Nothing -> ss (ServerIssued (ReceiveConversation chan nn chan msg'))
+                Just _  -> return ()
         _ -> return ()

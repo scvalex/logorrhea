@@ -30,7 +30,7 @@ data InEvent
     | Join Channel
     | SendChannel Channel String
     | SendConversation Channel Tag String
-
+    deriving (Show)
 
 -- responses
 data Response
@@ -42,17 +42,20 @@ data Response
     | JoinOk Channel
     | SendChannelOk
     | SendConversationOk
-
+    deriving (Show)
+             
 data ServerIssued
     = DisConnectS Reason
     | ReceiveChannel Channel NickName String
     | ReceiveConversation Channel NickName Tag String
-
+    deriving (Show)
+             
 data OutEvent
     = ServerIssued ServerIssued
     | Response (Either (InEvent, String) Response)
     | GenericError String
-
+    deriving (Show)
+             
 parseInEvent :: ByteString -> Maybe InEvent
 parseInEvent t = do
     j <- decode t :: Maybe Value
@@ -82,9 +85,9 @@ parseInEvent t = do
         return $ SendChannel (Text.unpack chan) (Text.unpack msg)
     send_channel _ = undefined
     
-    send_conversation [ ("channel",      String chan)
-                      , ("conversation", String convo) 
-                      , ("message",      String msg)
+    send_conversation [ ("channel", String chan)
+                      , ("tag",     String convo) 
+                      , ("message", String msg)
                       ] =
         SendConversation <$> return (Text.unpack chan)
                          <*> return (Text.unpack convo)
