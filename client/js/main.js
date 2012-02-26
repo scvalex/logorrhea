@@ -27,6 +27,8 @@ require(['jquery', 'knockout', 'websocket-json-events'],
       return statusLabels[self.connectionStatus];
     });
     self.isConnected = ko.computed(function() {
+      if (self.connectionStatus() == status.connected)
+        $('.hero-unit').slideUp();
       return self.connectionStatus() == status.connected;
     });
 
