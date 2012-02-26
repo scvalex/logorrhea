@@ -18,7 +18,7 @@
           <div class="nav-collapse">
             <ul class="nav">
               <li>
-                <a href="#usage">Learn more</a>
+                <a href="#usage">… no question unanswered</a>
               </li>
             </ul>
           </div>
@@ -28,7 +28,7 @@
 
     <div class="container">
       <div class="hero-unit">
-        <h1>No questions unanswered!</h1>
+        <h1>No question unanswered!</h1>
         <p>Lecturea is a real-time QA system for university lectures.
         It lets students ask questions during lectures and gives
         professors an overview of the class' current level of
@@ -62,7 +62,7 @@
 
       <div class="row">
         <div class="span12 pagination-centered">
-          <h1>Enough talk. Let's QA!</h1>
+          <h1>Enough talk. Let's do some QA!</h1>
         </div>
       </div>
 
@@ -79,11 +79,11 @@
 
           <div id="loggedInBox" style="display: none" data-bind="visible: isConnected">
             <h3 class="inline">
-              You are <strong data-bind="text: username">USER</strong>
+              You are <strong data-bind="text: username">USER</strong>.
             </h3>
             <span id="connectionStatusLabel" data-bind="text: connectionStatusText">STATUS</span>
             <form class="inline" data-bind="submit: disconnect">
-              <input type="submit" value="Disconnect" />
+              <input class="loginButton" type="submit" value="Disconnect" />
             </form>
           </div>
         </div>
@@ -118,15 +118,16 @@
         </div>
       </div>
 
-
       <div class="row">
         <div class="span2 float-right">
           <div id="usersBox" class="well"
                style="display: none"
                data-bind="visible: usersReceived">
-            <h2>QAers</h2>
-            <ul class="users" data-bind="foreach: users">
-              <li data-bind="text: $data"></li>
+            <ul class="nav nav-list">
+              <li class="nav-header"><h3 class="inline">Users<h3></li>
+            </ul>
+            <ul class="nav nav-list" data-bind="foreach: users">
+              <li>★ <h4 class="inline" data-bind="text: $data"></h4></li>
             </ul>
           </div>
         </div>
@@ -161,6 +162,11 @@
               </ul>
             </div>
             <em data-bind="ifnot: conversation().messages.length > 0">No messages</em>
+
+            <form data-bind="submit: postInCurrent">
+              <input data-bind="value: currentMessage" />
+              <input type="submit" value="Send" />
+            </form>
           </div>
         </div>
       </div>

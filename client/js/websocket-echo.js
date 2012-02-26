@@ -29,9 +29,9 @@ echo.on('request', function(request) {
           msgObj = {event: "disconnect.ok", data: {}};
         } else if (msgObj['event'] === 'list_channels') {
           msgObj = {event: 'list_channels.ok',
-                    data: { channels: ["stats", "comptech"] }};
+                    data: { channels: ["#stats", "#comptech"] }};
         } else if (msgObj['event'] === 'list_users') {
-          if (msgObj['data']['channel'] === 'stats') {
+          if (msgObj['data']['channel'] === '#stats') {
             var users = ['aif', 'nh2', 'exFalso'];
           } else {
             var users = ['scvalex', 'rostayob'];
@@ -40,7 +40,7 @@ echo.on('request', function(request) {
                     data: {users: users,
                            channel: msgObj['data']['channel']}};
         } else if (msgObj['event'] === 'list_conversations') {
-          if (msgObj['data']['channel'] === 'stats') {
+          if (msgObj['data']['channel'] === '#stats') {
             var convs = [
               {
                 tag: 'client_development',
@@ -74,6 +74,9 @@ echo.on('request', function(request) {
           msgObj = {event: "list_conversations.ok",
                     data: {conversations: convs,
                            channel: msgObj['data']['channel']}};
+        } else if (msgObj['event'] === 'send_conversation') {
+          msgObj['event'] = 'receive_conversation';
+          msgObj['data']['user'] = 'noname';
         }
         var replyStr = JSON.stringify(msgObj);
       } catch (err) {

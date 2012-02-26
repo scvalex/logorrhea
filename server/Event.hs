@@ -30,29 +30,32 @@ data InEvent
     | Join Channel
     | SendChannel Channel String
     | SendConversation Channel Tag String
-
+    deriving (Show)
 
 -- responses
 data Response
     = ConnectOk
     | DisConnectOk
     | ListChannelsOk [Channel]
-    | ListUsersOk [NickName]
+    | ListUsersOk Channel [NickName]
     | ListConversationsOk [Tag]
     | JoinOk Channel
     | SendChannelOk
     | SendConversationOk
-
+    deriving (Show)
+             
 data ServerIssued
     = DisConnectS Reason
     | ReceiveChannel Channel NickName String
     | ReceiveConversation Channel NickName Tag String
-
+    deriving (Show)
+             
 data OutEvent
     = ServerIssued ServerIssued
     | Response (Either (InEvent, String) Response)
     | GenericError String
-
+    deriving (Show)
+             
 parseInEvent :: ByteString -> Maybe InEvent
 parseInEvent t = do
     j <- decode t :: Maybe Value
@@ -82,9 +85,9 @@ parseInEvent t = do
         return $ SendChannel (Text.unpack chan) (Text.unpack msg)
     send_channel _ = undefined
     
-    send_conversation [ ("channel",      String chan)
-                      , ("conversation", String convo) 
-                      , ("message",      String msg)
+    send_conversation [ ("channel", String chan)
+                      , ("tag",     String convo) 
+                      , ("message", String msg)
                       ] =
         SendConversation <$> return (Text.unpack chan)
                          <*> return (Text.unpack convo)
@@ -148,19 +151,19 @@ unParseResponse DisConnectOk =
            ]
 unParseResponse (ListChannelsOk chans) =
     object [ "event" .= ("list_channels.ok" :: Text)
-           , "data"  .= chans
+           , "data"  .= object ["channels" .= chans]
            ]
-unParseResponse (ListUsersOk users) =
+unParseResponse (ListUsersOk chan users) =
     object [ "event" .= ("list_users.ok" :: Text)
-           , "data"  .= users
+           , "data"  .= object ["channel" .= chan, "users" .= users]
            ]
 unParseResponse (ListConversationsOk convos) =
     object [ "event" .= ("list_conversations.ok" :: Text)
-           , "data"  .= convos
+           , "data"  .= object ["conversations" .= convos]
            ]
 unParseResponse (JoinOk chan) =
     object [ "event" .= ("join.ok" :: Text)
-           , "data"  .= chan
+           , "data"  .= object ["channel" .= chan]
            ]
 unParseResponse SendChannelOk =
     object [ "event" .= ("send_channel.ok" :: Text)

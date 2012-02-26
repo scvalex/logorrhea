@@ -45,6 +45,8 @@ require(['jquery', 'knockout', 'websocket-json-events'],
       return (typeof self.conversation().tag !== "undefined");
     });
 
+    self.currentMessage = ko.observable("");
+
     self.conversationsDict = ko.computed(function() {
       return objectArrayToDict(self.conversations(), 'tag');
     });
@@ -63,6 +65,20 @@ require(['jquery', 'knockout', 'websocket-json-events'],
 
     self.conversationClicked = function(conversation) {
       conversationClickedInternal(conversation.tag);
+    }
+
+    self.postInCurrent = function(_) {
+      self.post(self.channel(), self.conversation()['tag'],
+                self.currentMessage());
+      self.currentMessage("");
+    }
+
+    self.post = function(channel, tag, message) {
+      console.log("Sending ", channel,
+                  " in conversation ", tag,
+                  " in channel ", message);
+      socket.send('send_conversation',
+                  { channel: channel, tag: tag, message: message });
     }
   }
 

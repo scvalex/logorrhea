@@ -18,6 +18,9 @@ body
 .inline
     display: inline
 
+.loginButton
+    margin-left: 15px
+
 .top-spaced
     margin-top: 1em
 
@@ -34,6 +37,15 @@ body
     margin-right: auto;
     width: 67%
 
+.navbar .nav > li > a
+    margin-top: 3px
+    margin-bottom: -3px
+    font-family: "Daniel Black"
+    color: #ddd
+    font-size: 14px
+
+
+
 /* Mixins */
 
 border-radius()
@@ -45,3 +57,11 @@ border-bottom-left-radius()
     border-bottom-left-radius arguments
     -webkit-border-bottom-left-radius arguments
     -moz-border-bottom-left-radius arguments
+
+
+/* Fonts */
+
+@font-face
+    // TODO add license from fontsquirrel
+    font-family: "Daniel Black"
+    src: url('/fonts/danielbk.ttf') format("truetype")
