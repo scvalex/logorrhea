@@ -39,7 +39,11 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     self.users = ko.observableArray([]);
     self.usersReceived = ko.observable(false);
     self.conversations = ko.observableArray([]);
+    self.conversationsReceived = ko.observable(false);
     self.conversation = ko.observable({topic: "", messages: []});
+    self.conversationSelected = ko.computed(function() {
+      return (typeof self.conversation()['tag'] != "undefined");
+    });
 
     self.connect = function() {
       connectInternal();
@@ -138,7 +142,7 @@ require(['jquery', 'knockout', 'websocket-json-events'],
         console.log("Conversations in ", conversationsModel.channel(),
                     " are ", conversations['conversations']);
         conversationsModel.conversations(conversations['conversations']);
-        $("#conversationsBox").removeClass('hidden');
+        conversationsModel.conversationsReceived(true);
       },
       function(err) {
         console.log("failed to get conversations: ", err);
