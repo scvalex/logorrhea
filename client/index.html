@@ -46,7 +46,7 @@
     <div id="conversationsBox" class="hidden">
       <h3>Conversations</h3>
       <ul class="conversations" data-bind="foreach: conversations">
-        <li>
+        <li data-bind="click: $root.conversationClicked">
           <strong>Question: </strong><span data-bind="text: topic"></span>
           <strong>Users: </strong>
           <span data-bind="foreach: users">

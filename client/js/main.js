@@ -22,6 +22,10 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     self.channelClicked = function(channelName) {
       browseChannelInternal(channelName);
     }
+
+    self.conversationClicked = function(conversation) {
+      conversationClickedInternal(conversation.tag);
+    }
   }
 
   function connectInternal() {
@@ -121,6 +125,10 @@ require(['jquery', 'knockout', 'websocket-json-events'],
                 {"channel": conversationsModel.channel()});
     socket.send('list_conversations',
                 {"channel": conversationsModel.channel()});
+  }
+
+  function conversationClickedInternal(tag) {
+    console.log("Conversation clicked: ", tag);
   }
 
   $(function() {
