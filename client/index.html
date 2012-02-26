@@ -111,7 +111,7 @@
       </div>
 
       <div class="row">
-        <div class="span9">
+        <div class="span4 float-right">
           <div id="usersBox" style="display: none"
                data-bind="visible: usersReceived">
             <h3>Users</h3>
@@ -119,7 +119,9 @@
               <li data-bind="text: $data"></li>
             </ul>
           </div>
+        </div>
 
+        <div class="span8">
           <div id="conversationsBox" style="display: none"
                data-bind="visible: conversationsReceived">
             <h3>Conversations</h3>
@@ -133,7 +135,9 @@
               </li>
             </ul>
           </div>
+        </div>
 
+        <div class="span8">
           <div id="chatBox" style="display: none"
                data-bind="visible: conversationSelected">
             <h3>Chat <em>(fr. cat!)</em></h3>
