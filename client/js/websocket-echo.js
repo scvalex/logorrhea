@@ -74,6 +74,9 @@ echo.on('request', function(request) {
           msgObj = {event: "list_conversations.ok",
                     data: {conversations: convs,
                            channel: msgObj['data']['channel']}};
+        } else if (msgObj['event'] === 'send_conversation') {
+          msgObj['event'] = 'receive_conversation';
+          msgObj['data']['user'] = 'noname';
         }
         var replyStr = JSON.stringify(msgObj);
       } catch (err) {

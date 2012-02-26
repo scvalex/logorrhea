@@ -162,6 +162,11 @@
               </ul>
             </div>
             <em data-bind="ifnot: conversation().messages.length > 0">No messages</em>
+
+            <form data-bind="submit: postInCurrent">
+              <input data-bind="value: currentMessage" />
+              <input type="submit" value="Send" />
+            </form>
           </div>
         </div>
       </div>
