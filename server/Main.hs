@@ -100,7 +100,7 @@ ircProxy sink = forever $ do
             Just (UserMessage nn t s) ->
                 ss (ServerIssued (ReceiveConversation chan nn t s))
             Just (NoQuestions _) ->
-                ss (Response (Right (ListConversationsOk [])))
+                ss (Response (Right (ListConversationsOk chan [])))
             Just (NotAQuestion _) ->
                 ss (Response (Left (ListConversations undefined,
                                     "this channel cannot have a conversation")))

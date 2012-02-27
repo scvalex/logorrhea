@@ -38,7 +38,7 @@ data Response
     | DisConnectOk
     | ListChannelsOk [Channel]
     | ListUsersOk Channel [NickName]
-    | ListConversationsOk [Tag]
+    | ListConversationsOk Channel [Tag]
     | JoinOk Channel
     | SendChannelOk
     | SendConversationOk
@@ -157,9 +157,9 @@ unParseResponse (ListUsersOk chan users) =
     object [ "event" .= ("list_users.ok" :: Text)
            , "data"  .= object ["channel" .= chan, "users" .= users]
            ]
-unParseResponse (ListConversationsOk convos) =
+unParseResponse (ListConversationsOk chan convos) =
     object [ "event" .= ("list_conversations.ok" :: Text)
-           , "data"  .= object ["tags" .= convos]
+           , "data"  .= object ["channel" .= chan, "conversations" .= convos]
            ]
 unParseResponse (JoinOk chan) =
     object [ "event" .= ("join.ok" :: Text)
