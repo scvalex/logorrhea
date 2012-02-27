@@ -124,12 +124,9 @@ require(['jquery', 'knockout', 'websocket-json-events'],
         console.log("failed to connect: ", err);
       });
 
-    socket.bind('join.ok', function(e){
-      console.log("eee: ", e);
-      var channel = e.channel;
-      conversationsModel.channel(channel);
-      // TODO
-      browseChannelInternal(channel);
+    socket.bind('join.ok', function(joinOkEvent) {
+      // TODO rename
+      browseChannelInternal(joinOkEvent.channel);
     });
 
 
@@ -210,7 +207,9 @@ require(['jquery', 'knockout', 'websocket-json-events'],
 
   function browseChannelInternal(channel) {
     console.log("Channel clicked: " + channel);
+
     conversationsModel.channel(channel);
+
     socket.bindMethod(
       'list_users',
       function(usersEvent) {
@@ -238,10 +237,8 @@ require(['jquery', 'knockout', 'websocket-json-events'],
         console.log("failed to get conversations: ", err);
       });
 
-    socket.send('list_users',
-                {"channel": conversationsModel.channel()});
-    socket.send('list_conversations',
-                {"channel": conversationsModel.channel()});
+    socket.send('list_users', { "channel": channel });
+    socket.send('list_conversations', { "channel": channel });
   }
 
   function conversationClickedInternal(tag) {
