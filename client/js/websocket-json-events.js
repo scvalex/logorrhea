@@ -67,7 +67,7 @@ define(['jsschema', 'schemas'], function(_, schemas) {
 
       // dispatch to the right handlers
       conn.onmessage = function(evt) {
-        console.log("websocket receive: ", evt);
+        console.log("websocket receive: ", evt.data);
 
         var json = JSON.parse(evt.data);
 
