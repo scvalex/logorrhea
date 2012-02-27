@@ -140,8 +140,7 @@
             <h2>Discussions</h2>
             <ul id="discussions" data-bind="foreach: conversations">
               <li data-bind="click: $root.conversationClicked">
-                <strong>Q: </strong><span data-bind="text: topic"></span>
-                <strong>A: </strong>
+                <strong>Question: </strong><span data-bind="text: topic"></span>
                 <span data-bind="foreach: users">
                   <span class="username" data-bind="text: $data"></span>
                 </span>
