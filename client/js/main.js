@@ -142,44 +142,26 @@ require(['jquery', 'knockout', 'websocket-json-events'],
     socket.bind(
       'receive_conversation',
       function(receiveConversationEvent) {
-        var e = receiveConversationEvent;
-
-        console.log("BEFORE", conversationsModel.conversations());
-
-        // Hack
-        e.tag = '#whatislecturea';
-
-        if (conversationsModel.conversations().length == 0) {
-          console.log('adding');
-          // conversationsModel.conversations.push({ tag: e.tag, topic: "What is Lecturea!", users: ['nh2', 'scvalex', 'rostayob', 'exfalso'], messages: [] });
-          conversationsModel.conversations([{ tag: e.tag, topic: "What is Lecturea!", users: ['nh2', 'scvalex', 'rostayob', 'exfalso'], messages: [] }]);
-        }
-        conversationsModel.conversationsReceived(true);
-
         // TODO we can currently be in only one channel, so ignore e.channel
+        var tag = receiveConversationEvent.tag;
+        var user = receiveConversationEvent.user;
+        var message = receiveConversationEvent.message;
 
-        // TODO conversation creation
-        // TODO user "creation"
-
-        console.log("dict ", conversationsModel.conversationsDict(), "tag: ", e.tag, e);
-        // var conv = conversationsModel.conversationsDict()[e.tag];
-        var conv = conversationsModel.conversationsDict()[e.tag];
-        console.log("receive_conversation", e, conv);
+        var conv = conversationsModel.conversationsDict()[tag];
 
         // TODO extract !conv handling, share with conversationClickedInternal
         if (!conv) {
-          console.error("Warning: Could not find conversation for receive_conversation event: ", e);
-          return;
+          console.log("receive_conversation: Could not find conversation with tag '" + tag + "', creating");
+          // TODO make an event for this that tells us the actual attributes for topic, user and messages
+          // for now, set them empty as we don't display them
+          conv = { tag: tag, topic: "TODO: Topic not known", users: [], messages: [] };
+          conversationsModel.conversations.push(conv);
         }
 
         // Update conversation
-        // TODO check if we have to update 'conversations'
-        conv.messages.push({ user: e.user, message: e.message });
+        // TODO check if we have to update 'conversations' again
+        conv.messages.push({ user: user, message: message });
         conversationsModel.conversation(conv);
-        console.log("new conv:", conv);
-
-
-
       });
   }
 
