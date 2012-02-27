@@ -51,7 +51,7 @@ define(['jsschema', 'schemas'], function(_, schemas) {
 
       this.send = function(event_name, event_data) {
         var payload = JSON.stringify({event:event_name, data: event_data});
-        console.log("sending on socket ", payload);
+        console.log("SOCKET send: ", payload);
         conn.send(payload); // <= send JSON data to socket server
         return this;
       };
@@ -67,7 +67,7 @@ define(['jsschema', 'schemas'], function(_, schemas) {
 
       // dispatch to the right handlers
       conn.onmessage = function(evt) {
-        console.log("websocket receive: ", evt.data);
+        console.log("SOCKET receive: ", evt.data);
 
         var json = JSON.parse(evt.data);
 
@@ -93,7 +93,7 @@ define(['jsschema', 'schemas'], function(_, schemas) {
       };
 
       conn.onopen = function() {
-        console.log("websocket open");
+        console.log("SOCKET open");
         dispatch('open',null);
       };
 
